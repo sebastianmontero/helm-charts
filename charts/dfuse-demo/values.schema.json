@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "properties": {
+    "eosqNetworkName": {
+      "description": "Name of the network on eosq",
+      "type": "string"
+    },
+    "nameOverride": {
+      "description": "If specified replaces chart name when creating full name used for the names of all components",
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "description": "If specified its value is used for the names of all components",
+      "type": "string"
+    },
+    "domain": {
+      "description": "Domain Details",
+      "properties": {
+        "base": {
+          "type": "string",
+          "pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$"
+        },
+        "dfuseApi": {
+          "type": "string"
+        },
+        "nodeos": {
+          "type": "string"
+        },
+        "nodeManager": {
+          "type": "string"
+        },
+        "prometheus": {
+          "type": "string"
+        },
+        "eosq": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "base",
+        "dfuseApi",
+        "nodeos",
+        "nodeManager",
+        "prometheus",
+        "eosq"
+      ],
+      "type": "object"
+    },
+    "storage": {
+      "description": "Storage Details",
+      "properties": {
+        "size": {
+          "type": "string"
+        },
+        "className": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "size",
+        "className"
+      ],
+      "type": "object"
+    },
+    "image": {
+      "description": "Image Details",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_/]+$"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "pattern": "^(Always|Never|IfNotPresent)$"
+        },
+        "tag": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_]+$"
+        }
+      },
+      "required": [
+        "name",
+        "pullPolicy",
+        "tag"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "eosqNetworkName",
+    "domain",
+    "storage"
+  ],
+  "title": "Values",
+  "type": "object"
+}

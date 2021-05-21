@@ -1,0 +1,28 @@
+# Default values for dfuse-demo.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+eosqNetworkName: fi
+
+# Domain specification
+domain:
+  base: fi2.tekit.io
+  dfuseApi: dapi
+  nodeos: "n"
+  nodeManager: nm
+  prometheus: pm
+  eosq: q
+
+#Volume Settings
+storage:  
+  size: 5Gi
+  className: standard
+
+image:
+  name: dfuse/dfuse-eosio
+  pullPolicy: IfNotPresent
+  tag: 80117b5
+
+nameOverride: ""
+fullnameOverride: ""

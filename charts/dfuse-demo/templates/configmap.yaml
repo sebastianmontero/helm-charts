@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "dfuse-demo.fullname" . }}
+  labels:
+    {{- include "dfuse-demo.labels" . | nindent 4 }}
+data:
+  {{- $currentContext := . }}
+  {{- range $path, $_ := .Files.Glob "config/*.*" }}
+  {{- $fileName := base $path }}
+  {{ $fileName }}: |
+    {{- $.Files.Get $path | nindent 4}}
+    {{- if eq $fileName "dfuse.yaml" }}
+        eosq-available-networks: '[{ "id": "fi", "is_test": true, "name": "{{ $currentContext.Values.eosqNetworkName }}", "url": "{{ include "dfuse-demo.dapi-url" $currentContext }}" }]'
+        eosq-default-network: fi
+        eosq-api-endpoint-url: '{{ include "dfuse-demo.dapi-url" $currentContext }}'
+    {{- end}}
+  {{ end }}

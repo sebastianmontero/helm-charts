@@ -1,0 +1,6 @@
+Here are the urls for the different services:
+  - Nodeos:       {{ include "dfuse-demo.nodeos-url" . }}
+  - Node Manager: {{ include "dfuse-demo.nm-url" . }}
+  - Prometheus:   {{ include "dfuse-demo.pm-url" . }}
+  - EOSQ:         {{ include "dfuse-demo.eosq-url" . }}
+  - Graphiql:     {{ include "dfuse-demo.dapi-url" . }}/graphiql

@@ -1,0 +1,96 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "dfuse-demo.fullname" . }}
+  labels:
+    {{- include "dfuse-demo.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.storage.size }}
+  storageClassName: {{ .Values.storage.className }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "dfuse-demo.fullname" . }}
+  labels:
+    {{- include "dfuse-demo.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  serviceName: fi-dfuse-service
+  selector:
+    matchLabels:
+      {{- include "dfuse-demo.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "dfuse-demo.selectorLabels" . | nindent 8 }}
+    spec:
+      # serviceAccountName: dfuse-service-account
+      # serviceAccount: dfuse/dfuse-service-account
+      containers:
+      - name: dfuse-eosio
+        image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["/app/dfuseeos"]
+        args: ["start", "-c", "/config/dfuse.yaml", "--data-dir", "/dfuse-data", "-vvv"]
+        ports:
+        - containerPort: 8888
+          name: nodeos-api
+          protocol: TCP
+        - containerPort: 9000
+          name: firehose
+          protocol: TCP
+        - containerPort: 9102
+          name: metrics
+          protocol: TCP
+        - containerPort: 13008
+          name: nm-api
+          protocol: TCP
+        - containerPort: 13023
+          name: dgql-http
+          protocol: TCP
+        - containerPort: 13024
+          name: dgql-grpc
+          protocol: TCP
+        - containerPort: 13026
+          name: eosws
+          protocol: TCP
+        - containerPort: 13030
+          name: eosq
+          protocol: TCP
+        volumeMounts:
+        - name: fi-dfuse-data
+          mountPath: /dfuse-data
+        - name: fi-dfuse-config
+          mountPath: /config/dfuse.yaml
+          subPath: dfuse.yaml
+        - name: fi-dfuse-config
+          mountPath: /config/mindreader/config.ini
+          subPath: mindreader-config.ini
+        - name: fi-dfuse-config
+          mountPath: /config/mindreader/genesis.json
+          subPath: genesis.json
+        - name: fi-dfuse-config
+          mountPath: /config/producer/config.ini
+          subPath: nodeos-config.ini
+        - name: fi-dfuse-config
+          mountPath: /config/producer/genesis.json
+          subPath: genesis.json
+        # - name: dfuse-service-account-token-jsp6h
+        #   readOnly: true
+        #   mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      volumes:
+      - name: fi-dfuse-data
+        persistentVolumeClaim:
+          claimName: {{ include "dfuse-demo.fullname" . }}
+      - name: fi-dfuse-config
+        configMap:
+          name: {{ include "dfuse-demo.fullname" . }}
+      # - name: dfuse-service-account-token-jsp6h
+      #   secret:
+      #     secretName: dfuse-service-account-token-jsp6h
+      #     defaultMode: 420

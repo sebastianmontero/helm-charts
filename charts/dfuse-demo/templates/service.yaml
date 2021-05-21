@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "dfuse-demo.fullname" . }}
+  labels:
+    {{- include "dfuse-demo.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8888
+    targetPort: 8888
+    protocol: TCP
+    name: nodeos-api
+  - port: 9000
+    targetPort: 9000
+    protocol: TCP
+    name: firehose
+  - port: 9102
+    targetPort: 9102
+    protocol: TCP
+    name: metrics
+  - targetPort: 13008
+    port: 13008
+    protocol: TCP
+    name: nm-api
+  - targetPort: 13023
+    port: 13023
+    protocol: TCP
+    name: dgql-http
+  - targetPort: 13024
+    port: 13024
+    protocol: TCP
+    name: dgql-grpc
+  - targetPort: 13026
+    port: 13026
+    protocol: TCP
+    name: eosws        
+  - targetPort: 13030
+    port: 13030
+    protocol: TCP
+    name: eosq
+  selector:
+    {{- include "dfuse-demo.selectorLabels" . | nindent 4 }}

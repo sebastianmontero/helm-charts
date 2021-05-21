@@ -1,0 +1,35 @@
+start:
+  args:
+  - abicodec
+  - blockmeta
+  - dgraphql
+  - eosq
+  - eosws
+  - firehose
+  - merger
+  - mindreader
+  - node-manager
+  - relayer
+  - search-archive
+  - search-forkresolver
+  - search-indexer
+  - search-live
+  - search-router
+  - statedb
+  - tokenmeta
+  - trxdb-loader
+  flags:
+    log-to-file: false
+    mindreader-manager-api-addr: :8080
+    mindreader-nodeos-api-addr: :8889
+    mindreader-config-dir: /config/mindreader
+    mindreader-merge-threshold-block-age: 2h
+    mindreader-blocks-chan-capacity: 100000
+    mindreader-start-failure-handler: false
+    mindreader-log-to-zap: true
+    mindreader-shutdown-delay: 20s
+    merger-max-one-block-operations-batch-size: 50000
+    firehose-grpc-listen-addr: ":9000*"
+    node-manager-config-dir: /config/producer
+    node-manager-http-listen-addr: ":13008"
+    node-manager-nodeos-api-addr: ":8888"
