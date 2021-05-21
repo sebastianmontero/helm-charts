@@ -44,6 +44,7 @@ jobs:
       - name: Run chart-testing (install)
         run: ct install --all --debug
   release:
+    needs: lint-test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
