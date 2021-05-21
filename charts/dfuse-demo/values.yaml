@@ -6,8 +6,9 @@
 eosqNetworkName: fi
 
 # Domain specification
+# ex. base: fi2.tekit.io
 domain:
-  base: fi2.tekit.io
+  base: ""
   dfuseApi: dapi
   nodeos: "n"
   nodeManager: nm
