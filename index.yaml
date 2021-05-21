@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  dfuse-demo:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-05-21T13:31:18.283470867Z"
+    description: Sets up a dfuse demo environment
+    digest: 78d6b6394db122e362064fce4d2ea0c71ae90ed4e53655f13dec3f1c0f4bd068
+    name: dfuse-demo
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/dfuse-demo-0.1.0/dfuse-demo-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-05-21T13:31:18.283599667Z"
