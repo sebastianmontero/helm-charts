@@ -49,9 +49,9 @@ jobs:
     steps:
       - name: Install dependencies
         run: |
-          apt update
-          apt install snapd -y
-          snap install yq
+          sudo apt update
+          sudo apt install snapd -y
+          sudo snap install yq
 
       - name: Checkout
         uses: actions/checkout@v2
