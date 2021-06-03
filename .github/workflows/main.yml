@@ -70,7 +70,7 @@ jobs:
 
       - name: Add subchart repos to helm
         run: |
-          i=0; for url in $(yq e .dependencies charts/ssl-ingress/Chart.yaml --tojson | jq -r .[].repository); do i=$((i+1)); helm repo add blah${i} ${url}; done
+          i=0; for filename in charts/*/Chart.yaml; do deps=$(yq e .dependencies ${filename} --tojson);  if [ "$deps" != "null" ]; then urls=$(echo $deps | jq -r .[].repository); for url in $urls; do i=$((i+1)); helm repo add blah${i} ${url}; done fi done
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.2.1
