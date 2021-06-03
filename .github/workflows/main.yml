@@ -50,7 +50,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install snapd -y
+          sudo apt install snapd jq -y
           sudo snap install yq
 
       - name: Checkout
@@ -70,7 +70,7 @@ jobs:
 
       - name: Add subchart repos to helm
         run: |
-          i=0; for url in $(yq r Chart.yaml dependencies --tojson | jq -r .[].repository); do i=$((i+1)); helm repo add blah${i} ${url}; done
+          i=0; for url in $(yq e .dependencies charts/ssl-ingress/Chart.yaml --tojson | jq -r .[].repository); do i=$((i+1)); helm repo add blah${i} ${url}; done
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.2.1
