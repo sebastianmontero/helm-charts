@@ -47,6 +47,12 @@ jobs:
     needs: lint-test
     runs-on: ubuntu-latest
     steps:
+      - name: Install dependencies
+        run: |
+          apt update
+          apt install snapd -y
+          snap install yq
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -56,6 +62,15 @@ jobs:
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+      
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.4.0
+
+      - name: Add subchart repos to helm
+        run: |
+          i=0; for url in $(yq r Chart.yaml dependencies --tojson | jq -r .[].repository); do i=$((i+1)); helm repo add blah${i} ${url}; done
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.2.1
