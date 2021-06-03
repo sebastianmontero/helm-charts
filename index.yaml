@@ -3,6 +3,16 @@ entries:
   dfuse-demo:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-06-03T13:48:43.931830352Z"
+    description: Sets up a dfuse demo environment
+    digest: 0bd5c99a55d469c78e8e2a5cc17e1d01206642b15f6a2cebe52131aa1a2f8269
+    name: dfuse-demo
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/dfuse-demo-0.1.4/dfuse-demo-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-05-21T15:07:55.933624097Z"
     description: Sets up a dfuse demo environment
     digest: fe720db9205ef234d96344c84e0b6406d37899d8ae5a1df65079fe22c4763226
@@ -41,4 +51,19 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/dfuse-demo-0.1.0/dfuse-demo-0.1.0.tgz
     version: 0.1.0
-generated: "2021-05-21T15:07:55.933739703Z"
+  ssl-ingress:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2021-06-03T13:48:44.046034528Z"
+    dependencies:
+    - name: ingress-nginx
+      repository: https://kubernetes.github.io/ingress-nginx
+      version: ~3.32.0
+    description: Sets up the packages required to support ssl enabled ingresses
+    digest: 003cdf57b7c03cbca3f86296b66c6419d9bf1274b1106b5331b9aa1b95734277
+    name: ssl-ingress
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/ssl-ingress-0.1.0/ssl-ingress-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-06-03T13:48:44.046056728Z"
