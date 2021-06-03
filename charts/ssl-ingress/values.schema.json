@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "properties": {
+    "issuer": {
+      "description": "Certificate cluster issuer details",
+      "properties": {
+        "server": {
+          "type": "string",
+          "pattern": "^(http(s)?:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "registrationEmail": {
+          "type": "string",
+          "pattern": "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"
+        }
+      },
+      "required": [
+        "server",
+        "registrationEmail"
+      ],
+      "type": "object"
+    },
+    "ingress-nginx": {
+      "description": "Ingress nginx values",
+      "properties": {
+        "controller": {
+          "properties":{
+            "replicaCount": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "service": {
+              "properties":{
+                "loadBalancerIP": {
+                  "type":"string",
+                  "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+                }
+              },
+              "type":"object"
+            }
+          },
+          "type": "object",
+          "required": [
+            "replicaCount"
+          ]
+        }
+      },
+      "required": [
+        "controller"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "issuer"
+  ],
+  "title": "Values",
+  "type": "object"
+}

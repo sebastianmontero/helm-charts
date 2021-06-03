@@ -1,6 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema#",
   "properties": {
+    "certClusterIssuer": {
+      "description": "Name of the SSL Certificate Cluster Issuer",
+      "type": "string",
+      "pattern": "^[a-z0-9-_]+$"
+    },
     "eosqNetworkName": {
       "description": "Name of the network on eosq",
       "type": "string"
@@ -87,6 +92,7 @@
     }
   },
   "required": [
+    "certClusterIssuer",
     "eosqNetworkName",
     "domain",
     "storage"

@@ -1,0 +1,3 @@
+The following components have been installed and configured:
+- Nginx Ingress
+- Cluster Issuer configured to use letsencrypt

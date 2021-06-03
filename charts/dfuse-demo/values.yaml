@@ -2,8 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-
-eosqNetworkName: fi
+certClusterIssuer: "letsencrypt-prod"
 
 # Domain specification
 # ex. base: fi2.tekit.io
@@ -14,6 +13,8 @@ domain:
   nodeManager: nm
   prometheus: pm
   eosq: q
+
+eosqNetworkName: fi
 
 #Volume Settings
 storage:  

@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: {{ include "ssl-ingress.fullname" . }}
+spec:
+  acme:
+    server: {{ .Values.issuer.server }}
+    email: {{ .Values.issuer.registrationEmail }}
+    privateKeySecretRef:
+      name: {{ include "ssl-ingress.fullname" . }}
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
