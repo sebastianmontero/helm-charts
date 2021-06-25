@@ -1,0 +1,6 @@
+dependencies:
+- name: dgraph
+  repository: https://charts.dgraph.io
+  version: 0.0.17
+digest: sha256:bf9b8efeab94ecc56e92445e22da48e2c77dc1928f2ced045cfaea47d3783caf
+generated: "2021-06-24T10:25:45.144471675-05:00"

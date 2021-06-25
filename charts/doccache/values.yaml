@@ -1,0 +1,62 @@
+# Default values for doccache.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: sebastianmontero/hypha-doc-cache-gql-go-mainnet
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: bc13fb4be5d8baff23749bbd4f60b25d9152d7e9
+
+nameOverride: ""
+fullnameOverride: ""
+
+domain:
+  base: "test.io"
+  alpha: alpha
+  ratel: ratel
+
+typeMapping:
+- type: VoteTally
+  labels:
+    pass:
+      - vote_power
+    fail:
+      - vote_power
+
+env:
+  contractName: dao.hypha
+  docTableName: documents
+  edgeTableName: edges
+  firehoseEndpoint: "firehose-telos-mainnet.dfuse.svc.cluster.local:9000"
+  eosEndpoint: https://telos.caleos.io
+  prometheusPort: 2114
+  startBlock: "1"
+  heartBeatFrequency: 100
+  dfuseApiKey: "api-key"
+
+dgraph:
+  image:
+    tag: v21.03.0
+  zero:
+    replicaCount: 1
+    persistence:
+      size: 5Gi
+  alpha:
+    replicaCount: 1
+    persistence:
+      size: 20Gi
+  ratel: 
+    enabled: true
+    image:
+      tag: v20.11.3
+    replicaCount: 1
+
+  initContainers:
+    init:
+      image:
+        tag: v21.03.0
+
+
+  # backups.image.tag=v20.11.3
+  # backups.destination Destination - file path, s3://, minio:	/dgraph/backups

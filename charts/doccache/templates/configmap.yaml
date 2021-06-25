@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "doccache.fullname" . }}
+  labels:
+    {{- include "doccache.labels" . | nindent 4 }}
+data:
+  config.yml: |
+    contract-name: {{ .Values.env.contractName }}
+    doc-table-name: {{ .Values.env.docTableName }}
+    edge-table-name: {{ .Values.env.edgeTableName }}
+    firehose-endpoint: {{ .Values.env.firehoseEndpoint }}
+    eos-endpoint: {{ .Values.env.eosEndpoint }}
+    dgraph-alpha-host: {{ include "dgraph.alphaServiceName" . }}
+    dgraph-alpha-grpc-port: 9080
+    dgraph-alpha-http-port: 8080
+    prometheus-port: {{ .Values.env.prometheusPort }}
+    start-block: {{ .Values.env.startBlock }}
+    heart-beat-frequency: {{ .Values.env.heartBeatFrequency }}
+    dfuse-api-key: {{ .Values.env.dfuseApiKey }}
+    type-mappings:
+      {{- range .Values.typeMapping -}}
+        {{- printf "- type: %s" .type | nindent 4 }}
+        {{- nindent 6 "labels:"}}
+        {{- range $k, $v := .labels -}}
+          {{ $k | nindent 8 }}:
+          {{- range $v -}}
+            {{- printf "- %s" . | nindent 10 -}}
+          {{- end }}
+        {{- end }}
+      {{- end }}

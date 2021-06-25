@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "doccache.fullname" . }}
+  labels:
+    {{- include "doccache.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "doccache.selectorLabels" . | nindent 6 }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        {{- include "doccache.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: IfNotPresent
+        command: ["/usr/local/go/bin/go"]
+        args: ["run", ".", "/config/config.yml"]
+        ports:
+        - containerPort: {{ .Values.env.prometheusPort }}
+          name: prometheus
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+        volumeMounts:
+        - name: doccache-config
+          mountPath: /config/config.yml
+          subPath: config.yml
+      volumes:
+      - name: doccache-config
+        configMap:
+          name: {{ include "doccache.fullname" . }}
