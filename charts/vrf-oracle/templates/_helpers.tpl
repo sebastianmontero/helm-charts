@@ -55,5 +55,5 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Generate Database URL
 */}}
 {{- define "vrf-oracle.dbUrl" -}}
-{{- printf "postgresql://vrf@%s-vrf-db.%s.svc.cluster.local:%s/vrf?sslmode=disable&password=%s" .Release.Name .Release.Namespace .Values.vrf-db.service.port .Values.vrf-db.vrfPassword }}
+{{- printf "postgresql://vrf@%s-vrf-db.%s.svc.cluster.local:%s/vrf?sslmode=disable&password=%s" .Release.Name .Release.Namespace (index .Values "vrf-db" "service.port") (index .Values "vrf-db" "vrfPassword") }}
 {{- end }}
