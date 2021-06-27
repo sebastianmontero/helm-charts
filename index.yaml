@@ -152,6 +152,20 @@ entries:
   vrf-oracle:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-06-27T23:16:53.703758745Z"
+    dependencies:
+    - name: vrf-db
+      repository: https://sebastianmontero.github.io/helm-charts/
+      version: 0.1.1
+    description: Sets up VRF Oracle
+    digest: 9c6f4e36e2661d7c2d9984147443b58657a150dfa77db1b540cdde305c4f6f96
+    name: vrf-oracle
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.1/vrf-oracle-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-06-27T21:50:47.533149667Z"
     description: Sets up VRF Oracle
     digest: 2c107384f34d8f018bffbd834dd8e3884121c129ae065a2e72d1ef7956f14678
@@ -160,4 +174,4 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.0/vrf-oracle-0.1.0.tgz
     version: 0.1.0
-generated: "2021-06-27T21:50:47.533208468Z"
+generated: "2021-06-27T23:16:53.703789946Z"
