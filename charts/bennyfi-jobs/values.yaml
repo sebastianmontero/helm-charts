@@ -1,0 +1,18 @@
+# Default values for bennyfi-jobs.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: sebastianmontero/bennyfi-jobs
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: v0.5
+
+nameOverride: ""
+fullnameOverride: ""
+
+env:
+  contractName: bennyfitest5
+  eosEndpoint: https://testnet.telos.caleos.io
+  runIntervalMins: 2
+  privateKey: 5J32r6xBR7Z6MBN8mUAnmFWyKiqB78Azam7JRF4t9KWqGWJ7Bjz

@@ -20,7 +20,7 @@ metadata:
     {{- include "dfuse-demo.labels" . | nindent 4 }}
 spec:
   replicas: 1
-  serviceName: fi-dfuse-service
+  serviceName: {{ include "dfuse-demo.fullname" . }}
   selector:
     matchLabels:
       {{- include "dfuse-demo.selectorLabels" . | nindent 6 }}

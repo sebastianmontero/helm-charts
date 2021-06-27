@@ -17,7 +17,7 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         command: ["/usr/local/go/bin/go"]
         args: ["run", ".", "/config/config.yml"]
         ports:

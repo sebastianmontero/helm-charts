@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "properties": {
+    "nameOverride": {
+      "description": "If specified replaces chart name when creating full name used for the names of all components",
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "description": "If specified its value is used for the names of all components",
+      "type": "string"
+    },
+    "domain": {
+      "description": "Domain Details",
+      "properties": {
+        "base": {
+          "type": "string",
+          "pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$"
+        },
+        "alpha": {
+          "type": "string",
+          "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{2,}$"
+        },
+        "ratel": {
+          "type": "string",
+          "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{2,}$"
+        }
+      },
+      "required": [
+        "base",
+        "alpha",
+        "ratel"
+      ],
+      "type": "object"
+    },
+    "env": {
+      "description": "Environment variables",
+      "properties": {
+        "contractName": {
+          "type": "string",
+          "pattern": "^[a-z1-5\\.]{1,12}$"
+        },
+        "docTableName": {
+          "type": "string",
+          "pattern": "^[a-z1-5\\.]{1,12}$"
+        },
+        "edgeTableName": {
+          "type": "string",
+          "pattern": "^[a-z1-5\\.]{1,12}$"
+        },
+        "firehoseEndpoint": {
+          "type": "string",
+          "pattern": "^[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "eosEndpoint": {
+          "type": "string",
+          "pattern": "^(http(s)?:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "prometheusPort": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "startBlock": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "heartBeatFrequency": {
+          "type": "integer",
+          "minimum": 10
+        },
+        "dfuseApiKey": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_]+$"
+        }
+      },
+      "required": [
+        "contractName",
+        "docTableName",
+        "edgeTableName",
+        "firehoseEndpoint",
+        "eosEndpoint",
+        "prometheusPort",
+        "startBlock",
+        "heartBeatFrequency",
+        "dfuseApiKey"
+      ],
+      "type": "object"
+    },
+    "typeMapping": {
+      "description": "Type-Fields map, that enables document type deduction",
+      "type": "array",
+      "items": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          },
+          "labels": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "type",
+          "labels"
+        ],
+        "type": "object"
+      }
+    },
+    "dgraph": {
+      "description": "Dgraph configuration values",
+      "properties": {
+        "image": {
+          "properties": {
+            "tag": {
+              "type": "string",
+              "pattern": "^[a-z0-9-_\\.]+$"
+            }
+          },
+          "required": [
+            "tag"
+          ],
+          "type": "object"
+        },
+        "zero": {
+          "properties": {
+            "replicaCount": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "persistence": {
+              "properties": {
+                "size": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "size"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "replicaCount",
+            "persistence"
+          ],
+          "type": "object"
+        },
+        "alpha": {
+          "properties": {
+            "replicaCount": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "persistence": {
+              "properties": {
+                "size": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "size"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "replicaCount",
+            "persistence"
+          ],
+          "type": "object"
+        },
+        "ratel": {
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "replicaCount": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "image": {
+              "properties": {
+                "tag": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9-_\\.]+$"
+                }
+              },
+              "required": [
+                "tag"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "enabled",
+            "replicaCount",
+            "image"
+          ],
+          "type": "object"
+        },
+        "initContainers": {
+          "properties": {
+            "init": {
+              "properties": {
+                "image": {
+                  "properties": {
+                    "tag": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9-_\\.]+$"
+                    }
+                  },
+                  "required": [
+                    "tag"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [
+                "image"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "init"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "alpha",
+        "zero",
+        "ratel",
+        "initContainers"
+      ],
+      "type": "object"
+    },
+    "image": {
+      "description": "Image Details",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_/]+$"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "pattern": "^(Always|Never|IfNotPresent)$"
+        },
+        "tag": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_\\.]+$"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "domain",
+    "env",
+    "dgraph",
+    "image"
+  ],
+  "title": "Values",
+  "type": "object"
+}

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "bennyfi-jobs.fullname" . }}
+  labels:
+    {{- include "bennyfi-jobs.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "bennyfi-jobs.selectorLabels" . | nindent 6 }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        {{- include "bennyfi-jobs.selectorLabels" . | nindent 6 }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+          - name: CONTRACT_NAME
+            value: "{{ .Values.env.contractName }}"
+          - name: EOS_ENDPOINT
+            value: "{{ .Values.env.eosEndpoint }}"
+          - name: RUN_INTERVAL_MINS
+            value: "{{ .Values.env.runIntervalMins }}"
+        envFrom:
+          - secretRef:
+             name: {{ include "bennyfi-jobs.fullname" . }}

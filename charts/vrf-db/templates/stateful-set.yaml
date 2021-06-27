@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "vrf-db.fullname" . }}
+  labels:
+    {{- include "vrf-db.labels" . | nindent 4 }}
+spec:
+  serviceName: {{ include "vrf-db.fullname" . }}
+  selector:
+    matchLabels:
+      {{- include "vrf-db.selectorLabels" . | nindent 6 }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        {{- include "vrf-db.selectorLabels" . | nindent 6 }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+        env:
+          - name: PGDATA
+            value: /var/lib/postgresql/data/pgdata
+        envFrom:
+          - secretRef:
+             name: {{ include "vrf-db.fullname" . }}
+        ports:
+         - containerPort: {{ .Values.service.port }}
+           name: default
+        volumeMounts:
+        - name: {{ include "vrf-db.fullname" . }}
+          mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: {{ include "vrf-db.fullname" . }}
+          persistentVolumeClaim:
+            claimName: {{ include "vrf-db.fullname" . }}

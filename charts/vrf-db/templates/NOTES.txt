@@ -1,0 +1,3 @@
+VRF DB Installed.
+
+DB Endpoint: {{ include "vrf-db.endpoint" . }}

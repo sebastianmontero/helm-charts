@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "properties": {
+    "nameOverride": {
+      "description": "If specified replaces chart name when creating full name used for the names of all components",
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "description": "If specified its value is used for the names of all components",
+      "type": "string"
+    },
+    "password": {
+      "description": "DB password",
+      "type": "string",
+      "pattern": "^[A-Za-z\\d@$!%*#?&]{8,}$"
+    },
+    "service": {
+      "description": "Service related properties",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "port"
+      ],
+      "type": "object"
+    },
+    "image": {
+      "description": "Image Details",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_/]+$"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "pattern": "^(Always|Never|IfNotPresent)$"
+        },
+        "tag": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_\\.]+$"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "type": "object"
+    }
+  },
+  "title": "Values",
+  "required": [
+    "password"
+  ],
+  "type": "object"
+}

@@ -12,9 +12,20 @@ nameOverride: ""
 fullnameOverride: ""
 
 domain:
-  base: "test.io"
+  base: test.io
   alpha: alpha
   ratel: ratel
+
+env:
+  contractName: dao.hypha
+  docTableName: documents
+  edgeTableName: edges
+  firehoseEndpoint: firehose-telos-mainnet.dfuse.svc.cluster.local:9000
+  eosEndpoint: https://telos.caleos.io
+  prometheusPort: 2114
+  startBlock: 1
+  heartBeatFrequency: 100
+  dfuseApiKey: server_eeb2882943ae420bfb3eb9bf3d78ed9d
 
 typeMapping:
 - type: VoteTally
@@ -23,17 +34,6 @@ typeMapping:
       - vote_power
     fail:
       - vote_power
-
-env:
-  contractName: dao.hypha
-  docTableName: documents
-  edgeTableName: edges
-  firehoseEndpoint: "firehose-telos-mainnet.dfuse.svc.cluster.local:9000"
-  eosEndpoint: https://telos.caleos.io
-  prometheusPort: 2114
-  startBlock: "1"
-  heartBeatFrequency: 100
-  dfuseApiKey: "api-key"
 
 dgraph:
   image:
@@ -51,7 +51,6 @@ dgraph:
     image:
       tag: v20.11.3
     replicaCount: 1
-
   initContainers:
     init:
       image:
