@@ -12,7 +12,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 env:
-  contractName: bennyfitest5
-  eosEndpoint: https://testnet.telos.caleos.io
+  contractName: ""
+  eosEndpoint: ""
   runIntervalMins: 2
-  privateKey: 5J32r6xBR7Z6MBN8mUAnmFWyKiqB78Azam7JRF4t9KWqGWJ7Bjz
+  privateKey: ""

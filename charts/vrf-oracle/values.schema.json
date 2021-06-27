@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "properties": {
+    "nameOverride": {
+      "description": "If specified replaces chart name when creating full name used for the names of all components",
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "description": "If specified its value is used for the names of all components",
+      "type": "string"
+    },
+    "env": {
+      "description": "Environment variables",
+      "properties": {
+        "eosURL": {
+          "type": "string",
+          "pattern": "^(http(s)?:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "firehoseEndpoint": {
+          "type": "string",
+          "pattern": "^[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "vrfStartBlockNum": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "vrfContract": {
+          "type": "string",
+          "pattern": "^[a-z1-5\\.]{1,12}$"
+        },
+        "vrfJobTable": {
+          "type": "string",
+          "pattern": "^[a-z1-5\\.]{1,12}$"
+        },
+        "vrfHeartBeatFrequency": {
+          "type": "integer",
+          "minimum": 10
+        },
+        "dfuseApiKey": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_]+$"
+        },
+        "vrfContractKey": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]+$"
+        },
+        "vrfKeyStorePassword": {
+          "description": " VRF DB password",
+          "type": "string",
+          "pattern": "^[A-Za-z\\d@$!%*#?&]{8,}$"
+        }
+      },
+      "required": [
+        "eosURL",
+        "firehoseEndpoint",
+        "vrfStartBlockNum",
+        "vrfContract",
+        "vrfJobTable",
+        "vrfHeartBeatFrequency",
+        "dfuseApiKey",
+        "vrfContractKey",
+        "vrfKeyStorePassword"
+      ],
+      "type": "object"
+    },
+    "vrf-db":{
+      "properties": {
+        "postgresPassword": {
+          "description": "Postgres user password",
+          "type": "string",
+          "pattern": "^[A-Za-z\\d@$!%*#?&]{8,}$"
+        },
+        "vrfPassword": {
+          "description": " VRF DB password",
+          "type": "string",
+          "pattern": "^[A-Za-z\\d@$!%*#?&]{8,}$"
+        },
+        "service": {
+          "description": "Service related properties",
+          "properties": {
+            "port": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "port"
+          ],
+          "type": "object"
+        }
+      },
+      "type":"object",
+      "required": [
+        "postgresPassword",
+        "vrfPassword",
+        "service"
+      ]
+    },
+    "image": {
+      "description": "Image Details",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_/]+$"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "pattern": "^(Always|Never|IfNotPresent)$"
+        },
+        "tag": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_\\.]+$"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "type": "object"
+    }
+  },
+  "title": "Values",
+  "required": [
+    "image"
+  ],
+  "type": "object"
+}

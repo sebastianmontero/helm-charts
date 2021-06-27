@@ -12,7 +12,12 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
-password: pg12356789
+postgresPassword: ""
+vrfPassword: "s"
 
 service:
   port: 5432
+
+storage:
+  size: 5Gi
+  class: standard

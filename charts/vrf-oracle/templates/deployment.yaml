@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "vrf-oracle.fullname" . }}
+  labels:
+    {{- include "vrf-oracle.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "vrf-oracle.selectorLabels" . | nindent 6 }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        {{- include "vrf-oracle.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        #command: ["ls"]
+        command: ["/usr/local/go/bin/go"]
+        args: ["run", "./start-vrf-oracle.go"]
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+        env:
+          - name: EOS_URL
+            value: "{{ .Values.env.eosURL }}"
+          - name: FIREHOSE_ENDPOINT
+            value: "{{ .Values.env.firehoseEndpoint }}"
+          - name: VRF_START_BLOCK_NUM
+            value: "{{ .Values.env.vrfStartBlockNum }}"
+          - name: VRF_CONTRACT
+            value: "{{ .Values.env.vrfContract }}"
+          - name: VRF_JOB_TABLE
+            value: "{{ .Values.env.vrfJobTable }}"
+          - name: VRF_HEART_BEAT_FREQUENCY
+            value: "{{ .Values.env.vrfHeartBeatFrequency }}"
+        envFrom:
+          - secretRef:
+             name: {{ include "vrf-oracle.fullname" . }}

@@ -13,7 +13,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "vrf-db.selectorLabels" . | nindent 6 }}
+        {{- include "vrf-db.selectorLabels" . | nindent 8 }}
     spec:
       containers:
       - name: {{ .Chart.Name }}

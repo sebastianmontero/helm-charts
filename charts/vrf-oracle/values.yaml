@@ -1,0 +1,30 @@
+# Default values for vrf-oracle.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: sebastianmontero/vrf-oracle-test
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: 10d8af5f41daf66efca954a36fc7368545814b1c
+
+nameOverride: ""
+fullnameOverride: ""
+
+env:
+  eosURL: ""
+  firehoseEndpoint: ""
+  vrfStartBlockNum: 1
+  vrfContract: ""
+  vrfJobTable: jobs
+  vrfHeartBeatFrequency: 100
+  dfuseApiKey: ""
+  vrfContractKey: ""
+  vrfKeyStorePassword: ""
+
+vrf-db:
+  postgresPassword: ""
+  vrfPassword: ""
+
+  service:
+    port: 5432

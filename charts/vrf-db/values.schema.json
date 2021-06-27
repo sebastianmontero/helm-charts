@@ -9,8 +9,13 @@
       "description": "If specified its value is used for the names of all components",
       "type": "string"
     },
-    "password": {
-      "description": "DB password",
+    "postgresPassword": {
+      "description": "Postgres user password",
+      "type": "string",
+      "pattern": "^[A-Za-z\\d@$!%*#?&]{8,}$"
+    },
+    "vrfPassword": {
+      "description": " VRF DB password",
       "type": "string",
       "pattern": "^[A-Za-z\\d@$!%*#?&]{8,}$"
     },
@@ -24,6 +29,23 @@
       },
       "required": [
         "port"
+      ],
+      "type": "object"
+    },
+    "storage": {
+      "description": "Storage related properties",
+      "properties": {
+        "size": {
+          "type": "string"
+        },
+        "class": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_/]+$"
+        }
+      },
+      "required": [
+        "size",
+        "class"
       ],
       "type": "object"
     },
@@ -53,7 +75,10 @@
   },
   "title": "Values",
   "required": [
-    "password"
+    "postgresPassword",
+    "vrfPassword",
+    "service",
+    "image"
   ],
   "type": "object"
 }
