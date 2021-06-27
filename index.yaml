@@ -3,6 +3,16 @@ entries:
   bennyfi-jobs:
   - apiVersion: v2
     appVersion: "0.5"
+    created: "2021-06-27T21:50:47.205170833Z"
+    description: Sets up the bennify unstaker job
+    digest: c02059e84230a85cc5772718b3cf5fae08550dc41ba1778ec8c497fdfb300c3f
+    name: bennyfi-jobs
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/bennyfi-jobs-0.1.1/bennyfi-jobs-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: "0.5"
     created: "2021-06-27T14:40:47.328376939Z"
     description: Sets up the bennify unstaker job
     digest: 459ba7ce27cda91720f426b7bcd780254bf9aaf61495189aedfa6313c4923efe
@@ -75,6 +85,21 @@ entries:
   doccache:
   - apiVersion: v2
     appVersion: 0.3.0
+    created: "2021-06-27T21:50:47.317257748Z"
+    dependencies:
+    - name: dgraph
+      repository: https://charts.dgraph.io
+      version: 0.0.17
+    description: Sets up document cache, installs dgraph as a dependency and configures
+      ssl ingresses requires ingress-nginx and cert-manager to be installed and configured
+    digest: 1a5c8042fc2ebd3c54827febd32b89cf78445c75252e7c5b1f2697408b7bef5a
+    name: doccache
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/doccache-0.1.1/doccache-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.3.0
     created: "2021-06-27T14:40:47.519890758Z"
     dependencies:
     - name: dgraph
@@ -106,6 +131,16 @@ entries:
   vrf-db:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-06-27T21:50:47.415660179Z"
+    description: Sets up VRF database
+    digest: bbf82d901d31da134ec943647aacc74d609ca02e48c21713768ee4bb6628ecd5
+    name: vrf-db
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-db-0.1.1/vrf-db-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-06-27T14:40:47.633608141Z"
     description: A Helm chart for Kubernetes
     digest: da2e5ae5b91fbeca26828fe7f2a9bfc16cad9e87e6b55b05310cbe7652fc3fa0
@@ -114,4 +149,15 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-db-0.1.0/vrf-db-0.1.0.tgz
     version: 0.1.0
-generated: "2021-06-27T14:40:47.633644641Z"
+  vrf-oracle:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-06-27T21:50:47.533149667Z"
+    description: Sets up VRF Oracle
+    digest: 2c107384f34d8f018bffbd834dd8e3884121c129ae065a2e72d1ef7956f14678
+    name: vrf-oracle
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.0/vrf-oracle-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-06-27T21:50:47.533208468Z"
