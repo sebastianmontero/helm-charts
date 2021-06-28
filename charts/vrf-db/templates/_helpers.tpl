@@ -55,5 +55,5 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 DB Endpoint
 */}}
 {{- define "vrf-db.endpoint" -}}
-{{- printf "%s.%s.cluster.local:%s/vrf" (include "vrf-db.fullname" .)  .Release.Namespace .Values.service.port }}
+{{- printf "%s.%s.cluster.local:%v/vrf" (include "vrf-db.fullname" .)  .Release.Namespace .Values.service.port }}
 {{- end }}
