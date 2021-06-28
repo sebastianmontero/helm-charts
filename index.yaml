@@ -131,6 +131,16 @@ entries:
   vrf-db:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-06-28T00:37:17.183330732Z"
+    description: Sets up VRF database
+    digest: 3a95087885b9fa1e4df0866e307def2e12a7484b3fb9eadd08813b6fbdd747bf
+    name: vrf-db
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-db-0.1.2/vrf-db-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-06-27T21:50:47.415660179Z"
     description: Sets up VRF database
     digest: bbf82d901d31da134ec943647aacc74d609ca02e48c21713768ee4bb6628ecd5
@@ -174,4 +184,4 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.0/vrf-oracle-0.1.0.tgz
     version: 0.1.0
-generated: "2021-06-27T23:16:53.703789946Z"
+generated: "2021-06-28T00:37:17.183429638Z"
