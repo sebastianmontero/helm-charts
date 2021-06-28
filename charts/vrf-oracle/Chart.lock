@@ -1,6 +1,6 @@
 dependencies:
 - name: vrf-db
   repository: https://sebastianmontero.github.io/helm-charts/
-  version: 0.1.1
-digest: sha256:eb64f211891283e83717a2a17e83bac8e3936ba63d22a288661270259939e354
-generated: "2021-06-27T17:39:56.041131113-05:00"
+  version: 0.1.2
+digest: sha256:2a8326e44648449843c15f7286458c625f145c446daa322538ec480618781a94
+generated: "2021-06-27T21:14:57.077384034-05:00"
