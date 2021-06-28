@@ -18,11 +18,11 @@
         },
         "alpha": {
           "type": "string",
-          "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{2,}$"
+          "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
         },
         "ratel": {
           "type": "string",
-          "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{2,}$"
+          "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
         }
       },
       "required": [
