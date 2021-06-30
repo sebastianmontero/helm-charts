@@ -6,7 +6,7 @@ image:
   repository: sebastianmontero/hypha-doc-cache-gql-go-mainnet
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 81ee9c911b7c80149c3b1048331f82c7de8f5d1d
+  tag: 14c74003b41923da1ee76f6bcae8832e186619d8
 
 nameOverride: ""
 fullnameOverride: ""
