@@ -188,6 +188,16 @@ entries:
   minio-gcs-gateway:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-07-21T21:14:12.484086112Z"
+    description: Enables the setup of a minio google cloud starage gateway
+    digest: c53699b52968b0c9ee2de698129a5b6b0696e017e5655dbef91a1f340df0e7d8
+    name: minio-gcs-gateway
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/minio-gcs-gateway-0.1.1/minio-gcs-gateway-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-07-21T18:58:38.128127836Z"
     description: Enables the setup of a minio google cloud starage gateway
     digest: e3dccfb766f8e8e3da210494026ea71fecafd16fd2468963ba504ec993d5b738
@@ -309,4 +319,4 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.0/vrf-oracle-0.1.0.tgz
     version: 0.1.0
-generated: "2021-07-21T18:58:38.128161236Z"
+generated: "2021-07-21T21:14:12.484177617Z"
