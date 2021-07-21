@@ -20,7 +20,7 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         command: ["minio"]
-        args: ["gateway", "gcs", "{{ .Values.gcloudProjectId }}"]
+        args: ["gateway", "gcs", "{{ .Values.gcloudProjectId }}", "--console-address", ":9001"]
         ports:
          - containerPort: 9000
            name: web
