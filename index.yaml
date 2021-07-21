@@ -82,6 +82,18 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/dfuse-demo-0.1.0/dfuse-demo-0.1.0.tgz
     version: 0.1.0
+  dgraph-backup-script:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2021-07-21T18:58:37.937718744Z"
+    description: Enables the performing of automatic dgraph backups. It can be used
+      in combination with the minio-gcs-gateway chart to enable backup to gcloud storage
+    digest: c48cd6b9f7af39c1c9ba4c9d8b770995b0c78a5d304992d6e2f99454d9a62b73
+    name: dgraph-backup-script
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/dgraph-backup-script-0.1.0/dgraph-backup-script-0.1.0.tgz
+    version: 0.1.0
   doccache:
   - apiVersion: v2
     appVersion: 0.3.0
@@ -172,6 +184,17 @@ entries:
     type: application
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/doccache-0.1.0/doccache-0.1.0.tgz
+    version: 0.1.0
+  minio-gcs-gateway:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-07-21T18:58:38.128127836Z"
+    description: Enables the setup of a minio google cloud starage gateway
+    digest: e3dccfb766f8e8e3da210494026ea71fecafd16fd2468963ba504ec993d5b738
+    name: minio-gcs-gateway
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/minio-gcs-gateway-0.1.0/minio-gcs-gateway-0.1.0.tgz
     version: 0.1.0
   ssl-ingress:
   - apiVersion: v2
@@ -286,4 +309,4 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.0/vrf-oracle-0.1.0.tgz
     version: 0.1.0
-generated: "2021-06-30T04:34:13.797785367Z"
+generated: "2021-07-21T18:58:38.128161236Z"
