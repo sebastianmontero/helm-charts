@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "properties": {
+    "nameOverride": {
+      "description": "If specified replaces chart name when creating full name used for the names of all components",
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "description": "If specified its value is used for the names of all components",
+      "type": "string"
+    },
+    "gcloudProjectId": {
+      "description": "Google Cloud Project Id where the storage buckets exist",
+      "type": "string",
+      "pattern": "^[a-z0-9-_\\.]+$"
+    },
+    "env": {
+      "description": "Environment variables",
+      "properties": {
+        "minioRootUser": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_\\.]+$"
+        },
+        "minioRootPassword": {
+          "type": "string",
+          "pattern": "^[A-Za-z\\d@$!%*#?&]{8,}$"
+        }
+      },
+      "required": [
+        "minioRootUser",
+        "minioRootPassword"
+      ],
+      "type": "object"
+    },
+    "serviceAccount": {
+      "description": "Service account related properties",
+      "properties": {
+        "create": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "create"
+      ],
+      "type": "object"
+    },
+    "image": {
+      "description": "Image Details",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_/]+$"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "pattern": "^(Always|Never|IfNotPresent)$"
+        },
+        "tag": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9-_\\.]+$"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "type": "object"
+    }
+  },
+  "title": "Values",
+  "required": [
+    "gcloudProjectId",
+    "env",
+    "serviceAccount",
+    "image"
+  ],
+  "type": "object"
+}

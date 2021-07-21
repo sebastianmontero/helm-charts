@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "dgraph-backup-script.fullname" . }}
+  labels:
+    {{- include "dgraph-backup-script.labels" . | nindent 4 }}
+data:
+  config.yml: |
+    export-destination: {{ .Values.env.exportDestination }}
+    export-use-ssl: {{ .Values.env.exportUseSSL }}
+    export-access-key: {{ .Values.env.exportAccessKey }}
+    export-secret-key: {{ .Values.env.exportSecretKey }}
+    prometheus-port: {{ .Values.env.prometheusPort }}
+    export-jobs:
+      {{- range .Values.exportJobs -}}
+        {{- printf "- name: %s" .name | nindent 4 }}
+        {{- printf "  gql-admin-url: %s" .gqlAdminUrl | nindent 4 }}
+        {{- printf "  schedule: %s" .schedule | nindent 4 }}
+      {{- end }}

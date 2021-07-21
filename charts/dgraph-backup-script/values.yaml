@@ -1,0 +1,23 @@
+# Default values for dgraph-backup-script.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: sebastianmontero/dgraph-backup-script-prod
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: 0ee45b245e4115a449937a600835cf3de45d9985
+
+nameOverride: ""
+fullnameOverride: ""
+
+env:
+  exportDestination: ""
+  exportAccessKey: ""
+  exportSecretKey: ""
+  exportUseSSL: false
+  prometheusPort: 2114
+
+exportJobs: {}
+
+

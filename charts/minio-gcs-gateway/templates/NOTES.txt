@@ -1,0 +1,5 @@
+Minio as google cloud storage gateway has been installed and configured
+
+Cluster Ports:
+Web: 9000
+Instance: 9001

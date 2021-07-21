@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "dgraph-backup-script.fullname" . }}
+  labels:
+    {{- include "dgraph-backup-script.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "dgraph-backup-script.selectorLabels" . | nindent 6 }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        {{- include "dgraph-backup-script.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["/usr/local/go/bin/go"]
+        args: ["run", ".", "/config/config.yml"]
+        ports:
+        - containerPort: {{ .Values.env.prometheusPort }}
+          name: prometheus
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+        volumeMounts:
+        - name: dgraph-backup-script-config
+          mountPath: /config/config.yml
+          subPath: config.yml
+      volumes:
+      - name: dgraph-backup-script-config
+        configMap:
+          name: {{ include "dgraph-backup-script.fullname" . }}

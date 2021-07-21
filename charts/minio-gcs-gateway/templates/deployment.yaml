@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "minio-gcs-gateway.fullname" . }}
+  labels:
+    {{- include "minio-gcs-gateway.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "minio-gcs-gateway.selectorLabels" . | nindent 6 }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        {{- include "minio-gcs-gateway.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ include "minio-gcs-gateway.serviceAccountName" . }}
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["minio"]
+        args: ["gateway", "gcs", "{{ .Values.gcloudProjectId }}"]
+        ports:
+         - containerPort: 9000
+           name: web
+         - containerPort: 9001
+           name: instance
+        envFrom:
+          - secretRef:
+             name: {{ include "minio-gcs-gateway.fullname" . }}
