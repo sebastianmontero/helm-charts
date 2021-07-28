@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "bennyfi-jobs.fullname" . }}
+  labels:
+    {{- include "bennyfi-jobs.labels" . | nindent 4 }}
+data:
+  config.yml: |
+    contract-name: {{ .Values.env.contractName }}
+    run-interval-mins: {{ .Values.env.runIntervalMins }}
+    private-key: {{ .Values.env.privateKey }}
+    eos-endpoints:
+      {{- range .Values.env.eosEndpoints -}}
+        {{- printf "- %s" . | nindent 4 }}
+      {{- end }}

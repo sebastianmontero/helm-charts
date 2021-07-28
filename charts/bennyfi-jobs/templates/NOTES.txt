@@ -1,2 +1,5 @@
 Bennyfi jobs has been installed, jobs:
-- unstaker
+- Unstaker
+- Redraw
+- Timeout rounds
+- Unlock rounds

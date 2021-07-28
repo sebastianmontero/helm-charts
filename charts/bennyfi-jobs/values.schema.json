@@ -12,9 +12,13 @@
     "env": {
       "description": "Environment variables",
       "properties": {
-        "eosEndpoint": {
-          "type": "string",
-          "pattern": "^(http(s)?:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        "eosEndpoints": {
+          "type" :"array",
+          "items": {
+            "type": "string",
+            "pattern": "^(http(s)?:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+          },
+          "minItems": 1
         },
         "contractName": {
           "type": "string",
@@ -30,7 +34,7 @@
         }
       },
       "required": [
-        "eosEndpoint",
+        "eosEndpoints",
         "contractName",
         "runIntervalMins",
         "privateKey"
