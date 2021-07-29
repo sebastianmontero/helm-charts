@@ -94,6 +94,17 @@ entries:
     version: 0.1.0
   dgraph-backup-script:
   - apiVersion: v2
+    appVersion: 0.0.4
+    created: "2021-07-29T19:28:33.968043094Z"
+    description: Enables the performing of automatic dgraph backups. It can be used
+      in combination with the minio-gcs-gateway chart to enable backup to gcloud storage
+    digest: 25460a96752510af80e596fc1b9cfc093576c27e2c3e08bb1faa2f3da61fc6fe
+    name: dgraph-backup-script
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/dgraph-backup-script-0.1.4/dgraph-backup-script-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
     appVersion: 0.0.3
     created: "2021-07-29T18:50:46.842248816Z"
     description: Enables the performing of automatic dgraph backups. It can be used
@@ -362,4 +373,4 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.0/vrf-oracle-0.1.0.tgz
     version: 0.1.0
-generated: "2021-07-29T18:50:46.842293416Z"
+generated: "2021-07-29T19:28:33.968105294Z"
