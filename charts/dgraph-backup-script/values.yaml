@@ -6,7 +6,7 @@ image:
   repository: sebastianmontero/dgraph-backup-script-prod
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 833e7a4c77f4e8f7acb3694e0df8966fa5b15365
+  tag: a4b7fde5ab39ba7aba181944d29701f71cb18608
 
 nameOverride: ""
 fullnameOverride: ""
