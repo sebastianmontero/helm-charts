@@ -92,7 +92,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "pattern": "^[a-zA-Z0-9]+$"
+            "pattern": "^[a-zA-Z0-9\\._]+$"
           },
           "labels": {
             "type": "object"
@@ -101,6 +101,99 @@
         "required": [
           "type",
           "labels"
+        ],
+        "type": "object"
+      }
+    },
+    "customInterfaces": {
+      "description": "Custom interfaces descriptions to add as GQL types",
+      "type": "array",
+      "items": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\._]+$"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "contentGroup":{
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9\\._]+$"
+                },
+                "name":{
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9\\._]+$"
+                },
+                "type":{
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9\\._]+$"
+                },
+                "signature":{
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "name",
+                "type"
+              ],
+              "type":"object"
+            }
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9\\._]+$"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "fields"
+        ],
+        "type": "object"
+      }
+    },
+    "logicalIds": {
+      "description": "Details logical Ids to add",
+      "type": "array",
+      "items": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\._]+$"
+          },
+          "ids": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "contentGroup":{
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9\\._]+$"
+                },
+                "name":{
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9\\.]+$"
+                },
+                "type":{
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9\\._]+$"
+                }
+              },
+              "required": [
+                "contentGroup",
+                "name",
+                "type"
+              ],
+              "type":"object"
+            }
+          }
+        },
+        "required": [
+          "type",
+          "ids"
         ],
         "type": "object"
       }

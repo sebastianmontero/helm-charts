@@ -15,17 +15,54 @@ data:
     dgraph-alpha-grpc-port: 9080
     dgraph-alpha-http-port: 8080
     prometheus-port: {{ .Values.env.prometheusPort }}
-    start-block: {{ .Values.env.startBlock }}
+    start-block: {{ int .Values.env.startBlock }}
     heart-beat-frequency: {{ .Values.env.heartBeatFrequency }}
     dfuse-api-key: {{ .Values.env.dfuseApiKey }}
+    {{- if .Values.typeMapping }}
     type-mappings:
-      {{- range .Values.typeMapping -}}
-        {{- printf "- type: %s" .type | nindent 4 }}
-        {{- nindent 6 "labels:"}}
-        {{- range $k, $v := .labels -}}
-          {{ $k | nindent 8 }}:
-          {{- range $v -}}
-            {{- printf "- %s" . | nindent 10 -}}
+        {{- range .Values.typeMapping -}}
+          {{- printf "- type: %s" .type | nindent 6 }}
+          {{- nindent 8 "labels:"}}
+          {{- range $k, $v := .labels -}}
+            {{ $k | nindent 10 }}:
+            {{- range $v -}}
+              {{- printf "- %s" . | nindent 12 -}}
+            {{- end }}
           {{- end }}
         {{- end }}
+    {{- end }}
+    {{- if .Values.customInterfaces }}
+    custom-interfaces:
+      {{- range .Values.customInterfaces -}}
+        {{- printf "- name: %s" .name | nindent 6 }}
+        {{- nindent 8 "fields:"}}
+        {{- range .fields -}}
+          {{- printf "- name: %s" .name | nindent 10 }}
+          {{- printf "type: %s" .type | nindent 12 }}
+          {{- if .contentGroup -}}
+            {{- printf "content-group: %s" .contentGroup | nindent 12 }}
+          {{- end -}}
+          {{- if .signature -}}
+            {{- printf "signature: %t" .signature | nindent 12 }}
+          {{- end -}}
+        {{- end }}
+        {{- if .types -}}
+          {{- nindent 8 "types:"}}
+          {{- range .types -}}
+            {{- printf "- %s" . | nindent 10 }}
+          {{- end }}
+        {{- end -}}
       {{- end }}
+    {{- end }}
+    {{- if .Values.logicalIds }}
+    logical-ids:
+      {{- range .Values.logicalIds -}}
+        {{- printf "- type: %s" .type | nindent 6 }}
+        {{- nindent 8 "ids:"}}
+        {{- range .ids -}}
+          {{- printf "- content-group: %s" .contentGroup | nindent 10 }}
+          {{- printf "name: %s" .name | nindent 12 }}
+          {{- printf "type: %s" .type | nindent 12 }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
