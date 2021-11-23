@@ -80,8 +80,7 @@
         "eosEndpoint",
         "prometheusPort",
         "startBlock",
-        "heartBeatFrequency",
-        "dfuseApiKey"
+        "heartBeatFrequency"
       ],
       "type": "object"
     },
