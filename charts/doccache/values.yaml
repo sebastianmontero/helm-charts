@@ -25,7 +25,6 @@ env:
   prometheusPort: 2114
   startBlock: 1
   heartBeatFrequency: 100
-  dfuseApiKey: ""
 
 dgraph:
   image:
