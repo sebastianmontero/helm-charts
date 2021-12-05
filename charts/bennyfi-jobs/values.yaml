@@ -6,7 +6,7 @@ image:
   repository: sebastianmontero/bennyfi-jobs
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: v1.1
+  tag: v1.2
 
 nameOverride: ""
 fullnameOverride: ""
@@ -16,3 +16,11 @@ env:
   runIntervalMins: 2
   privateKey: ""
   eosEndpoints: []
+  batchActions:
+  - TimeoutRounds
+  - MoveFromSavings
+  - SellRex
+  - WithdrawRex
+  - UnlockRounds
+  - UnstakeUnlockedRounds
+  - UnstakeTimedoutRounds

@@ -31,13 +31,22 @@
         "runIntervalMins": {
           "type": "integer",
           "minimum": 1
+        },
+        "batchActions": {
+          "type" :"array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          },
+          "minItems": 1
         }
       },
       "required": [
         "eosEndpoints",
         "contractName",
         "runIntervalMins",
-        "privateKey"
+        "privateKey",
+        "batchActions"
       ],
       "type": "object"
     },

@@ -13,3 +13,7 @@ data:
       {{- range .Values.env.eosEndpoints -}}
         {{- printf "- %s" . | nindent 4 }}
       {{- end }}
+    batch-actions:
+      {{- range .Values.env.batchActions -}}
+        {{- printf "- %s" . | nindent 4 }}
+      {{- end }}
