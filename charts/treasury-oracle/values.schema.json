@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "properties": {
+    "nameOverride": {
+      "description": "If specified replaces chart name when creating full name used for the names of all components",
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "description": "If specified its value is used for the names of all components",
+      "type": "string"
+    },
+    "env": {
+      "description": "Environment variables",
+      "properties": {
+        "bwsUrl": {
+          "type": "string",
+          "pattern": "^(http(s)?:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "bwsLogLevel": {
+          "type": "string",
+          "enum": ["silent", "debug", "info", "log", "warn", "error", "fatal"]
+        },
+        "bwsTimeout": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "dfuseEOSApiKey": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_]+$"
+        },
+        "dfuseEOSNetwork": {
+          "type": "string",
+          "pattern": "^[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "dfuseETHApiKey": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_]+$"
+        },
+        "dfuseETHNetwork": {
+          "type": "string",
+          "pattern": "^[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "dfuseTelosApiKey": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_]+$"
+        },
+        "dfuseTelosNetwork": {
+          "type": "string",
+          "pattern": "^[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "web3Endpoint": {
+          "type": "string",
+          "pattern": "^([a-z0-9+.-]+):(?://(?:((?:[a-z0-9-._~!$&'()*+,;=:]|%[0-9A-F]{2})*)@)?((?:[a-z0-9-._~!$&'()*+,;=]|%[0-9A-F]{2})*)(?::(\\d*))?(/(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?|(/?(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})+(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?)(?:\\?((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?$"
+        },
+        "eosEndpoint": {
+          "type": "string",
+          "pattern": "^(http(s)?:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "accountingContract": {
+          "type": "string",
+          "pattern": "^[a-z1-5\\.]{1,12}$"
+        },
+        "eosAccount": {
+          "type": "string",
+          "pattern": "^[a-z1-5\\.]{1,12}$"
+        },
+        "eosAccountKey": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]+$"
+        },
+        "btcMinConfirmations": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "runIntervalTimeoutMins": {
+          "type": "integer",
+          "minimum": 1
+        }
+
+      },
+      "required": [
+        "bwsUrl",
+        "bwsLogLevel",
+        "bwsTimeout",
+        "dfuseEOSApiKey",
+        "dfuseEOSNetwork",
+        "dfuseETHApiKey",
+        "dfuseETHNetwork",
+        "dfuseTelosApiKey",
+        "dfuseTelosNetwork",
+        "web3Endpoint",
+        "eosEndpoint",
+        "accountingContract",
+        "eosAccount",
+        "eosAccountKey",
+        "btcMinConfirmations"
+      ],
+      "type": "object"
+    },
+    "btc": {
+      "description": "BTC Related Details",
+      "properties": {
+        "secret": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_]+$"
+        },
+        "wallets": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9-_]+$"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "secret",
+        "wallets"
+      ],
+      "type": "object"
+    },
+    "image": {
+      "description": "Image Details",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_/]+$"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "pattern": "^(Always|Never|IfNotPresent)$"
+        },
+        "tag": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_\\.]+$"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "type": "object"
+    }
+  },
+  "title": "Values",
+  "required": [
+    "image"
+  ],
+  "type": "object"
+}

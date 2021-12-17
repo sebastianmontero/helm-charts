@@ -52,17 +52,45 @@ Params:
   subdomain: subdomain to use
 */}}
 {{- define "dgraph.getDomain" -}}
-{{- printf "%s.%s" .subdomain .context.Values.domain.base }}
+{{- if .subdomain }}
+{{- printf "%s.%s" .subdomain .context.Values.url.domain.base }}
+{{- else }}
+{{- .context.Values.url.domain.base }}
 {{- end }}
+{{- end }}
+
+{{/*
+Get url path
+Params:
+  path: path to use
+*/}}
+{{- define "dgraph.getUrlPath" -}}
+{{- if .path }}
+{{- printf "%s/" (trimSuffix "/" .path) }}
+{{- else }}
+{{- "/" }}
+{{- end }}
+{{- end }}
+
+{{/*
+Get  url path rewrite function
+Params:
+  path: path to use
+*/}}
+{{- define "dgraph.getUrlPathRewrite" -}}
+{{- printf "%s?(.*)" (include "dgraph.getUrlPath" .) }}
+{{- end }}
+
 
 {{/*
 Get full url function
 Params:
   context: chart context
   subdomain: subdomain to use
+  path: path to use
 */}}
 {{- define "dgraph.getUrl" -}}
-{{- printf "https://%s" (include "dgraph.getDomain" .) }}
+{{- printf "https://%s%s" (include "dgraph.getDomain" .) (include "dgraph.getUrlPath" .) }}
 {{- end }}
 
 
@@ -70,14 +98,43 @@ Params:
 Get dgraph alpha domain
 */}}
 {{- define "dgraph.alphaDomain" -}}
-{{ include "dgraph.getDomain" (dict "context" . "subdomain" .Values.domain.alpha ) }}
+{{ include "dgraph.getDomain" (dict "context" . "subdomain" .Values.url.domain.alpha ) }}
 {{- end }}
 
 {{/*
 Get dgraph ratel domain
 */}}
 {{- define "dgraph.ratelDomain" -}}
-{{ include "dgraph.getDomain" (dict "context" . "subdomain" .Values.domain.ratel ) }}
+{{ include "dgraph.getDomain" (dict "context" . "subdomain" .Values.url.domain.ratel ) }}
+{{- end }}
+
+
+{{/*
+Get dgraph alpha url path
+*/}}
+{{- define "dgraph.alphaUrlPath" -}}
+{{ include "dgraph.getUrlPath" (dict "path" .Values.url.path.alpha ) }}
+{{- end }}
+
+{{/*
+Get dgraph ratel url path
+*/}}
+{{- define "dgraph.ratelUrlPath" -}}
+{{ include "dgraph.getUrlPath" (dict "path" .Values.url.path.ratel ) }}
+{{- end }}
+
+{{/*
+Get dgraph alpha url path rewrite
+*/}}
+{{- define "dgraph.alphaUrlPathRewrite" -}}
+{{ include "dgraph.getUrlPathRewrite" (dict "path" .Values.url.path.alpha ) }}
+{{- end }}
+
+{{/*
+Get dgraph ratel url path rewrite
+*/}}
+{{- define "dgraph.ratelUrlPathRewrite" -}}
+{{ include "dgraph.getUrlPathRewrite" (dict "path" .Values.url.path.ratel ) }}
 {{- end }}
 
 
@@ -85,14 +142,14 @@ Get dgraph ratel domain
 Get dgraph alpha url
 */}}
 {{- define "dgraph.alphaUrl" -}}
-{{ include "dgraph.getUrl" (dict "context" . "subdomain" .Values.domain.alpha ) }}
+{{ include "dgraph.getUrl" (dict "context" . "subdomain" .Values.url.domain.alpha "path" .Values.url.path.alpha ) }}
 {{- end }}
 
 {{/*
 Get dgraph ratel url
 */}}
 {{- define "dgraph.ratelUrl" -}}
-{{ include "dgraph.getUrl" (dict "context" . "subdomain" .Values.domain.ratel ) }}
+{{ include "dgraph.getUrl" (dict "context" . "subdomain" .Values.url.domain.ratel "path" .Values.url.path.ratel ) }}
 {{- end }}
 
 {{/*

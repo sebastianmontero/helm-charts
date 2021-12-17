@@ -9,26 +9,52 @@
       "description": "If specified its value is used for the names of all components",
       "type": "string"
     },
-    "domain": {
-      "description": "Domain Details",
+    "url":{
+      "description": "Url details",
       "properties": {
-        "base": {
-          "type": "string",
-          "pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$"
+        "domain": {
+          "description": "Domain Details",
+          "properties": {
+            "base": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$"
+            },
+            "alpha": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
+            },
+            "ratel": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
+            }
+          },
+          "required": [
+            "base"
+          ],
+          "type": "object"
         },
-        "alpha": {
-          "type": "string",
-          "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
-        },
-        "ratel": {
-          "type": "string",
-          "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
+        "path": {
+          "description": "Path Details",
+          "properties": {
+            "alpha": {
+              "type": "string",
+              "pattern": "^\\/[\\/\\.a-zA-Z0-9\\-]*$"
+            },
+            "ratel": {
+              "type": "string",
+              "pattern": "^\\/[\\/\\.a-zA-Z0-9\\-]*$"
+            }
+          },
+          "required": [
+            "alpha",
+            "ratel"
+          ],
+          "type": "object"
         }
       },
       "required": [
-        "base",
-        "alpha",
-        "ratel"
+        "domain",
+        "path"
       ],
       "type": "object"
     },
@@ -351,7 +377,7 @@
     }
   },
   "required": [
-    "domain",
+    "url",
     "env",
     "dgraph",
     "image"

@@ -1,0 +1,39 @@
+# Default values for treasury-oracle.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: sebastianmontero/hypha-treasury-services
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: 06aa50adbbbade0be19d339b5bfbcef2ec9a1189
+
+nameOverride: ""
+fullnameOverride: ""
+
+env:
+  bwsCredentialsDir: "/btc/credentials"
+  bwsUrl: https://bws.bitpay.com/bws/api
+  bwsLogLevel: silent 
+  bwsTimeout: 50000
+  dfuseEOSApiKey: ""
+  dfuseEOSNetwork: eos.dfuse.eosnation.io
+  dfuseETHApiKey: ""
+  dfuseETHNetwork: mainnet.eth.dfuse.io
+  dfuseTelosApiKey: ""
+  dfuseTelosNetwork: dgql.tekit.io
+  web3Endpoint: wss://mainnet.infura.io/ws/v3/637f31f8a02549758e974daee4eb5eca
+  eosEndpoint: ""
+  accountingContract: ""
+  eosAccount: ""
+  eosAccountKey: ""
+  btcMinConfirmations: 5
+  runIntervalTimeoutMins: 10
+
+btc:
+  secret: btc-wallets
+  wallets:
+  - btc-treasury-1
+  - btc-treasury-2
+  - btc-treasury-3
+  - btc-treasury-5

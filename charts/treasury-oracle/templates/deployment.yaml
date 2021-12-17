@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "treasury-oracle.fullname" . }}
+  labels:
+    {{- include "treasury-oracle.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "treasury-oracle.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "treasury-oracle.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["node"]
+        args: ["src/TrxOracleRunner.js"]
+        env:
+        - name: BWS_CREDENTIALS_DIR
+          value: "{{ .Values.env.bwsCredentialsDir }}"
+        - name: BWS_URL
+          value: "{{ .Values.env.bwsUrl }}"
+        - name: BWS_LOG_LEVEL
+          value: "{{ .Values.env.bwsLogLevel }}"
+        - name: BWS_TIMEOUT
+          value: "{{ .Values.env.bwsTimeout }}"
+        - name: EOS_ENDPOINT
+          value: "{{ .Values.env.eosEndpoint }}"
+        - name: DFUSE_EOS_NETWORK
+          value: "{{ .Values.env.dfuseEOSNetwork }}"
+        - name: ACCOUNTING_CONTRACT
+          value: "{{ .Values.env.accountingContract }}"
+        - name: DFUSE_ETH_NETWORK
+          value: "{{ .Values.env.dfuseETHNetwork }}"
+        - name: EOS_ACCOUNT
+          value: "{{ .Values.env.eosAccount }}"
+        - name: DFUSE_TELOS_NETWORK
+          value: "{{ .Values.env.dfuseTelosNetwork }}"
+        - name: WEB3_ENDPOINT
+          value: "{{ .Values.env.web3Endpoint }}"
+        - name: BTC_MIN_CONFIRMATIONS
+          value: "{{ .Values.env.btcMinConfirmations }}"
+        - name: RUN_INTERVAL_TIMEOUT_MINS
+          value: "{{ .Values.env.runIntervalTimeoutMins }}"
+        envFrom:
+        - secretRef:
+            name: {{ include "treasury-oracle.fullname" . }}
+        volumeMounts:
+          - name: {{ include "treasury-oracle.btc-credentials-volume" . }}
+            mountPath: {{ .Values.env.bwsCredentialsDir }}
+            readOnly: true
+      volumes:
+      - name: {{ include "treasury-oracle.btc-credentials-volume" . }}
+        secret:
+          secretName: "{{ .Values.btc.secret }}"
+          items:
+            {{- range .Values.btc.wallets -}}
+              {{- printf "- key: %s.json" . | nindent 12 }}
+              {{- printf "path: %s.json" . | nindent 14 }}
+              {{- printf "- key: %s.key" . | nindent 12 }}
+              {{- printf "path: %s.key" . | nindent 14 }}
+            {{- end }}

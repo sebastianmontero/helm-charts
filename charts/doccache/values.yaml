@@ -11,10 +11,14 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
-domain:
-  base: ""
-  alpha: alpha
-  ratel: ratel
+url:
+  domain: 
+    base: ""
+    # alpha: alpha-dge-test
+    # ratel: ratel-dge-test
+  path:
+    alpha: /
+    ratel: /
 
 env:
   contractName: ""
