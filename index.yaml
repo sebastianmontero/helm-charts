@@ -3,6 +3,16 @@ entries:
   bennyfi-jobs:
   - apiVersion: v2
     appVersion: "1.1"
+    created: "2021-12-22T19:04:05.481339354Z"
+    description: Sets up the bennify jobs
+    digest: a38da21b7de3146978bcb8477aa5e785f7f55505f64b5be9f8aa63aa199f44e2
+    name: bennyfi-jobs
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/bennyfi-jobs-0.1.4/bennyfi-jobs-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: "1.1"
     created: "2021-07-28T15:04:44.152679617Z"
     description: Sets up the bennify jobs
     digest: c906fb0a7f5b5f1e3143013782f055974956e8f0da5cbc6612748a4731e38430
@@ -160,6 +170,21 @@ entries:
     - https://github.com/sebastianmontero/helm-charts/releases/download/dgraph-backup-script-0.1.0/dgraph-backup-script-0.1.0.tgz
     version: 0.1.0
   doccache:
+  - apiVersion: v2
+    appVersion: 0.3.0
+    created: "2021-12-22T19:04:05.609525683Z"
+    dependencies:
+    - name: dgraph
+      repository: https://charts.dgraph.io
+      version: 0.0.17
+    description: Sets up document cache, installs dgraph as a dependency and configures
+      ssl ingresses requires ingress-nginx and cert-manager to be installed and configured
+    digest: d3990cb2ef940a6544a8117c1bb823dec4a718ce41148a5f778565caabaa80b6
+    name: doccache
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/doccache-0.1.10/doccache-0.1.10.tgz
+    version: 0.1.10
   - apiVersion: v2
     appVersion: 0.3.0
     created: "2021-11-30T22:25:43.336105751Z"
@@ -346,6 +371,17 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/ssl-ingress-0.1.0/ssl-ingress-0.1.0.tgz
     version: 0.1.0
+  treasury-oracle:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-12-22T19:04:05.732321253Z"
+    description: Sets up the treasury oracle service
+    digest: ed8c796cabb60943a15805c14e014e68ff2f95fd61cab050b203490ccd73336c
+    name: treasury-oracle
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/treasury-oracle-0.1.0/treasury-oracle-0.1.0.tgz
+    version: 0.1.0
   vrf-db:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -444,4 +480,4 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.0/vrf-oracle-0.1.0.tgz
     version: 0.1.0
-generated: "2021-11-30T22:25:43.336202955Z"
+generated: "2021-12-22T19:04:05.732420159Z"
