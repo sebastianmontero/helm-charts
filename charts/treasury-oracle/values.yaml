@@ -6,7 +6,7 @@ image:
   repository: sebastianmontero/hypha-treasury-services
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 06aa50adbbbade0be19d339b5bfbcef2ec9a1189
+  tag: 43a9bf9a0da14adef55a84c8f6143e5ece46e6cf
 
 nameOverride: ""
 fullnameOverride: ""
