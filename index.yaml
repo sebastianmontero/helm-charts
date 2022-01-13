@@ -102,6 +102,18 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/dfuse-demo-0.1.0/dfuse-demo-0.1.0.tgz
     version: 0.1.0
+  dgesearch:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-01-13T03:06:31.029925019Z"
+    description: Sets up the process that feeds the documents from a document-graph
+      contract to elastic search
+    digest: 3f70dad749bc46807e559ad3224755bbcca31e8ab987133af5be0ae4929ec491
+    name: dgesearch
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/dgesearch-0.1.0/dgesearch-0.1.0.tgz
+    version: 0.1.0
   dgraph-backup-script:
   - apiVersion: v2
     appVersion: 0.0.5
@@ -480,4 +492,4 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.0/vrf-oracle-0.1.0.tgz
     version: 0.1.0
-generated: "2021-12-22T19:04:05.732420159Z"
+generated: "2022-01-13T03:06:31.030103719Z"
