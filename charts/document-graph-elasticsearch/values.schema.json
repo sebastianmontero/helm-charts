@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "properties": {
+    "nameOverride": {
+      "description": "If specified replaces chart name when creating full name used for the names of all components",
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "description": "If specified its value is used for the names of all components",
+      "type": "string"
+    },
+    "env": {
+      "description": "Environment variables",
+      "properties": {
+        "contractName": {
+          "type": "string",
+          "pattern": "^[a-z1-5\\.]{1,12}$"
+        },
+        "docTableName": {
+          "type": "string",
+          "pattern": "^[a-z1-5\\.]{1,12}$"
+        },
+        "firehoseEndpoint": {
+          "type": "string",
+          "pattern": "^[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "eosEndpoint": {
+          "type": "string",
+          "pattern": "^(http(s)?:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "elasticEndpoint": {
+          "type": "string",
+          "pattern": "^(http(s)?:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "elasticCA": {
+          "type": "string"
+        },
+        "prometheusPort": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "startBlock": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "heartBeatFrequency": {
+          "type": "integer",
+          "minimum": 10
+        },
+        "dfuseApiKey": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_]+$"
+        },
+        "esUser": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "esPassword": {
+          "type": "string",
+          "pattern": "^[A-Za-z\\d@$!%*#?&]{8,}$"
+        }
+      },
+      "required": [
+        "contractName",
+        "docTableName",
+        "firehoseEndpoint",
+        "eosEndpoint",
+        "elasticEndpoint",
+        "prometheusPort",
+        "startBlock",
+        "heartBeatFrequency",
+        "esUser",
+        "esPassword"
+      ],
+      "type": "object"
+    },
+    "image": {
+      "description": "Image Details",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_/]+$"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "pattern": "^(Always|Never|IfNotPresent)$"
+        },
+        "tag": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_\\.]+$"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "env",
+    "image"
+  ],
+  "title": "Values",
+  "type": "object"
+}

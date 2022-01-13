@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "document-graph-elasticsearch.fullname" . }}
+  labels:
+    {{- include "document-graph-elasticsearch.labels" . | nindent 4 }}
+data:
+  config.yml: |
+    contract-name: {{ .Values.env.contractName }}
+    doc-table-name: {{ .Values.env.docTableName }}
+    firehose-endpoint: {{ .Values.env.firehoseEndpoint }}
+    eos-endpoint: {{ .Values.env.eosEndpoint }}
+    elastic-endpoint: {{ .Values.env.elasticEndpoint }}
+    elastic-ca: {{ .Values.env.elasticCA }}
+    prometheus-port: {{ .Values.env.prometheusPort }}
+    start-block: {{ int .Values.env.startBlock }}
+    heart-beat-frequency: {{ .Values.env.heartBeatFrequency }}
+    dfuse-api-key: {{ .Values.env.dfuseApiKey }}

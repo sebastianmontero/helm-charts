@@ -1,0 +1,2 @@
+The following items have been performed:
+  - Document graph elasticsearch has been installed
