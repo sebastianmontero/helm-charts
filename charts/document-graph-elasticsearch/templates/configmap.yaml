@@ -6,8 +6,6 @@ metadata:
     {{- include "document-graph-elasticsearch.labels" . | nindent 4 }}
 data:
   config.yml: |
-    contract-name: {{ .Values.env.contractName }}
-    doc-table-name: {{ .Values.env.docTableName }}
     firehose-endpoint: {{ .Values.env.firehoseEndpoint }}
     eos-endpoint: {{ .Values.env.eosEndpoint }}
     elastic-endpoint: {{ .Values.env.elasticEndpoint }}
@@ -16,3 +14,10 @@ data:
     start-block: {{ int .Values.env.startBlock }}
     heart-beat-frequency: {{ .Values.env.heartBeatFrequency }}
     dfuse-api-key: {{ .Values.env.dfuseApiKey }}
+    cursor-index-prefix: {{ .Values.env.cursorIndexPrefix }}
+    contracts:
+      {{- range .Values.env.contracts -}}
+        {{- printf "- name: %s" .name | nindent 4 }}
+        {{- printf "doc-table-name: %s" .docTableName | nindent 6 }}
+        {{- printf "index-prefix: %s" .indexPrefix | nindent 6 }}
+      {{- end }}

@@ -3,17 +3,15 @@
 # Declare variables to be passed into your templates.
 
 image:
-  repository: document-graph-elasticsearch-mainnet
+  repository: sebastianmontero/document-graph-elasticsearch-testnet
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 352d2ab34dd01b27d83fe01afcb0d8d9ece3175b
+  tag: c5343012fb5de9229aca788805bfd3cd3f5e1306
 
 nameOverride: ""
 fullnameOverride: ""
 
 env:
-  contractName: ""
-  docTableName: documents
   firehoseEndpoint: ""
   eosEndpoint: ""
   elasticEndpoint: "" #username and password should be set using env vars ES_USER, ES_PASSWORD
@@ -23,3 +21,6 @@ env:
   heartBeatFrequency: 100
   esUser: ""
   esPassword: ""
+  dfuseApiKey: ""
+  cursorIndexPrefix: ""
+  contracts: []

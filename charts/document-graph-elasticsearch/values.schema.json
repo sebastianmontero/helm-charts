@@ -12,14 +12,6 @@
     "env": {
       "description": "Environment variables",
       "properties": {
-        "contractName": {
-          "type": "string",
-          "pattern": "^[a-z1-5\\.]{1,12}$"
-        },
-        "docTableName": {
-          "type": "string",
-          "pattern": "^[a-z1-5\\.]{1,12}$"
-        },
         "firehoseEndpoint": {
           "type": "string",
           "pattern": "^[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
@@ -49,7 +41,7 @@
         },
         "dfuseApiKey": {
           "type": "string",
-          "pattern": "^[a-zA-Z0-9_]+$"
+          "pattern": "^[a-zA-Z0-9_]*$"
         },
         "esUser": {
           "type": "string",
@@ -58,11 +50,39 @@
         "esPassword": {
           "type": "string",
           "pattern": "^[A-Za-z\\d@$!%*#?&]{8,}$"
+        },
+        "cursorIndexPrefix": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9-]+$"
+        },
+        "contracts": {
+          "description": "Contract related Details",
+          "type": "array",
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[a-z1-5\\.]{1,12}$"
+              },
+              "docTableName": {
+                "type": "string",
+                "pattern": "^[a-z1-5\\.]{1,12}$"
+              },
+              "indexPrefix": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9-]+$"
+              }
+            },
+            "required": [
+              "name",
+              "docTableName",
+              "indexPrefix"
+            ],
+            "type": "object"
+          }
         }
       },
       "required": [
-        "contractName",
-        "docTableName",
         "firehoseEndpoint",
         "eosEndpoint",
         "elasticEndpoint",
@@ -70,7 +90,9 @@
         "startBlock",
         "heartBeatFrequency",
         "esUser",
-        "esPassword"
+        "esPassword",
+        "cursorIndexPrefix",
+        "contracts"
       ],
       "type": "object"
     },
