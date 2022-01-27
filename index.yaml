@@ -105,6 +105,17 @@ entries:
   dgesearch:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-01-27T20:19:02.979716953Z"
+    description: Sets up the process that feeds the documents from a document-graph
+      contract to elastic search
+    digest: c43fcdcadb511af1a9a9f95f15765d7bfdee5be78193dc6b347a1c5aa4a06bd6
+    name: dgesearch
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/dgesearch-0.1.2/dgesearch-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-01-13T03:06:31.029925019Z"
     description: Sets up the process that feeds the documents from a document-graph
       contract to elastic search
@@ -182,6 +193,21 @@ entries:
     - https://github.com/sebastianmontero/helm-charts/releases/download/dgraph-backup-script-0.1.0/dgraph-backup-script-0.1.0.tgz
     version: 0.1.0
   doccache:
+  - apiVersion: v2
+    appVersion: 0.3.0
+    created: "2022-01-27T20:19:03.157760509Z"
+    dependencies:
+    - name: dgraph
+      repository: https://charts.dgraph.io
+      version: 0.0.17
+    description: Sets up document cache, installs dgraph as a dependency and configures
+      ssl ingresses requires ingress-nginx and cert-manager to be installed and configured
+    digest: 6619ae5ada66453604864f0580e7608f7d35eb0dc8801604f4667cf1638fb9ff
+    name: doccache
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/doccache-0.1.11/doccache-0.1.11.tgz
+    version: 0.1.11
   - apiVersion: v2
     appVersion: 0.3.0
     created: "2021-12-22T19:04:05.609525683Z"
@@ -492,4 +518,4 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.0/vrf-oracle-0.1.0.tgz
     version: 0.1.0
-generated: "2022-01-13T03:06:31.030103719Z"
+generated: "2022-01-27T20:19:03.15802111Z"
