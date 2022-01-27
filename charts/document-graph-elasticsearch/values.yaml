@@ -23,4 +23,12 @@ env:
   esPassword: ""
   dfuseApiKey: ""
   cursorIndexPrefix: ""
+  addIntsAsStrings: false
   contracts: []
+  singleTextSearchField:
+    asset: none
+    checksum256: none
+    int64: none
+    name: none
+    time_point: none
+    string: none

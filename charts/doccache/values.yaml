@@ -58,3 +58,7 @@ dgraph:
 
   # backups.image.tag=v20.11.3
   # backups.destination Destination - file path, s3://, minio:	/dgraph/backups
+
+
+ingress:
+  enabled: true

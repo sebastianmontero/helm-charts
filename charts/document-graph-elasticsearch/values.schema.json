@@ -55,6 +55,9 @@
           "type": "string",
           "pattern": "^[a-zA-Z0-9-]+$"
         },
+        "addIntsAsStrings": {
+          "type": "boolean"
+        },
         "contracts": {
           "description": "Contract related Details",
           "type": "array",
@@ -80,6 +83,36 @@
             ],
             "type": "object"
           }
+        },
+        "singleTextSearchField": {
+          "description": "Single Text Search Field Details",
+          "properties": {
+            "asset": {
+              "type": "string",
+              "enum": ["none", "include", "replace"]
+            },
+            "checksum256": {
+              "type": "string",
+              "enum": ["none", "include", "replace"]
+            },
+            "int64": {
+              "type": "string",
+              "enum": ["none", "include", "replace"]
+            },
+            "name": {
+              "type": "string",
+              "enum": ["none", "include", "replace"]
+            },
+            "string": {
+              "type": "string",
+              "enum": ["none", "include", "replace"]
+            },
+            "time_point": {
+              "type": "string",
+              "enum": ["none", "include", "replace"]
+            }
+          },
+          "additionalProperties": false
         }
       },
       "required": [

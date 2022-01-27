@@ -376,11 +376,24 @@
       "type": "object"
     }
   },
+  "ingress": {
+    "description": "Ingress Details",
+    "properties": {
+      "enabled": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "enabled"
+    ],
+    "type": "object"
+  },
   "required": [
     "url",
     "env",
     "dgraph",
-    "image"
+    "image",
+    "ingress"
   ],
   "title": "Values",
   "type": "object"

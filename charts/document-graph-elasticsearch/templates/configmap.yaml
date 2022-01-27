@@ -15,9 +15,16 @@ data:
     heart-beat-frequency: {{ .Values.env.heartBeatFrequency }}
     dfuse-api-key: {{ .Values.env.dfuseApiKey }}
     cursor-index-prefix: {{ .Values.env.cursorIndexPrefix }}
+    add-ints-as-strings: {{ .Values.env.addIntsAsStrings }}
     contracts:
       {{- range .Values.env.contracts -}}
         {{- printf "- name: %s" .name | nindent 4 }}
         {{- printf "doc-table-name: %s" .docTableName | nindent 6 }}
         {{- printf "index-prefix: %s" .indexPrefix | nindent 6 }}
       {{- end }}
+    {{- if .Values.env.singleTextSearchField }}
+    single-text-search-field:
+      {{- range $k, $v := .Values.env.singleTextSearchField -}}
+        {{- printf "%s: %s" $k $v | nindent 6 }}
+      {{- end }}
+    {{- end }}
