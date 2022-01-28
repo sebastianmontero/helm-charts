@@ -29,6 +29,8 @@ env:
   prometheusPort: 2114
   startBlock: 1
   heartBeatFrequency: 100
+  elasticEndpoint: "" #Used only to update the doccache config object
+  elasticApiKey: "" #Used only to update the doccache config object
 
 dgraph:
   image:

@@ -96,6 +96,14 @@
         "dfuseApiKey": {
           "type": "string",
           "pattern": "^[a-zA-Z0-9_]+$"
+        },
+        "elasticEndpoint": {
+          "type": "string",
+          "pattern": "^(http(s)?:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "elasticApiKey": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_=]+$"
         }
       },
       "required": [

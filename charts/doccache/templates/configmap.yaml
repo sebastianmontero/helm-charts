@@ -18,6 +18,8 @@ data:
     start-block: {{ int .Values.env.startBlock }}
     heart-beat-frequency: {{ .Values.env.heartBeatFrequency }}
     dfuse-api-key: {{ .Values.env.dfuseApiKey }}
+    elastic-endpoint: {{ .Values.env.elasticEndpoint }}
+    elastic-api-key: {{ .Values.env.elasticApiKey }}
     {{- if .Values.typeMapping }}
     type-mappings:
         {{- range .Values.typeMapping -}}
