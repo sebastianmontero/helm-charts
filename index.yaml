@@ -195,6 +195,21 @@ entries:
   doccache:
   - apiVersion: v2
     appVersion: 0.3.0
+    created: "2022-01-28T21:47:34.050867972Z"
+    dependencies:
+    - name: dgraph
+      repository: https://charts.dgraph.io
+      version: 0.0.17
+    description: Sets up document cache, installs dgraph as a dependency and configures
+      ssl ingresses requires ingress-nginx and cert-manager to be installed and configured
+    digest: 3e2a476c0974d95ededf7cae29cb9f9f4dc2d78e95c92997d7a1b40d1fd7f35d
+    name: doccache
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/doccache-0.1.12/doccache-0.1.12.tgz
+    version: 0.1.12
+  - apiVersion: v2
+    appVersion: 0.3.0
     created: "2022-01-27T20:19:03.157760509Z"
     dependencies:
     - name: dgraph
@@ -518,4 +533,4 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.0/vrf-oracle-0.1.0.tgz
     version: 0.1.0
-generated: "2022-01-27T20:19:03.15802111Z"
+generated: "2022-01-28T21:47:34.051154987Z"
