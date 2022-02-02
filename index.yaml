@@ -105,6 +105,17 @@ entries:
   dgesearch:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-02-02T03:28:44.048876307Z"
+    description: Sets up the process that feeds the documents from a document-graph
+      contract to elastic search
+    digest: 4bb39285ad35c43dc64200e55d5dbd26e0f603bfe2eda595d4379adbcd47fd3f
+    name: dgesearch
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/dgesearch-0.1.3/dgesearch-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-01-27T20:19:02.979716953Z"
     description: Sets up the process that feeds the documents from a document-graph
       contract to elastic search
@@ -533,4 +544,4 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.0/vrf-oracle-0.1.0.tgz
     version: 0.1.0
-generated: "2022-01-28T21:47:34.051154987Z"
+generated: "2022-02-02T03:28:44.048955808Z"
