@@ -3,10 +3,10 @@
 # Declare variables to be passed into your templates.
 
 image:
-  repository: sebastianmontero/document-graph-elasticsearch-testnet
+  repository: sebastianmontero/document-graph-elasticsearch-mainnet
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: c5343012fb5de9229aca788805bfd3cd3f5e1306
+  tag: 4d80e26897c524c22beefad5694c4f1fb9d19f69
 
 nameOverride: ""
 fullnameOverride: ""
