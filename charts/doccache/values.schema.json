@@ -286,6 +286,34 @@
                 "size"
               ],
               "type": "object"
+            },
+            "initContainers": {
+              "properties": {
+                "init": {
+                  "properties": {
+                    "image": {
+                      "properties": {
+                        "tag": {
+                          "type": "string",
+                          "pattern": "^[a-z0-9-_\\.]+$"
+                        }
+                      },
+                      "required": [
+                        "tag"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "image"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [
+                "init"
+              ],
+              "type": "object"
             }
           },
           "required": [
@@ -322,41 +350,12 @@
             "image"
           ],
           "type": "object"
-        },
-        "initContainers": {
-          "properties": {
-            "init": {
-              "properties": {
-                "image": {
-                  "properties": {
-                    "tag": {
-                      "type": "string",
-                      "pattern": "^[a-z0-9-_\\.]+$"
-                    }
-                  },
-                  "required": [
-                    "tag"
-                  ],
-                  "type": "object"
-                }
-              },
-              "required": [
-                "image"
-              ],
-              "type": "object"
-            }
-          },
-          "required": [
-            "init"
-          ],
-          "type": "object"
         }
       },
       "required": [
         "alpha",
         "zero",
-        "ratel",
-        "initContainers"
+        "ratel"
       ],
       "type": "object"
     },

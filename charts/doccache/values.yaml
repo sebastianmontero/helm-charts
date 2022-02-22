@@ -47,14 +47,14 @@ dgraph:
       config.yaml: |
         security:
           whitelist: 10.0.0.0/8
-    initContainers:
-    init:
-      image:
-        tag: v21.03.2
+    # initContainers:
+    #   init:
+    #     image:
+    #       tag: v21.03.2
   ratel: 
     enabled: true
     image:
-      tag: v21.03.2
+      tag: v20.11.3
     replicaCount: 1
   
 

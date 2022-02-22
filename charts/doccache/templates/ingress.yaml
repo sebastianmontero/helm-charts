@@ -11,7 +11,7 @@ spec:
   tls:
   - hosts:
     - {{ include "dgraph.alphaDomain" . }}
-    {{- if ne (include "dgraph.alphaDomain" .) (include "dgraph.ratelDomain" .) }}
+    {{- if and (.Values.dgraph.ratel.enabled) (ne (include "dgraph.alphaDomain" .) (include "dgraph.ratelDomain" .)) }}
     - {{ include "dgraph.ratelDomain" . }}
     {{- end }}
     secretName: {{ include "doccache.fullname" . }}
@@ -26,6 +26,7 @@ spec:
             name: {{ include "dgraph.alphaServiceName" . }}
             port:
               number: 8080
+  {{- if .Values.dgraph.ratel.enabled }}
   - host: {{ include "dgraph.ratelDomain" . }}
     http:
       paths:
@@ -36,4 +37,5 @@ spec:
             name: {{ include "dgraph.ratelServiceName" . }}
             port:
               number: 8000
+  {{- end }}
 {{- end }}

@@ -5,4 +5,6 @@ The following items have been performed:
 
 Here are the urls for the different services:
   - Alpha: {{ include "dgraph.alphaUrl" . }}
+  {{- if .Values.dgraph.ratel.enabled }}
   - Ratel: {{ include "dgraph.ratelUrl" . }}
+  {{- end }}
