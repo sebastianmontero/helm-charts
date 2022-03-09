@@ -8,3 +8,4 @@ Here are the urls for the different services:
   {{- if .Values.dgraph.ratel.enabled }}
   - Ratel: {{ include "dgraph.ratelUrl" . }}
   {{- end }}
+  - Prometheus: {{ include "dgraph.prometheusUrl" . }}

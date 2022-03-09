@@ -26,6 +26,10 @@
             "ratel": {
               "type": "string",
               "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
+            },
+            "prometheus": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
             }
           },
           "required": [
@@ -43,11 +47,16 @@
             "ratel": {
               "type": "string",
               "pattern": "^\\/[\\/\\.a-zA-Z0-9\\-]*$"
+            },
+            "prometheus": {
+              "type": "string",
+              "pattern": "^\\/[\\/\\.a-zA-Z0-9\\-]*$"
             }
           },
           "required": [
             "alpha",
-            "ratel"
+            "ratel",
+            "prometheus"
           ],
           "type": "object"
         }

@@ -108,6 +108,13 @@ Get dgraph ratel domain
 {{ include "dgraph.getDomain" (dict "context" . "subdomain" .Values.url.domain.ratel ) }}
 {{- end }}
 
+{{/*
+Get prometheus domain
+*/}}
+{{- define "dgraph.prometheusDomain" -}}
+{{ include "dgraph.getDomain" (dict "context" . "subdomain" .Values.url.domain.prometheus ) }}
+{{- end }}
+
 
 {{/*
 Get dgraph alpha url path
@@ -124,6 +131,13 @@ Get dgraph ratel url path
 {{- end }}
 
 {{/*
+Get dgraph prometheus url path
+*/}}
+{{- define "dgraph.prometheusUrlPath" -}}
+{{ include "dgraph.getUrlPath" (dict "path" .Values.url.path.prometheus ) }}
+{{- end }}
+
+{{/*
 Get dgraph alpha url path rewrite
 */}}
 {{- define "dgraph.alphaUrlPathRewrite" -}}
@@ -135,6 +149,13 @@ Get dgraph ratel url path rewrite
 */}}
 {{- define "dgraph.ratelUrlPathRewrite" -}}
 {{ include "dgraph.getUrlPathRewrite" (dict "path" .Values.url.path.ratel ) }}
+{{- end }}
+
+{{/*
+Get dgraph ratel url path rewrite
+*/}}
+{{- define "dgraph.prometheusUrlPathRewrite" -}}
+{{ include "dgraph.getUrlPathRewrite" (dict "path" .Values.url.path.prometheus ) }}
 {{- end }}
 
 
@@ -150,6 +171,13 @@ Get dgraph ratel url
 */}}
 {{- define "dgraph.ratelUrl" -}}
 {{ include "dgraph.getUrl" (dict "context" . "subdomain" .Values.url.domain.ratel "path" .Values.url.path.ratel ) }}
+{{- end }}
+
+{{/*
+Get dgraph prometheus url
+*/}}
+{{- define "dgraph.prometheusUrl" -}}
+{{ include "dgraph.getUrl" (dict "context" . "subdomain" .Values.url.domain.prometheus "path" .Values.url.path.prometheus ) }}
 {{- end }}
 
 {{/*
