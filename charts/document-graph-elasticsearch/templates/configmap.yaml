@@ -20,7 +20,16 @@ data:
       {{- range .Values.env.contracts -}}
         {{- printf "- name: %s" .name | nindent 4 }}
         {{- printf "doc-table-name: %s" .docTableName | nindent 6 }}
+        {{- printf "edge-table-name: %s" .edgeTableName | nindent 6 }}
         {{- printf "index-prefix: %s" .indexPrefix | nindent 6 }}
+      {{- if .edgeBlackList }}
+      edge-black-list:
+        {{- range .edgeBlackList -}}
+          {{- printf "- from: %s" .from | nindent 6 }}
+          {{- printf "to: %s" .to | nindent 8 }}
+          {{- printf "name: %s" .name | nindent 8 }}
+        {{- end }}
+      {{- end }}
       {{- end }}
     {{- if .Values.env.singleTextSearchField }}
     single-text-search-field:

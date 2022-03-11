@@ -49,3 +49,26 @@ Selector labels
 app.kubernetes.io/name: {{ include "document-graph-elasticsearch.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+
+{{/*
+Get full domain function
+Params:
+  context: chart context
+  subdomain: subdomain to use
+*/}}
+{{- define "document-graph-elasticsearch.getDomain" -}}
+{{- if .subdomain }}
+{{- printf "%s.%s" .subdomain .context.Values.url.domain.base }}
+{{- else }}
+{{- .context.Values.url.domain.base }}
+{{- end }}
+{{- end }}
+
+
+{{/*
+Get prometheus domain
+*/}}
+{{- define "document-graph-elasticsearch.prometheusDomain" -}}
+{{ include "document-graph-elasticsearch.getDomain" (dict "context" . "subdomain" .Values.url.domain.prometheus ) }}
+{{- end }}

@@ -11,6 +11,14 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+url:
+  domain: 
+    base: ""
+    prometheus: ""
+
+ingress:
+  enabled: true
+
 env:
   firehoseEndpoint: ""
   eosEndpoint: ""

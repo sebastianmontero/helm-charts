@@ -9,6 +9,45 @@
       "description": "If specified its value is used for the names of all components",
       "type": "string"
     },
+    "url":{
+      "description": "Url details",
+      "properties": {
+        "domain": {
+          "description": "Domain Details",
+          "properties": {
+            "base": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$"
+            },
+            "prometheus": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
+            }
+          },
+          "required": [
+            "base",
+            "prometheus"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "domain"
+      ],
+      "type": "object"
+    },
+    "ingress": {
+      "description": "Ingress Details",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "type": "object"
+    },
     "env": {
       "description": "Environment variables",
       "properties": {
@@ -74,11 +113,38 @@
               "indexPrefix": {
                 "type": "string",
                 "pattern": "^[a-zA-Z0-9-]+$"
+              },
+              "edgeBlackList": {
+                "description": "Edge Black List related Details",
+                "type": "array",
+                "items": {
+                  "properties": {
+                    "from": {
+                      "type": "string",
+                      "pattern": "^[a-zA-Z1-5*]{1,12}$"
+                    },
+                    "to": {
+                      "type": "string",
+                      "pattern": "^[a-zA-Z1-5*]{1,12}$"
+                    },
+                    "name": {
+                      "type": "string",
+                      "pattern": "^[a-zA-Z1-5*]{1,12}$"
+                    }
+                  },
+                  "required": [
+                    "from",
+                    "to",
+                    "name"
+                  ],
+                  "type": "object"
+                }
               }
             },
             "required": [
               "name",
               "docTableName",
+              "edgeTableName",
               "indexPrefix"
             ],
             "type": "object"
@@ -154,8 +220,10 @@
     }
   },
   "required": [
+    "url",
     "env",
-    "image"
+    "image",
+    "ingress"
   ],
   "title": "Values",
   "type": "object"
