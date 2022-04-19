@@ -11,6 +11,7 @@ spec:
   - hosts:
     - {{ include "document-graph-elasticsearch.prometheusDomain" . }}
     secretName: {{ include "document-graph-elasticsearch.fullname" . }}
+  rules:
   - host: {{ include "document-graph-elasticsearch.prometheusDomain" . }}
     http:
       paths:
