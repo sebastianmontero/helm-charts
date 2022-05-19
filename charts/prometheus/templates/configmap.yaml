@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "prometheus.fullname" . }}
+  labels:
+    {{- include "prometheus.labels" . | nindent 4 }}
+data:
+  prometheus.yml: |
+    scrape_configs:
+        {{- range .Values.scrapeConfigs -}}
+          {{- printf "- job_name: %s" .jobName | nindent 6 }}
+          {{- printf "metrics_path: %s" .metricsPath | nindent 8 }}
+          {{- printf "scrape_interval: %s" .scrapeInterval | nindent 8 }}
+          {{- nindent 8 "static_configs:"}}
+          {{- range .staticConfigs -}}
+            {{- nindent 8 "- targets:"}}
+            {{- range .targets -}}
+              {{- printf "- %s" . | nindent 10 -}}
+            {{- end }}
+          {{- end }}
+        {{- end }}

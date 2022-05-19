@@ -1,0 +1,23 @@
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+nameOverride: ""
+fullnameOverride: ""
+
+url:
+  domain: 
+    base: ""
+    subdomain: ""
+
+ingress:
+  enabled: true
+
+env:
+  port: 8000
+  networkUrl: ssl://electrum.blockstream.info:60002
+  network: testnet
+  logLevel: normal

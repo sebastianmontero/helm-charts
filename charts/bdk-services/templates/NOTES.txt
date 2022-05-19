@@ -1,0 +1,3 @@
+BDK Services has been installed. 
+
+The endpoint is: {{ include "bdk-services.url" . }}

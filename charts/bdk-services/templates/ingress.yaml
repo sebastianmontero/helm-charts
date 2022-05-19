@@ -1,0 +1,25 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "bdk-services.fullname" . }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"    
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - {{ include "bdk-services.domain" . }}
+    secretName: {{ include "bdk-services.fullname" . }}
+  rules:
+  - host: {{ include "bdk-services.domain" . }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: {{ include "bdk-services.fullname" . }}
+            port:
+              number: {{ .Values.env.port }}
+{{- end }}

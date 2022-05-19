@@ -1,0 +1,38 @@
+# Default values for prometheus.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: prom/prometheus
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v2.34.0"
+
+nameOverride: ""
+fullnameOverride: ""
+
+url:
+  domain: 
+    base: ""
+    subdomain: ""
+
+scrapeConfigs:
+# - jobName: "dgraph-k8s"
+#   metricsPath: "/debug/prometheus_metrics"
+#   scrapeInterval: "10s"
+#   staticConfigs:
+#   - targets:
+#     - dgraph-mainnet.document-cache.svc.cluster.local:6080     # For Dgraph zero, 6080 is the http endpoint exposing metrics.
+#     - dgraph-mainnet.document-cache.svc.cluster.local:8080    # For Dgraph alpha, 8080 is the http endpoint exposing metrics.
+# - jobName: "docCache-k8s"
+#       metricsPath: "/metrics"
+#       scrapeInterval: "10s"
+#       staticConfigs:
+#       - targets:
+#         - doccache-go-mainnet.document-cache.svc.cluster.local:2114
+
+service:
+  port: 9090
+
+storage:
+  size: 50Gi

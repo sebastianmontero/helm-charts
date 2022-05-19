@@ -1,0 +1,3 @@
+Prometheus has been configure and deployed
+
+This is the url: {{ include "prometheus.url" . }}

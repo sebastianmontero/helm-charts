@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "properties": {
+    "nameOverride": {
+      "description": "If specified replaces chart name when creating full name used for the names of all components",
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "description": "If specified its value is used for the names of all components",
+      "type": "string"
+    },
+    "url":{
+      "description": "Url details",
+      "properties": {
+        "domain": {
+          "description": "Domain Details",
+          "properties": {
+            "base": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$"
+            },
+            "subdomain": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
+            }
+          },
+          "required": [
+            "base",
+            "subdomain"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "domain"
+      ],
+      "type": "object"
+    },
+    "ingress": {
+      "description": "Ingress Details",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "type": "object"
+    },
+    "env": {
+      "description": "Environment variables",
+      "properties": {
+        "networkUrl": {
+          "type": "string",
+          "pattern": "^(ssl:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "network": {
+          "type": "string",
+          "enum": ["testnet", "bitcoin"]
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "logLevel": {
+          "type": "string",
+          "enum": ["off", "critical", "normal", "debug"]
+        }
+      },
+      "required": [
+        "networkUrl",
+        "network",
+        "port"
+      ],
+      "type": "object"
+    },
+    "image": {
+      "description": "Image Details",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_/]+$"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "pattern": "^(Always|Never|IfNotPresent)$"
+        },
+        "tag": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_\\.]+$"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "url",
+    "env",
+    "image",
+    "ingress"
+  ],
+  "title": "Values",
+  "type": "object"
+}

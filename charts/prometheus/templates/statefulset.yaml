@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "prometheus.fullname" . }}
+  labels:
+    {{- include "prometheus.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.storage.size }}
+  storageClassName: standard
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "prometheus.fullname" . }}
+  labels:
+    {{- include "prometheus.labels" . | nindent 4 }}
+spec:
+  serviceName: {{ include "prometheus.fullname" . }}
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "prometheus.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "prometheus.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/bin/prometheus"]
+          args: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.path=/prometheus/data","--web.console.libraries=/usr/share/prometheus/console_libraries", "--web.console.templates=/usr/share/prometheus/consoles"]
+          ports:
+          - containerPort: 9090
+            name: default
+          volumeMounts:
+          - name: config-volume
+            mountPath: /etc/prometheus
+          - name: dho-prometheus-pvc
+            mountPath: /prometheus
+      initContainers:
+      - name: {{ include "prometheus.initContainer" . }}
+        image: busybox
+        command: ["/bin/chmod","-R","777", "/data"]
+        volumeMounts:
+        - name: dho-prometheus-pvc
+          mountPath: /data
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ include "prometheus.fullname" . }}
+        - name: dho-prometheus-pvc
+          persistentVolumeClaim:
+            claimName: {{ include "prometheus.fullname" . }}

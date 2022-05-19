@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "bdk-services.fullname" . }}
+  labels:
+    {{- include "bdk-services.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "bdk-services.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "bdk-services.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["bdk-services"]
+          ports:
+            - name: http
+              containerPort: {{ .Values.env.port }}
+              protocol: TCP
+          env:
+          - name: ROCKET_CONFIG
+            value: "/config/config.toml"
+          volumeMounts:
+          - name: bdk-config
+            mountPath: /config/config.toml
+            subPath: config.toml
+      volumes:
+      - name: bdk-config
+        configMap:
+          name: {{ include "bdk-services.fullname" . }}

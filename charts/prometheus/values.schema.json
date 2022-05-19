@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "properties": {
+    "nameOverride": {
+      "description": "If specified replaces chart name when creating full name used for the names of all components",
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "description": "If specified its value is used for the names of all components",
+      "type": "string"
+    },
+    "url":{
+      "description": "Url details",
+      "properties": {
+        "domain": {
+          "description": "Domain Details",
+          "properties": {
+            "base": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$"
+            },
+            "subdomain": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
+            }
+          },
+          "required": [
+            "base",
+            "subdomain"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "domain"
+      ],
+      "type": "object"
+    },
+    "service": {
+      "description": "Service Details",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "min": 1
+        }
+      },
+      "required": [
+        "port"
+      ],
+      "type": "object"
+    },
+    "storage": {
+      "description": "Storage Details",
+      "properties": {
+        "size": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "size"
+      ],
+      "type": "object"
+    },
+    "scrapeConfigs": {
+      "description": "Details of endpoints to scrape",
+      "type": "array",
+      "items": {
+        "properties": {
+          "jobName": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "metricsPath": {
+            "type": "string",
+            "pattern": "^\\/[\\/\\.a-zA-Z0-9\\-_]*$"
+          },
+          "scrapeInterval": {
+            "type": "string",
+            "pattern": "^[1-9]+[0-9]*[sm]$"
+          },
+          "staticConfigs": {
+            "type":"array",
+            "items" : {
+              "properties": {
+                "targets": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+                  }
+                }
+              },
+              "required": [
+                "targets"
+              ],
+              "type":"object"
+            }
+          }
+        },
+        "required": [
+          "jobName",
+          "metricsPath",
+          "scrapeInterval",
+          "staticConfigs"
+        ],
+        "type":"object"
+      }
+    },
+    "image": {
+      "description": "Image Details",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_/]+$"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "pattern": "^(Always|Never|IfNotPresent)$"
+        },
+        "tag": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_\\.]+$"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "url",
+    "scrapeConfigs",
+    "image",
+    "service",
+    "storage"
+  ],
+  "title": "Values",
+  "type": "object"
+}

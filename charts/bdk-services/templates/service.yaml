@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "bdk-services.fullname" . }}
+  labels:
+    {{- include "bdk-services.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.env.port }}
+      targetPort: {{ .Values.env.port }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "bdk-services.selectorLabels" . | nindent 4 }}
