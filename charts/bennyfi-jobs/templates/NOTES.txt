@@ -3,3 +3,5 @@ Bennyfi jobs has been installed, jobs:
 - Redraw
 - Timeout rounds
 - Unlock rounds
+- Vesting rounds
+- REX related jobs
