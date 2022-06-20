@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "properties": {
+    "nameOverride": {
+      "description": "If specified replaces chart name when creating full name used for the names of all components",
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "description": "If specified its value is used for the names of all components",
+      "type": "string"
+    },
+    "replicaCount": {
+      "description": "Number of replicas of the action server",
+      "type": "integer"
+    },
+    "url":{
+      "description": "Url details",
+      "properties": {
+        "domain": {
+          "description": "Domain Details",
+          "properties": {
+            "base": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$"
+            },
+            "gql": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
+            }
+          },
+          "required": [
+            "base",
+            "gql"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "domain"
+      ],
+      "type": "object"
+    },
+    "login":{
+      "description": "Login related details",
+      "properties": {
+        "challenge": {
+          "description": "Login challenge related Details",
+          "properties": {
+            "timeToLiveMinutes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "timeToLiveMinutes"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "challenge"
+      ],
+      "type": "object"
+    },
+    "jwt":{
+      "description": "JWT related details",
+      "properties": {
+        "localKeyPath": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]*(/[a-zA-Z0-9_-]+)*$"
+        },
+        "passphrase": {
+          "type": "string"
+        },
+        "tokenExpirationTimeMins": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "localKeyPath",
+        "passphrase",
+        "tokenExpirationTimeMins"
+      ],
+      "type": "object"
+    },
+    "hasura": {
+      "description": "Hasura chart configuration values",
+      "properties": {
+        "adminSecret": {
+          "type": "string",
+          "pattern": "^[A-Za-z\\d@$!%*#?&]{8,}$"
+        },
+        "jwtSecret": {
+          "type": "string"
+        },
+        "extraEnv": {
+          "type": "string"
+        },
+        "unauthorizedRole": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "console": {
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ],
+          "type": "object"
+        },
+        "imageConfig": {
+          "properties": {
+            "tag": {
+              "type": "string",
+              "pattern": "^[a-z0-9-_\\.]+$"
+            }
+          },
+          "required": [
+            "tag"
+          ],
+          "type": "object"
+        },
+        "postgresql": {
+          "properties": {
+            "image": {
+              "properties": {
+                "tag": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9-_\\.]+$"
+                }
+              },
+              "required": [
+                "tag"
+              ],
+              "type": "object"
+            },
+            "postgresqlPassword": {
+              "type": "string",
+              "pattern": "^[A-Za-z\\d@$!%*#?&]{8,}$"
+            }
+          },
+          "required": [
+            "image",
+            "postgresqlPassword"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "adminSecret",
+        "jwtSecret",
+        "extraEnv",
+        "console",
+        "unauthorizedRole",
+        "imageConfig",
+        "postgresql"
+      ],
+      "type": "object"
+    },
+    "image": {
+      "description": "Image Details",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_/]+$"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "pattern": "^(Always|Never|IfNotPresent)$"
+        },
+        "tag": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_\\.]+$"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "type": "object"
+    }
+  },
+  "ingress": {
+    "description": "Ingress Details",
+    "properties": {
+      "enabled": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "enabled"
+    ],
+    "type": "object"
+  },
+  "required": [
+    "replicaCount",
+    "url",
+    "login",
+    "jwt",
+    "image",
+    "ingress",
+    "hasura"
+  ],
+  "title": "Values",
+  "type": "object"
+}

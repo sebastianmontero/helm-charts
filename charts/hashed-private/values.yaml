@@ -69,4 +69,4 @@ hasura:
 
   postgresql:
     image:
-      tag: 12
+      tag: "12"
