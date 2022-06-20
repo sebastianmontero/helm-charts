@@ -1,0 +1,6 @@
+dependencies:
+- name: hasura
+  repository: https://charts.platy.plus
+  version: 1.1.6
+digest: sha256:f65c891fac1c05373cbd7c67a2e856b977162f076faea8714a01322121439181
+generated: "2022-06-19T08:41:46.159372714-05:00"

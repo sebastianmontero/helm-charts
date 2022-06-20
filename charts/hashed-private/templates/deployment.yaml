@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "hashed-private.fullname" . }}
+  labels:
+    {{- include "hashed-private.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "hashed-private.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "hashed-private.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["node", "src/index.js"]
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          env:
+            - name: PORT
+              value: "3000"
+            - name: JWT_KEYS_PATH
+              value: "/jwt-keys"
+            - name: GQL_ENDPOINT
+              value: "{{ include "hasura.gqlEndpoint" . }}"
+            - name: GQL_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "hasura.fullName" . }}
+                  key: adminSecret
+          volumeMounts:
+          - name: {{ include "hashed-private.jwtKeysVolume" . }}
+            mountPath: "/jwt-keys"
+            readOnly: true
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+      - name: {{ include "hashed-private.jwtKeysVolume" . }}
+        secret:
+          secretName: {{ include "hashed-private.fullname" . }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
