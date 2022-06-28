@@ -1,0 +1,74 @@
+image:
+  repository: sebastianmontero/hypha-doc-cache-gql-go-mainnet
+  tag: 3db27fbe04edaaf506890090dcf6b92c74621152
+
+url:
+  domain:
+    base: tekit.io
+    alpha: alpha-dhomn
+    ratel: ratel-dhomn
+    prometheus: prometheus-dhomn
+env:
+  contractName: dao.hypha
+  firehoseEndpoint: firehose-telos-mainnet.dfuse.svc.cluster.local:9000
+  eosEndpoint: https://telos.caleos.io
+  # startBlock: 136860100
+  # startBlock: 147046658
+  startBlock: 209799822
+  elasticEndpoint: https://hypha.es.eu-west-1.aws.found.io:9243/dho-mainnet-documents/_search
+  elasticApiKey: ZE**
+
+typeMapping:
+- type: vote.tally
+  labels:
+    pass:
+      - vote_power
+    fail:
+      - vote_power
+      
+customInterfaces:
+  - name: Votable #New type so use name to use in GQL
+    fields:
+      - contentGroup: ballot
+        name: expiration
+        type: time_point
+        signature: true # used to identify votable types
+      - contentGroup: details
+        name: title
+        type: string
+      - contentGroup: details
+        name: description
+        type: string
+      - name: vote
+        type: vote
+      - name: votetally
+        type: vote.tally
+    types:
+      - payout
+      - assignment
+      - assignbadge
+      - edit
+      - suspend
+      - role
+      - badge
+
+logicalIds:
+  - type: member #Existing type use name from orginal chain doc
+    ids:
+      - contentGroup: details
+        name: member
+        type: name
+  - type: dao #Existing type use name from orginal chain doc
+    ids:
+      - contentGroup: details
+        name: dao_name
+        type: name
+  - type: dho #Existing type use name from orginal chain doc
+    ids:
+      - contentGroup: details
+        name: root_node
+        type: name
+
+dgraph:
+  ratel:
+    enabled: false
