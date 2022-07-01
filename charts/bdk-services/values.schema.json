@@ -63,6 +63,10 @@
           "type": "integer",
           "minimum": 1
         },
+        "pubKeySearchRadius": {
+          "type": "integer",
+          "minimum": 1
+        },
         "logLevel": {
           "type": "string",
           "enum": ["off", "critical", "normal", "debug"]

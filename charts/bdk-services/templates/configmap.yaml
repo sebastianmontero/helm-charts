@@ -11,4 +11,5 @@ data:
     port = {{ .Values.env.port }}
     network_url = "{{ .Values.env.networkUrl }}"
     network = "{{ .Values.env.network }}"
+    pub_key_search_radius = {{ .Values.env.pubKeySearchRadius }}
     log_level = "{{ .Values.env.logLevel }}"

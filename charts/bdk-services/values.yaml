@@ -20,4 +20,5 @@ env:
   port: 8000
   networkUrl: ssl://electrum.blockstream.info:60002
   network: testnet
+  pubKeySearchRadius: 5
   logLevel: normal
