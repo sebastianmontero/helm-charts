@@ -410,6 +410,28 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/doccache-0.1.0/doccache-0.1.0.tgz
     version: 0.1.0
+  hashed-faucet-db:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2022-09-08T23:54:17.788585431Z"
+    description: Deploys the Hashed Faucet database
+    digest: 709451cfb061499b96b3049c992e42bc6e5828ed6a3766798a61d000769b0f1b
+    name: hashed-faucet-db
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/hashed-faucet-db-0.1.1/hashed-faucet-db-0.1.1.tgz
+    version: 0.1.1
+  hashed-faucet-server:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-09-08T23:54:17.890900736Z"
+    description: A Helm chart for Kubernetes
+    digest: 6e0a6f5eabdbdc154f8bdcfceb2f0cf74053e5d2207b54c177ccee3c5a07a6d1
+    name: hashed-faucet-server
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/hashed-faucet-server-0.1.1/hashed-faucet-server-0.1.1.tgz
+    version: 0.1.1
   minio-gcs-gateway:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -555,4 +577,4 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.0/vrf-oracle-0.1.0.tgz
     version: 0.1.0
-generated: "2022-09-08T23:40:16.783444622Z"
+generated: "2022-09-08T23:54:17.891034346Z"
