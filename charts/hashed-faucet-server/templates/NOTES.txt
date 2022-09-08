@@ -1,0 +1,10 @@
+
+Hashed faucet server has been deployed the following services have been created:
+-Faucet Postrgres database
+-Faucet server
+
+{{- if .Values.ingress.enabled }}
+Access the services at: {{ include "hashed-faucet-server.getUrl" . }}
+{{- else }}
+No ingress has been created
+{{- end }}

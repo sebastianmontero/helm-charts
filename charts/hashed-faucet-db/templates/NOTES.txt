@@ -1,0 +1,3 @@
+Hashed Faucet DB Installed.
+
+DB Endpoint: {{ include "hashed-faucet-db.endpoint" . }}

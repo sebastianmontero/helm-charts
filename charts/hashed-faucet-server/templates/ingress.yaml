@@ -1,0 +1,25 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "hashed-faucet-server.fullname" . }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"    
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - {{ include "hashed-faucet-server.fullDomain" . }}
+    secretName: {{ include "hashed-faucet-server.fullname" . }}
+  rules:
+  - host: {{ include "hashed-faucet-server.fullDomain" . }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: {{ include "hashed-faucet-server.fullname" . }}
+            port:
+              number: 3000
+{{- end }}

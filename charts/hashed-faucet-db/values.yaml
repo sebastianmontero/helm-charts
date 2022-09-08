@@ -1,0 +1,18 @@
+
+image:
+  repository: sebastianmontero/hashed-faucet-db-prod
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: f857e8a93c6e4ea971e1773a61b3dc1428d2d68d
+
+nameOverride: ""
+fullnameOverride: ""
+
+postgresPassword: ""
+
+service:
+  port: 5432
+
+storage:
+  size: 5Gi
+  class: standard
