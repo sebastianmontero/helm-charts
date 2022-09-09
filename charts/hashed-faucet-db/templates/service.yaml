@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "hashed-faucet-db.labels" . | nindent 4 }}
 spec:
-  type: Cluster
+  type: ClusterIP
   ports:
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.port }}
