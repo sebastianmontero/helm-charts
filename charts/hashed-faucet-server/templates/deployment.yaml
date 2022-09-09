@@ -42,7 +42,7 @@ spec:
               value: {{ .Values.env.nodeEnv }}
           envFrom:
             - secretRef:
-              name: {{ include "hashed-faucet-server.fullname" . }}
+                name: {{ include "hashed-faucet-server.fullname" . }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

@@ -1,6 +1,6 @@
 dependencies:
 - name: hashed-faucet-db
   repository: https://sebastianmontero.github.io/helm-charts/
-  version: 0.1.1
-digest: sha256:555c4694b09f48bf2db6fec0329113c682a77542053fa5b17e461e32fc766357
-generated: "2022-09-08T19:10:34.620644989-05:00"
+  version: 0.1.2
+digest: sha256:d4e8c4670d9b59ee51d18b67b99b9992a2d12efa6f1ded5378b258c52bc0eff3
+generated: "2022-09-08T19:25:48.275401952-05:00"

@@ -87,5 +87,5 @@ Params:
   subdomain: subdomain to use
 */}}
 {{- define "hashed-faucet-server.getUrl" -}}
-{{- printf "https://%s" (include "hashed-faucet-server.getDomain" .) }}
+{{- printf "https://%s" (include "hashed-faucet-server.fullDomain" .) }}
 {{- end }}
