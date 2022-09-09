@@ -454,6 +454,20 @@ entries:
   hashed-faucet-server:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-09-09T22:45:30.221356793Z"
+    dependencies:
+    - name: hashed-faucet-db
+      repository: https://sebastianmontero.github.io/helm-charts/
+      version: 0.1.4
+    description: Deploys the hashed faucet web server and database
+    digest: 677f91be9b300d5e7bd6852e8f5eb233d2c67752158d0f27f9bb2b55331272d3
+    name: hashed-faucet-server
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/hashed-faucet-server-0.1.7/hashed-faucet-server-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-09-09T13:35:39.948898121Z"
     dependencies:
     - name: hashed-faucet-db
@@ -649,4 +663,4 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.0/vrf-oracle-0.1.0.tgz
     version: 0.1.0
-generated: "2022-09-09T13:35:39.949167324Z"
+generated: "2022-09-09T22:45:30.221491993Z"
