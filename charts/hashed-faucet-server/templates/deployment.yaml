@@ -35,11 +35,11 @@ spec:
             - name: PGDATABASE
               value: "postgres"
             - name: PGPORT
-              value: {{ index .Values "hashed-faucet-db" "service" "port" }}
+              value: "{{ index .Values "hashed-faucet-db" "service" "port" }}"
             - name: WSS
-              value: {{ .Values.env.wss }}
+              value: "{{ .Values.env.wss }}"
             - name: NODE_ENV
-              value: {{ .Values.env.nodeEnv }}
+              value: "{{ .Values.env.nodeEnv }}"
           envFrom:
             - secretRef:
                 name: {{ include "hashed-faucet-server.fullname" . }}
