@@ -105,6 +105,17 @@ entries:
   dgesearch:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-10-06T18:49:05.871540708Z"
+    description: Sets up the process that feeds the documents from a document-graph
+      contract to elastic search
+    digest: e5ddfe1c01f0b218afe32b3dc94f522456ed0879fc515396ec0898470d558864
+    name: dgesearch
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/dgesearch-0.1.5/dgesearch-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-09-08T23:40:16.783032218Z"
     description: Sets up the process that feeds the documents from a document-graph
       contract to elastic search
@@ -215,6 +226,21 @@ entries:
     - https://github.com/sebastianmontero/helm-charts/releases/download/dgraph-backup-script-0.1.0/dgraph-backup-script-0.1.0.tgz
     version: 0.1.0
   doccache:
+  - apiVersion: v2
+    appVersion: 0.3.0
+    created: "2022-10-06T18:49:06.106986349Z"
+    dependencies:
+    - name: dgraph
+      repository: https://charts.dgraph.io
+      version: 0.0.17
+    description: Sets up document cache, installs dgraph as a dependency and configures
+      ssl ingresses requires ingress-nginx and cert-manager to be installed and configured
+    digest: ebb5ec13e13c8377c35da9181d9f92ceb646fd0b831b9bedeb7d426b630c269f
+    name: doccache
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/doccache-0.1.16/doccache-0.1.16.tgz
+    version: 0.1.16
   - apiVersion: v2
     appVersion: 0.3.0
     created: "2022-01-28T21:47:34.050867972Z"
@@ -413,6 +439,16 @@ entries:
   hashed-faucet-db:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2022-10-06T18:49:06.251211461Z"
+    description: Deploys the Hashed Faucet database
+    digest: e36495ab5e7ab899203fa5fdfdef0eab0c902098f3f523fbe1278e2044cd34af
+    name: hashed-faucet-db
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/hashed-faucet-db-0.1.5/hashed-faucet-db-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2022-09-09T13:35:39.826383455Z"
     description: Deploys the Hashed Faucet database
     digest: 1cf9e4c11f55f3ff742ab305f75189f10c703b410c1c84a5cf3bb18af70761ac
@@ -452,6 +488,20 @@ entries:
     - https://github.com/sebastianmontero/helm-charts/releases/download/hashed-faucet-db-0.1.1/hashed-faucet-db-0.1.1.tgz
     version: 0.1.1
   hashed-faucet-server:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-10-06T18:49:06.399415609Z"
+    dependencies:
+    - name: hashed-faucet-db
+      repository: https://sebastianmontero.github.io/helm-charts/
+      version: 0.1.4
+    description: Deploys the hashed faucet web server and database
+    digest: 65d683644cbafd2ed5f7126cfee9c2478267b3e458eb6b958bd870b3d8b2bcdd
+    name: hashed-faucet-server
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/hashed-faucet-server-0.1.8/hashed-faucet-server-0.1.8.tgz
+    version: 0.1.8
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2022-09-09T22:45:30.221356793Z"
@@ -663,4 +713,4 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.0/vrf-oracle-0.1.0.tgz
     version: 0.1.0
-generated: "2022-09-09T22:45:30.221491993Z"
+generated: "2022-10-06T18:49:06.399692312Z"
