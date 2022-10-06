@@ -3,7 +3,7 @@ image:
   repository: sebastianmontero/hashed-faucet-db-prod
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: f857e8a93c6e4ea971e1773a61b3dc1428d2d68d
+  tag: d03df01ff47e8c1160aed5f11ae2578c75d6efd6
 
 nameOverride: ""
 fullnameOverride: ""

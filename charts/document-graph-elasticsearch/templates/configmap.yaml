@@ -14,6 +14,7 @@ data:
     start-block: {{ int .Values.env.startBlock }}
     heart-beat-frequency: {{ .Values.env.heartBeatFrequency }}
     dfuse-api-key: {{ .Values.env.dfuseApiKey }}
+    dfuse-auth-url: {{ .Values.env.dfuseAuthURL }}
     cursor-index-prefix: {{ .Values.env.cursorIndexPrefix }}
     add-ints-as-strings: {{ .Values.env.addIntsAsStrings }}
     contracts:

@@ -82,6 +82,10 @@
           "type": "string",
           "pattern": "^[a-zA-Z0-9_]*$"
         },
+        "dfuseAuthURL": {
+          "type": "string",
+          "pattern": "^(http(s)?:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
         "esUser": {
           "type": "string",
           "pattern": "^[a-zA-Z0-9_-]+$"
