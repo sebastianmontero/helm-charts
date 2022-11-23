@@ -568,6 +568,21 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/hashed-faucet-server-0.1.1/hashed-faucet-server-0.1.1.tgz
     version: 0.1.1
+  hashed-private:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2022-11-23T20:59:50.442291363Z"
+    dependencies:
+    - name: hasura
+      repository: https://charts.platy.plus
+      version: 1.1.6
+    description: Deploys the backend services of the hashed private solution
+    digest: e6ad85123405162cd2f9c9cb9d31fcdab7262855746e14396d7742547fe879ad
+    name: hashed-private
+    type: application
+    urls:
+    - https://github.com/sebastianmontero/helm-charts/releases/download/hashed-private-0.1.0/hashed-private-0.1.0.tgz
+    version: 0.1.0
   minio-gcs-gateway:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -713,4 +728,4 @@ entries:
     urls:
     - https://github.com/sebastianmontero/helm-charts/releases/download/vrf-oracle-0.1.0/vrf-oracle-0.1.0.tgz
     version: 0.1.0
-generated: "2022-10-06T18:49:06.399692312Z"
+generated: "2022-11-23T20:59:50.442400065Z"
