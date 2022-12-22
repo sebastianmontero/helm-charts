@@ -37,6 +37,9 @@ spec:
                 secretKeyRef:
                   name: {{ include "hasura.fullName" . }}
                   key: adminSecret
+          envFrom:
+            - secretRef:
+                name: {{ include "hashed-private.envSecrets" . }}
           volumeMounts:
           - name: {{ include "hashed-private.jwtKeysVolume" . }}
             mountPath: "/jwt-keys"

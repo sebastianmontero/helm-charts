@@ -49,6 +49,13 @@ Create action server url
 {{- end }}
 
 {{/*
+Generate the name for environment secrets secret
+*/}}
+{{- define "hashed-private.envSecrets" -}}
+{{- printf "%s-env-secrets" (include "hashed-private.fullname" .) }}
+{{- end }}
+
+{{/*
 Hasura service name.
 */}}
 {{- define "hasura.serviceName" -}}
