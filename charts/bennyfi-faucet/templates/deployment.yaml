@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "bennyfi-faucet.fullname" . }}
+  labels: {{- include "bennyfi-faucet.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {{- include "bennyfi-faucet.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels: {{- include "bennyfi-faucet.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ['bennyfi-faucet']
+          args: ['/config/config.yml']
+          volumeMounts:
+            - name: bennyfi-faucet-config
+              mountPath: /config/config.yml
+              subPath: config.yml
+            - name: {{ include "bennyfi-faucet.fullname" . }}
+              mountPath: /faucet/data
+          envFrom:
+            - secretRef:
+                name: {{ include "bennyfi-faucet.fullname" . }}
+      volumes:
+        - name: bennyfi-faucet-config
+          configMap:
+            name: {{ include "bennyfi-faucet.fullname" . }}
+        - name: {{ include "bennyfi-faucet.fullname" . }}
+          persistentVolumeClaim:
+            claimName: {{ include "bennyfi-faucet.fullname" . }}

@@ -1,0 +1,30 @@
+# Default values for bennyfi-faucet.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: sebastianmontero/bennyfi-faucet-prod
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: 7a73e6447e0422e377e20ee9b34c77fa581b435d
+
+nameOverride: ""
+fullnameOverride: ""
+
+env:
+  contract: ""
+  tokenContract: ""
+  tokenContractKey: ""
+  amountToSend: ""
+  firehoseEndpoint: ""
+  eosEndpoint: ""
+  startBlock: ""
+  heartBeatFrequency: 100
+  dfuseApiKey: ""
+  dfuseAuthURL: ""
+
+storage:
+  size: 3Gi
+  class: standard
