@@ -8,7 +8,7 @@ image:
   repository: sebastianmontero/bennyfi-faucet-prod
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 7a73e6447e0422e377e20ee9b34c77fa581b435d
+  tag: 62218a46009efc00068e4cbeca5f62444bf948d0
 
 nameOverride: ""
 fullnameOverride: ""
