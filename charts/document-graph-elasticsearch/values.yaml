@@ -40,3 +40,8 @@ env:
     name: none
     time_point: none
     string: none
+
+resources:
+    requests:
+        cpu: 100m
+        memory: 128Mi

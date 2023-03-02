@@ -31,6 +31,8 @@ spec:
         - name: doccache-config
           mountPath: /config/config.yml
           subPath: config.yml
+        resources:
+            {{- toYaml .Values.resources | nindent 12 }}
       volumes:
       - name: doccache-config
         configMap:

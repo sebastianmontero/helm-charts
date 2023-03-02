@@ -34,6 +34,11 @@ env:
   elasticEndpoint: "" #Used only to update the doccache config object
   elasticApiKey: "" #Used only to update the doccache config object
 
+resources:
+    requests:
+        cpu: 100m
+        memory: 128Mi
+
 dgraph:
   image:
     tag: v21.03.2

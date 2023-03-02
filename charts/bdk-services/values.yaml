@@ -22,3 +22,8 @@ env:
   network: testnet
   pubKeySearchRadius: 5
   logLevel: normal
+
+resources:
+    requests:
+        cpu: 100m
+        memory: 128Mi

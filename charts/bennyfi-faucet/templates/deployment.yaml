@@ -26,6 +26,8 @@ spec:
           envFrom:
             - secretRef:
                 name: {{ include "bennyfi-faucet.fullname" . }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: bennyfi-faucet-config
           configMap:
