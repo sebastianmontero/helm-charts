@@ -16,3 +16,8 @@ service:
 storage:
   size: 5Gi
   class: standard
+
+resources:
+    requests:
+        cpu: 100m
+        memory: 128Mi
