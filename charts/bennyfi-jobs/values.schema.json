@@ -20,33 +20,56 @@
           },
           "minItems": 1
         },
-        "contractName": {
-          "type": "string",
-          "pattern": "^[a-z1-5\\.]{1,12}$"
-        },
-        "privateKey": {
-          "type": "string",
-          "pattern": "^[a-zA-Z0-9]+$"
-        },
-        "runIntervalMins": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "batchActions": {
+        "contracts": {
           "type" :"array",
           "items": {
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+$"
+            "type": "object",
+            "properties": {
+              "contractName": {
+                "type": "string",
+                "pattern": "^[a-z1-5\\.]{1,12}$"
+              },
+              "privateKey": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9]+$"
+              },
+              "runIntervalMins": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "batchActions": {
+                "type" :"array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "action": {
+                      "type": "string",
+                      "pattern": "^[a-z1-5\\.]{1,12}$"
+                    },
+                    "callOnce": {
+                      "type": "boolean"
+                    }   
+                  },
+                  "required": [
+                    "action",
+                    "callOnce"
+                  ]
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "runIntervalMins",
+              "privateKey",
+              "batchActions"
+            ]
           },
           "minItems": 1
         }
       },
       "required": [
         "eosEndpoints",
-        "contractName",
-        "runIntervalMins",
-        "privateKey",
-        "batchActions"
+        "contracts"
       ],
       "type": "object"
     },

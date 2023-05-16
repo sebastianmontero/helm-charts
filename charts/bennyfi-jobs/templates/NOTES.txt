@@ -1,7 +1,10 @@
 Bennyfi jobs has been installed, jobs:
-- Unstaker
+- Start pools
+- Timeout pools
+- Unlock pools
+- Unstake Unlocked pools
+- Unstake Timedout pools
+- Vest pools
+- Claim Auth Stakes
 - Redraw
-- Timeout rounds
-- Unlock rounds
-- Vesting rounds
-- REX related jobs
+- TLOS REX related jobs

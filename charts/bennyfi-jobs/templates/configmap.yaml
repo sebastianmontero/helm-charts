@@ -6,14 +6,18 @@ metadata:
     {{- include "bennyfi-jobs.labels" . | nindent 4 }}
 data:
   config.yml: |
-    contract-name: {{ .Values.env.contractName }}
-    run-interval-mins: {{ .Values.env.runIntervalMins }}
-    private-key: {{ .Values.env.privateKey }}
     eos-endpoints:
       {{- range .Values.env.eosEndpoints -}}
         {{- printf "- %s" . | nindent 4 }}
       {{- end }}
-    batch-actions:
-      {{- range .Values.env.batchActions -}}
-        {{- printf "- %s" . | nindent 4 }}
+    contracts:
+      {{- range .Values.env.contracts -}}
+        {{- printf "- contract-name: %s" .contractName | nindent 4 }}
+        {{- printf "run-interval-mins: %v" .runIntervalMins | nindent 6 }}
+        {{- printf "private-key: %s" .privateKey | nindent 6 }}
+        {{- printf "batch-actions:" | nindent 6 }}
+          {{- range .batchActions -}}
+            {{- printf "- action: %s" .action | nindent 8 }}
+            {{- printf "call-once: %v" .callOnce | nindent 10 }}
+          {{- end }}
       {{- end }}

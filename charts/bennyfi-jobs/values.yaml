@@ -12,19 +12,38 @@ nameOverride: ""
 fullnameOverride: ""
 
 env:
-  contractName: ""
-  runIntervalMins: 2
-  privateKey: ""
   eosEndpoints: []
-  batchActions:
-  - TimeoutRounds
-  - MoveFromSavings
-  - SellRex
-  - WithdrawRex
-  - UnlockRounds
-  - UnstakeUnlockedRounds
-  - UnstakeTimedoutRounds
-  - VestingRounds
+  contracts:
+    - contractName: bennyfi
+      runIntervalMins: 2
+      privateKey: ""
+      batchActions:
+      - action: startpools
+        callOnce: false
+      - action: timeoutpools
+        callOnce: false
+      - action: unlockpools
+        callOnce: false
+      - action: ustkulkpools
+        callOnce: false
+      - action: ustktmdpools
+        callOnce: false
+      - action: vestingpools
+        callOnce: false
+      - action: claimathstks
+        callOnce: false
+      - action: redraw
+        callOnce: true
+    - contract-name: tlosrex
+      runIntervalMins: 1
+      private-key: ""
+      batchActions:
+        - action: mvfrmsavings
+          callOnce: false
+        - action: sellrex
+          callOnce: false
+        - action: withdrawrex
+          callOnce: false
 
 resources:
     requests:
