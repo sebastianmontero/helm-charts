@@ -1,0 +1,25 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "proxy-backend.fullname" . }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"    
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - {{ include "proxy-backend.gqlDomain" . }}
+    secretName: {{ include "proxy-backend.fullname" . }}
+  rules:
+  - host: {{ include "proxy-backend.gqlDomain" . }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: {{ include "hasura.serviceName" . }}
+            port:
+              number: 8080
+{{- end }}

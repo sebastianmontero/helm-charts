@@ -1,0 +1,11 @@
+
+Proxy backend uses the following services:
+-Postrgres database
+-Hasura gql engine
+-Hashed private action server
+
+{{- if .Values.ingress.enabled }}
+Access the services at: {{ include "hashed-private.url" . }}
+{{- else }}
+No ingress has been created
+{{- end }}
