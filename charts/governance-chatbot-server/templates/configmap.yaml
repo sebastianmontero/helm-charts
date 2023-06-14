@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "governance-chatbot-server.fullname" . }}
+  labels:
+    {{- include "governance-chatbot-server.labels" . | nindent 4 }}
+data:
+  gunicorn_config.py: |
+    workers = {{ .Values.env.workers }}
+    timeout = {{ .Values.env.timeout }}
+    bind = '0.0.0.0:8000'

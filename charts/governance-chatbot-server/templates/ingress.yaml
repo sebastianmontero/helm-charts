@@ -1,0 +1,25 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "governance-chatbot-server.fullname" . }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"    
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - {{ include "governance-chatbot-server.fullDomain" . }}
+    secretName: {{ include "governance-chatbot-server.fullname" . }}
+  rules:
+  - host: {{ include "governance-chatbot-server.fullDomain" . }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: {{ include "governance-chatbot-server.fullname" . }}
+            port:
+              number: 8000
+{{- end }}

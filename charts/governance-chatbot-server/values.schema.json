@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "properties": {
+    "nameOverride": {
+      "description": "If specified replaces chart name when creating full name used for the names of all components",
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "description": "If specified its value is used for the names of all components",
+      "type": "string"
+    },
+    "replicaCount": {
+      "description": "Number of replicas of the action server",
+      "type": "integer"
+    },
+    "env": {
+      "description": "Environment variables",
+      "properties": {
+        "openaiApiKey": {
+          "type": "string",
+          "pattern": ".+"
+        },
+        "pineconeApiKey": {
+          "type": "string",
+          "pattern": ".+"
+        },
+        "pineconeApiEnv": {
+          "type": "string",
+          "pattern": ".+"
+        },
+        "pineconeIndexName": {
+          "type": "string",
+          "pattern": ".+"
+        },
+        "proposalNamespace": {
+          "type": "string",
+          "pattern": ".+"
+        },
+        "verbose": {
+          "type": "string",
+          "enum": ["True", "False"]
+        },
+        "model": {
+          "type": "string",
+          "enum": ["gpt-4", "gpt-3.5-turbo"]
+        },
+        "workers": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "timeout": {
+          "type": "integer",
+          "minimum": 60
+        }
+      },
+      "required": [
+        "openaiApiKey",
+        "pineconeApiKey",
+        "pineconeApiEnv",
+        "pineconeIndexName",
+        "proposalNamespace",
+        "verbose",
+        "model",
+        "workers",
+        "timeout"
+      ],
+      "type": "object"
+    },
+    "url":{
+      "description": "Url details",
+      "properties": {
+        "domain": {
+          "description": "Domain Details",
+          "properties": {
+            "base": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$"
+            },
+            "subdomain": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
+            }
+          },
+          "required": [
+            "base",
+            "subdomain"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "domain"
+      ],
+      "type": "object"
+    },
+    "ingress": {
+      "description": "Ingress Details",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "type": "object"
+    },
+    "image": {
+      "description": "Image Details",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_/]+$"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "pattern": "^(Always|Never|IfNotPresent)$"
+        },
+        "tag": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_\\.]+$"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "type": "object"
+    }
+  },
+  "title": "Values",
+  "required": [
+    "replicaCount",
+    "url",
+    "image",
+    "ingress",
+    "env"
+  ],
+  "type": "object"
+}

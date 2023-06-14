@@ -1,0 +1,21 @@
+
+image:
+  repository: sebastianmontero/governance-db-prepopulated
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: v0.1
+
+nameOverride: ""
+fullnameOverride: ""
+
+postgresPassword: ""
+
+
+storage:
+  size: 5Gi
+  class: gp2
+
+resources:
+    requests:
+        cpu: 100m
+        memory: 128Mi

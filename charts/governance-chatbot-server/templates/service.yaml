@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "governance-chatbot-server.fullname" . }}
+  labels:
+    {{- include "governance-chatbot-server.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+  selector:
+    {{- include "governance-chatbot-server.selectorLabels" . | nindent 4 }}

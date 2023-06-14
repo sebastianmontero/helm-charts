@@ -1,0 +1,3 @@
+Governance DB Installed.
+
+DB Endpoint: {{ include "governance-db.endpoint" . }}

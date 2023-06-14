@@ -1,0 +1,67 @@
+# Default values for hashed-faucet-server.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: sebastianmontero/governance-chatbot-web-server-dev
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: 9c7cf961b00c66e4834d6574161ecc19a023cde5
+
+nameOverride: ""
+fullnameOverride: ""
+
+url:
+  domain: 
+    base: ""
+    subdomain: ""
+
+env:
+  openaiApiKey: ""
+  pineconeApiKey: ""
+  pineconeApiEnv: ""
+  pineconeIndexName: ""
+  proposalNamespace: "proposal"
+  verbose: "False"
+  model: "gpt-4"
+  workers: 2
+  timeout: 120
+
+ingress:
+  enabled: true
+
+resources:
+  requests:
+      cpu: 500m
+      memory: 128Mi
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+governance-db:
+  postgresPassword: ""
+  service:
+    port: 5432
+  

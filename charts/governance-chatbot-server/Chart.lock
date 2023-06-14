@@ -1,0 +1,6 @@
+dependencies:
+- name: governance-db
+  repository: file://../governance-db
+  version: 0.1.0
+digest: sha256:d17b6f581f7a7b8e18d23b8f841f909e8e71c666594a613c571d80772c32c382
+generated: "2023-06-13T21:16:08.520454964-06:00"

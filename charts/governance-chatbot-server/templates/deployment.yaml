@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "governance-chatbot-server.fullname" . }}
+  labels:
+    {{- include "governance-chatbot-server.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "governance-chatbot-server.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "governance-chatbot-server.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["poetry", "run", "gunicorn", "app:app", "-c", "/config/gunicorn_config.py"]
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          env:
+            - name: PINECONE_API_ENV
+              value: "{{ .Values.env.pineconeApiEnv }}"
+            - name: PINECONE_INDEX_NAME
+              value: "{{ .Values.env.pineconeIndexName }}"
+            - name: PROPOSAL_NAMESPACE
+              value: "{{ .Values.env.proposalNamespace }}"
+            - name: VERBOSE
+              value: "{{ .Values.env.verbose }}"
+            - name: MODEL
+              value: "{{ .Values.env.model }}"
+          envFrom:
+            - secretRef:
+                name: {{ include "governance-chatbot-server.fullname" . }}
+          volumeMounts:
+          - name: gunicorn-config
+            mountPath: /config/gunicorn_config.py
+            subPath: gunicorn_config.py
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+      - name: gunicorn-config
+        configMap:
+          name: {{ include "governance-chatbot-server.fullname" . }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

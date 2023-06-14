@@ -1,0 +1,10 @@
+
+Governance Chatbot server has been deployed the following services have been created:
+-Governance Postrgres database
+-Governance server
+
+{{- if .Values.ingress.enabled }}
+Access the services at: {{ include "governance-chatbot-server.getUrl" . }}
+{{- else }}
+No ingress has been created
+{{- end }}
