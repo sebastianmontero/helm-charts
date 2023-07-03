@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "strfry-relay.fullname" . }}
+  labels:
+    {{- include "strfry-relay.labels" . | nindent 4 }}
+spec:
+  serviceName: {{ include "strfry-relay.fullname" . }}
+  selector:
+    matchLabels:
+      {{- include "strfry-relay.selectorLabels" . | nindent 6 }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        {{- include "strfry-relay.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: 7777
+          name: default
+        env:
+        - name: STRFRY_CONFIG
+          value: "/etc/strfry.conf"
+        volumeMounts:
+        - name: {{ include "strfry-relay.fullname" . }}
+          mountPath: /var/lib/strfry/strfry-db
+        - name: strfry-config
+          mountPath: /etc/strfry.conf
+          subPath: strfry.conf
+        resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+      - name: strfry-config
+        configMap:
+          name: {{ include "strfry-relay.fullname" . }}
+  volumeClaimTemplates:
+  - metadata:
+      name: {{ include "strfry-relay.fullname" . }}
+      labels:
+        {{- include "strfry-relay.labels" . | nindent 8 }}
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: {{ .Values.storage.size }}
+      storageClassName: {{ .Values.storage.class }}

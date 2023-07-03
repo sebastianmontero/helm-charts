@@ -1,0 +1,3 @@
+Strfry Nostr Relay Installed.
+
+Endpoint: {{ include "strfry-relay.getUrl" . }}

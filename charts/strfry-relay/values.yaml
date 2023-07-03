@@ -1,0 +1,27 @@
+
+image:
+  repository: sebastianmontero/strfry
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: e4e79af1214e38ea90f4d099bd1f057a688abdb6
+
+nameOverride: ""
+fullnameOverride: ""
+
+url:
+  domain: 
+    base: ""
+    subdomain: ""
+
+ingress:
+  enabled: true
+
+
+storage:
+  size: 5Gi
+  class: gp2
+
+resources:
+    requests:
+        cpu: 200m
+        memory: 256Mi

@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "properties": {
+    "nameOverride": {
+      "description": "If specified replaces chart name when creating full name used for the names of all components",
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "description": "If specified its value is used for the names of all components",
+      "type": "string"
+    },
+    "url":{
+      "description": "Url details",
+      "properties": {
+        "domain": {
+          "description": "Domain Details",
+          "properties": {
+            "base": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
+            },
+            "subdomain": {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
+            }
+          },
+          "required": [
+            "base",
+            "subdomain"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "domain"
+      ],
+      "type": "object"
+    },
+    "ingress": {
+      "description": "Ingress Details",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "type": "object"
+    },
+    "storage": {
+      "description": "Storage related properties",
+      "properties": {
+        "size": {
+          "type": "string"
+        },
+        "class": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_/]+$"
+        }
+      },
+      "required": [
+        "size",
+        "class"
+      ],
+      "type": "object"
+    },
+    "image": {
+      "description": "Image Details",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_/]+$"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "pattern": "^(Always|Never|IfNotPresent)$"
+        },
+        "tag": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_\\.]+$"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "type": "object"
+    }
+  },
+  "title": "Values",
+  "required": [
+    "url",
+    "ingress",
+    "image"
+  ],
+  "type": "object"
+}
