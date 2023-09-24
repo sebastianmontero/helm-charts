@@ -17,7 +17,7 @@
           "properties": {
             "base": {
               "type": "string",
-              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)+[a-z]{1,}$"
+              "pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$"
             },
             "subdomain": {
               "type": "string",
