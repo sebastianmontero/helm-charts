@@ -16,6 +16,12 @@ url:
 ingress:
   enabled: true
 
+relay:
+  info:
+    name: ""
+    description: ""
+    pubkey: ""
+    contact: "https://www.smartvaults.io/"
 
 storage:
   size: 5Gi

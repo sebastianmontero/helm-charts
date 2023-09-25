@@ -48,6 +48,43 @@
       ],
       "type": "object"
     },
+    "relay": {
+      "description": "Relay related properties",
+      "properties": {
+        "info": {
+          "description": "Relay NIP11 related properties",
+          "properties": {
+            "name":{
+              "type":"string",
+              "pattern": ".{3,}$"
+            },
+            "description":{
+              "type":"string",
+              "pattern": ".{5,}$"
+            },
+            "pubkey":{
+              "type":"string",
+              "pattern": "^[a-f0-9]{64,64}$"
+            },
+            "contact":{
+              "type":"string",
+              "pattern": ".{3,}$"
+            }
+          },
+          "required": [
+            "name",
+            "description",
+            "pubkey",
+            "contact"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "info"
+      ],
+      "type": "object"
+    },
     "storage": {
       "description": "Storage related properties",
       "properties": {
