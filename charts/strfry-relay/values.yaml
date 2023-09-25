@@ -23,6 +23,8 @@ relay:
     pubkey: ""
     contact: "https://www.smartvaults.io/"
 
+serviceAccountName: "nostr-relays-sa"
+
 storage:
   size: 5Gi
   class: gp2

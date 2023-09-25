@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: nostr-relays
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      serviceAccountName: nostr-relays-sa
+      initContainers:
+      - name: demo-aws-cli
+        image: amazon/aws-cli
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            echo "First command" > local-test-file.txt
+            aws s3 cp local-test-file.txt s3://smartvaults-relay-backups/test/local-test-file.txt
+      containers:
+      - name: my-app
+        image: nginx
