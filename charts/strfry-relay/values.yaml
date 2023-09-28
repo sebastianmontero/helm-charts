@@ -3,7 +3,7 @@ image:
   repository: armnd0/strfry-relay
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: 4a665f699c2f2a8993e27817ba1a4ea7a94a0f78525a11e1b7a38ba2fb2fad31
 
 nameOverride: ""
 fullnameOverride: ""
