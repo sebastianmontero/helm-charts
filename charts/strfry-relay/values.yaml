@@ -1,9 +1,9 @@
 
 image:
-  repository: sebastianmontero/strfry
+  repository: armnd0/strfry-relay
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: e4e79af1214e38ea90f4d099bd1f057a688abdb6
+  tag: 4a665f699c2f2a8993e27817ba1a4ea7a94a0f78525a11e1b7a38ba2fb2fad31
 
 nameOverride: ""
 fullnameOverride: ""
@@ -24,6 +24,12 @@ relay:
     contact: "https://www.smartvaults.io/"
 
 serviceAccountName: "nostr-relays-sa"
+
+relays: "[url1,url2]"
+bucketName: ""
+allowedEvents: "[0,3,5,9288,9289,9290,9291,9292,9294,9295,32121]"
+backUpSchedule: "0 0 * * *"
+syncSchedule: "*/5 * * * *"
 
 storage:
   size: 5Gi
