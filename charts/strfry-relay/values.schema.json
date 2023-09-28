@@ -129,6 +129,36 @@
       "description": "Service account to use for the statefulset",
       "type": "string",
       "pattern": "^[a-z0-9-]+$"
+    },
+    "relays": {
+      "type": "string",
+      "pattern": "^\\[[\\w:\\/\\,\\s]+\\]$",
+      "description": "A string representing an array of relay URLs. Should be a comma-separated list enclosed in square brackets."
+    },
+    "bucketName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The name of the S3 bucket."
+    },
+    "allowedEvents": {
+      "type": "string",
+      "pattern": "^\\[[0-9\\,\\s]+\\]$",
+      "description": "A string representing an array of allowed event kinds. Should be a comma-separated list enclosed in square brackets."
+    },
+    "backUpSchedule": {
+      "type": "string",
+      "pattern": "^[\\*\\/0-9\\s]+$",
+      "description": "The cron expression for the backup schedule."
+    },
+    "syncSchedule": {
+      "type": "string",
+      "pattern": "^[\\*\\/0-9\\s]+$",
+      "description": "The cron expression for the sync schedule."
+    },
+    "podName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The name of the pod."
     }
   },
   "title": "Values",

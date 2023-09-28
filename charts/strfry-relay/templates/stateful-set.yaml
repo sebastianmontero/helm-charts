@@ -25,10 +25,8 @@ spec:
         env:
         - name: STRFRY_CONFIG
           value: "/etc/strfry.conf"
-        - name: RELAY_A
-          value: {{ .Values.relayA }}
-        - name: RELAY_B
-          value: {{ .Values.relayB }}
+        - name: RELAYS
+          value: {{ .Values.relays }}
         - name: ALLOWED_EVENTS
           value: {{ .Values.allowedEvents }}
         - name: BUCKET_NAME
@@ -37,6 +35,8 @@ spec:
           value: {{ .Values.backUpSchedule }}  
         - name: SYNC_SCHEDULE
           value: {{ .Values.syncSchedule }}  
+        - name: POD_NAME
+          value: {{ .Values.podName }}
         volumeMounts:
         - name: {{ include "strfry-relay.fullname" . }}
           mountPath: /var/lib/strfry/strfry-db
