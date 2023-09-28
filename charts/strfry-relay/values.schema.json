@@ -132,8 +132,8 @@
     },
     "relays": {
       "type": "string",
-      "pattern": "^\\[[\\w:\\/\\,\\s]+\\]$",
-      "description": "A string representing an array of relay URLs. Should be a comma-separated list enclosed in square brackets."
+      "pattern": "^\\[(ws:\\/\\/[\\w\\.-]+(:\\d+)?|wss:\\/\\/[\\w\\.-]+(:\\d+)?)(,(ws:\\/\\/[\\w\\.-]+(:\\d+)?|wss:\\/\\/[\\w\\.-]+(:\\d+)?))*\\]$",
+      "description": "A string representing an array of relay URLs. Should be a comma-separated list enclosed in square brackets, each should represent a websocket url."
     },
     "bucketName": {
       "type": "string",
@@ -154,11 +154,6 @@
       "type": "string",
       "pattern": "^[\\*\\/0-9\\s]+$",
       "description": "The cron expression for the sync schedule."
-    },
-    "podName": {
-      "type": "string",
-      "minLength": 1,
-      "description": "The name of the pod."
     }
   },
   "title": "Values",
