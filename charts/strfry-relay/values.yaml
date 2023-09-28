@@ -30,7 +30,6 @@ bucketName: ""
 allowedEvents: "[0,3,5,9288,9289,9290,9291,9292,9294,9295,32121]"
 backUpSchedule: "0 0 * * *"
 syncSchedule: "*/5 * * * *"
-podName: ""
 
 storage:
   size: 5Gi

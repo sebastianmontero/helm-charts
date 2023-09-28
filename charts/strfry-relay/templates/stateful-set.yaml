@@ -36,7 +36,7 @@ spec:
         - name: SYNC_SCHEDULE
           value: {{ .Values.syncSchedule }}  
         - name: POD_NAME
-          value: {{ .Values.podName }}
+          value: {{ include "strfry-relay.fullname" . }}
         volumeMounts:
         - name: {{ include "strfry-relay.fullname" . }}
           mountPath: /var/lib/strfry/strfry-db
