@@ -25,6 +25,13 @@ relay:
 
 serviceAccountName: "nostr-relays-sa"
 
+relayA: ""
+relayB: ""
+bucketName: ""
+allowedEvents: "[]"
+backUpSchedule: ""
+syncSchedule: ""
+
 storage:
   size: 5Gi
   class: gp2
