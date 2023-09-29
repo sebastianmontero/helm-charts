@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name:  {{ include "strfry-relay.fullname-backup-config" . }} 
+data:
+  backup.conf: |
+    RELAYS={{ .Values.relays }}
+    ALLOWED_EVENTS={{ .Values.allowedEvents }}
+    BUCKET_NAME={{ .Values.bucketName }}
+    BACKUP_SCHEDULE={{ .Values.backUpSchedule }}  
+    SYNC_SCHEDULE={{ .Values.syncSchedule }}  
+    POD_NAME={{ include "strfry-relay.fullname" . }}
