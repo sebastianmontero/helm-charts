@@ -25,6 +25,8 @@ spec:
         env:
         - name: STRFRY_CONFIG
           value: "/etc/strfry.conf"
+        - name: ALLOWED_EVENTS
+          value: {{ .Values.allowedEvents }}
         volumeMounts:
         - name: {{ include "strfry-relay.fullname" . }}
           mountPath: /var/lib/strfry/strfry-db
