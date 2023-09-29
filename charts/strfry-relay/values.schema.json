@@ -154,6 +154,11 @@
       "type": "string",
       "pattern": "^[\\*\\/0-9\\s]+$",
       "description": "The cron expression for the sync schedule."
+    },
+    "whitelistPubkeys": {
+      "type": "string",
+      "pattern": "^\\[\"([a-zA-Z0-9]+)\"(,\"([a-zA-Z0-9]+)\")*\\]$",
+      "description": "A string representing an array of whitelisted (hex) pubkeys. Should be a comma-separated list enclosed in square brackets."
     }
   },
   "title": "Values",
