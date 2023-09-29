@@ -26,7 +26,13 @@ spec:
         - name: STRFRY_CONFIG
           value: "/etc/strfry.conf"
         - name: ALLOWED_EVENTS
-          value: {{ .Values.allowedEvents }}
+          value: "{{ .Values.allowedEvents }}"
+        - name: WHITELIST_PUBKEYS
+          value: "{{ .Values.whitelistPubkeys }}"
+        - name: BACKUP_SCHEDULE
+          value: "{{ .Values.backUpSchedule }}"
+        - name: SYNC_SCHEDULE
+          value: "{{ .Values.syncSchedule }}"
         volumeMounts:
         - name: {{ include "strfry-relay.fullname" . }}
           mountPath: /var/lib/strfry/strfry-db
