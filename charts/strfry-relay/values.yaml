@@ -3,7 +3,7 @@ image:
   repository: armnd0/strfry-relay
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 953fe94756ae6ab50f065bd687bd8d92a5b7b122a34b45b35b1dec
+  tag: d8f30aa777b971a391ffb65bfa5a072b1ab344bb3b568b8bc8d97f0bf5b7ecbe
 
 nameOverride: ""
 fullnameOverride: ""
@@ -28,7 +28,7 @@ serviceAccountName: "nostr-relays-sa"
 relays: "[url1,url2]"
 bucketName: ""
 allowedEvents: "[0,3,5,9288,9289,9290,9291,9292,9294,9295,32121]"
-# whitelistPubkeys: ""
+# whitelistPubkeys: 
 backUpSchedule: "0 0 * * *"
 syncSchedule: "*/5 * * * *"
 
@@ -37,6 +37,16 @@ storage:
   class: gp2
 
 resources:
+    requests:
+        cpu: 200m
+        memory: 256Mi
+
+resourcesBackupJob:
+    requests:
+        cpu: 200m
+        memory: 256Mi
+
+resourcesSyncJob:
     requests:
         cpu: 200m
         memory: 256Mi

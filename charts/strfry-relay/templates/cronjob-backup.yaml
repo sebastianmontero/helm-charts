@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "strfry-relay.backUpCronjob" . }}
+  labels:
+    {{- include "strfry-relay.labels" . | nindent 4 }}
+spec:
+  schedule: "{{ .Values.backUpSchedule }}"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: {{ .Values.serviceAccountName }}
+          containers:
+          - name: {{ .Chart.Name }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            command: ["/app/backup_script.sh"]
+            env:
+            - name: STRFRY_CONFIG
+              value: "/etc/strfry.conf"
+            - name: BUCKET_NAME
+              value: {{ .Values.bucketName }}
+            - name: POD_NAME
+              value: {{ include "strfry-relay.fullname" . }}
+            volumeMounts:
+            - name: {{ include "strfry-relay.fullname" . }}
+              mountPath: /var/lib/strfry/strfry-db
+            - name: strfry-config
+              mountPath: /etc/strfry.conf
+              subPath: strfry.conf
+            resources:
+              {{- toYaml .Values.resourcesBackupJob | nindent 14 }}
+          volumes:
+          - name: strfry-config
+            configMap:
+              name: {{ include "strfry-relay.fullname" . }}
+          - name: {{ include "strfry-relay.fullname" . }}
+            persistentVolumeClaim:
+              claimName: {{ include "strfry-relay.fullname" . }}
+          restartPolicy: Never

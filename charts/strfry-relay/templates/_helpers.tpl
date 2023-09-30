@@ -23,21 +23,22 @@ If release name contains chart name it will be used as a full name.
 {{- end }}
 {{- end }}
 
+
 {{/*
-Create a default fully qualified app name for backup-config.
+Backup cronjob name
 */}}
-{{- define "strfry-relay.fullname-backup-config" -}}
-{{- if .Values.fullnameOverride }}
-{{- printf "%s-%s" (.Values.fullnameOverride | trunc 53 | trimSuffix "-") "backup-config" | trunc 63 | trimSuffix "-" }}
-{{- else }}
-{{- $name := default .Chart.Name .Values.nameOverride }}
-{{- if contains $name .Release.Name }}
-{{- printf "%s-%s" (.Release.Name | trunc 53 | trimSuffix "-") "backup-config" | trunc 63 | trimSuffix "-" }}
-{{- else }}
-{{- printf "%s-%s-%s" .Release.Name $name "backup-config" | trunc 63 | trimSuffix "-" }}
+{{- define "strfry-relay.backUpCronjob" -}}
+{{- printf "%s-backup-job" (include "strfry-relay.fullname" .) }}
 {{- end }}
+
+{{/*
+Sync cronjob name
+*/}}
+{{- define "strfry-relay.syncCronjob" -}}
+{{- printf "%s-sync-job" (include "strfry-relay.fullname" .) }}
 {{- end }}
-{{- end }}
+
+
 
 {{/*
 Create chart name and version as used by the chart label.

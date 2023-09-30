@@ -19,6 +19,8 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        command: ["/app/strfry"]
+        args: ["relay"]
         ports:
         - containerPort: 7777
           name: default
@@ -29,37 +31,18 @@ spec:
           value: "{{ .Values.allowedEvents }}"
         - name: WHITELIST_PUBKEYS
           value: "{{ .Values.whitelistPubkeys }}"
-        - name: BACKUP_SCHEDULE
-          value: "{{ .Values.backUpSchedule }}"
-        - name: SYNC_SCHEDULE
-          value: "{{ .Values.syncSchedule }}"
         volumeMounts:
         - name: {{ include "strfry-relay.fullname" . }}
           mountPath: /var/lib/strfry/strfry-db
         - name: strfry-config
           mountPath: /etc/strfry.conf
           subPath: strfry.conf
-        - name: backup-config
-          mountPath: /etc/backup.conf
-          subPath: backup.conf 
         resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
       - name: strfry-config
         configMap:
           name: {{ include "strfry-relay.fullname" . }}
-      - name: backup-config
-        configMap:
-          name: {{ include "strfry-relay.fullname-backup-config" . }} 
-  volumeClaimTemplates:
-  - metadata:
-      name: {{ include "strfry-relay.fullname" . }}
-      labels:
-        {{- include "strfry-relay.labels" . | nindent 8 }}
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: {{ .Values.storage.size }}
-      storageClassName: {{ .Values.storage.class }}
+      - name: {{ include "strfry-relay.fullname" . }}
+        persistentVolumeClaim:
+          claimName: {{ include "strfry-relay.fullname" . }}
