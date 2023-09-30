@@ -40,3 +40,13 @@ resources:
     requests:
         cpu: 200m
         memory: 256Mi
+
+resourcesSyncJob:
+    requests:
+        cpu: 200m
+        memory: 256Mi
+
+resourcesBackupJob:
+    requests:
+        cpu: 200m
+        memory: 256Mi

@@ -17,7 +17,7 @@ spec:
     spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
-      - name: {{ .Chart.Name }}
+      - name: {{ include "strfry-relay.relay-container-name" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         ports:
         - containerPort: 7777
@@ -39,11 +39,44 @@ spec:
         - name: strfry-config
           mountPath: /etc/strfry.conf
           subPath: strfry.conf
-        - name: backup-config
-          mountPath: /etc/backup.conf
-          subPath: backup.conf 
         resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      - name: {{ include "strfry-relay.sync-container-name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          command: ["/app/sync_script.sh"]
+          env:
+          - name: STRFRY_CONFIG
+            value: "/etc/strfry.conf"
+          - name: RELAYS
+            value: "{{ .Values.relays }}"
+          - name: ALLOWED_EVENTS
+            value: "{{ .Values.allowedEvents }}"
+          volumeMounts:
+          - name: {{ include "strfry-relay.fullname" . }}
+            mountPath: /var/lib/strfry/strfry-db
+          - name: strfry-config
+            mountPath: /etc/strfry.conf
+            subPath: strfry.conf
+          resources:
+            {{- toYaml .Values.resourcesSyncJob | nindent 14 }}
+      - name: {{ include "strfry-relay.backup-container-name" . }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            command: ["/app/backup_script.sh"]
+            env:
+            - name: STRFRY_CONFIG
+              value: "/etc/strfry.conf"
+            - name: BUCKET_NAME
+              value: {{ .Values.bucketName }}
+            - name: POD_NAME
+              value: {{ include "strfry-relay.fullname" . }}
+            volumeMounts:
+            - name: {{ include "strfry-relay.fullname" . }}
+              mountPath: /var/lib/strfry/strfry-db
+            - name: strfry-config
+              mountPath: /etc/strfry.conf
+              subPath: strfry.conf
+            resources:
+              {{- toYaml .Values.resourcesBackupJob | nindent 14 }}
       volumes:
       - name: strfry-config
         configMap:

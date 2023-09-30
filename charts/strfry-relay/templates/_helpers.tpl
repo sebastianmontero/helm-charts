@@ -46,6 +46,28 @@ Create chart name and version as used by the chart label.
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
+
+{{/*
+Relay container name.
+*/}}
+{{- define "strfry-relay.relay-container-name" -}}
+{{- printf "%s-relay" .Chart.Name }}
+{{- end }}
+
+{{/*
+Backup container name.
+*/}}
+{{- define "strfry-relay.backup-container-name" -}}
+{{- printf "%s-backup" .Chart.Name }}
+{{- end }}
+
+{{/*
+Sync container name.
+*/}}
+{{- define "strfry-relay.sync-container-name" -}}
+{{- printf "%s-sync" .Chart.Name }}
+{{- end }}
+
 {{/*
 Common labels
 */}}
