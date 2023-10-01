@@ -27,10 +27,13 @@ serviceAccountName: "nostr-relays-sa"
 
 relays: "[url1,url2]"
 bucketName: ""
-allowedEvents: "[0,3,5,9288,9289,9290,9291,9292,9294,9295,32121]"
+allowedEvents: "[0,3,4,5,9288,9289,9290,9291,9292,9294,9295,24133,32121]"
 # whitelistPubkeys: ""
-backUpSchedule: "0 0 * * *"
-syncSchedule: "*/5 * * * *"
+backupStartDelay: "5m"
+backupInterval: "1d"
+syncStartDelay: "5m"
+syncInterval: "10m"
+backUpInitialSleep: "5m"
 
 storage:
   size: 5Gi

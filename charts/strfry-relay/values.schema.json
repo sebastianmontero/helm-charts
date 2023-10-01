@@ -145,15 +145,25 @@
       "pattern": "^\\[[0-9\\,\\s]+\\]$",
       "description": "A string representing an array of allowed event kinds. Should be a comma-separated list enclosed in square brackets."
     },
-    "backUpSchedule": {
+    "backupStartDelay": {
       "type": "string",
-      "pattern": "^[\\*\\/0-9\\s]+$",
-      "description": "The cron expression for the backup schedule."
+      "pattern": "^[1-9][0-9]?[smhd]$",
+      "description": "The initial delay before the first backup"
     },
-    "syncSchedule": {
+    "backupInterval": {
       "type": "string",
-      "pattern": "^[\\*\\/0-9\\s]+$",
-      "description": "The cron expression for the sync schedule."
+      "pattern": "^[1-9][0-9]?[smhd]$",
+      "description": "The interval between backups"
+    },
+    "syncStartDelay": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]?[smhd]$",
+      "description": "The initial delay before the first sync"
+    },
+    "syncInterval": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]?[smhd]$",
+      "description": "The interval between syncs"
     },
     "whitelistPubkeys": {
       "type": "string",
