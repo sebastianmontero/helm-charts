@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "smartvaults-server-db.fullname" . }}
+  labels:
+    {{- include "smartvaults-server-db.labels" . | nindent 4 }}
+spec:
+  serviceName: {{ include "smartvaults-server-db.fullname" . }}
+  selector:
+    matchLabels:
+      {{- include "smartvaults-server-db.selectorLabels" . | nindent 6 }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        {{- include "smartvaults-server-db.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        env:
+          - name: PGDATA
+            value: /var/lib/postgresql/data/pgdata
+        envFrom:
+          - secretRef:
+             name: {{ include "smartvaults-server-db.fullname" . }}
+        ports:
+         - containerPort: {{ .Values.service.port }}
+           name: default
+        volumeMounts:
+        - name: {{ include "smartvaults-server-db.fullname" . }}
+          mountPath: /var/lib/postgresql/data
+        resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+  volumeClaimTemplates:
+  - metadata:
+      name: {{ include "smartvaults-server-db.fullname" . }}
+      labels:
+        {{- include "smartvaults-server-db.labels" . | nindent 8 }}
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: {{ .Values.storage.size }}
+      storageClassName: {{ .Values.storage.class }}

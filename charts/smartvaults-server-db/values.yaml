@@ -1,0 +1,23 @@
+
+image:
+  repository: sebastianmontero/smartvaults-server-db-dev
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: 3b5aeb7df5073253a2eb24ec151e9aa0c8ccd140
+
+nameOverride: ""
+fullnameOverride: ""
+
+postgresPassword: ""
+
+service:
+  port: 5432
+
+storage:
+  size: 5Gi
+  class: standard
+
+resources:
+    requests:
+        cpu: 100m
+        memory: 128Mi

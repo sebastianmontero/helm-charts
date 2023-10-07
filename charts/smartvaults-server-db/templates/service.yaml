@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "smartvaults-server-db.fullname" . }}
+  labels:
+    {{- include "smartvaults-server-db.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+      protocol: TCP
+  selector:
+    {{- include "smartvaults-server-db.selectorLabels" . | nindent 4 }}

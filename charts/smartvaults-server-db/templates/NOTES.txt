@@ -1,0 +1,3 @@
+Smartvaults Server DB Installed.
+
+DB Endpoint: {{ include "smartvaults-server-db.endpoint" . }}

@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "smartvaults-rest-server.fullname" . }}
+  labels:
+    {{- include "smartvaults-rest-server.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "smartvaults-rest-server.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "smartvaults-rest-server.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["node", "src/index.js"]
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          env:
+            - name: PORT
+              value: "3000"
+            - name: PGHOST
+              value: {{ include "smartvaults-rest-server.dbHost" . }}
+            - name: PGUSER
+              value: "postgres"
+            - name: PGDATABASE
+              value: "postgres"
+            - name: PGPORT
+              value: "{{ index .Values "hashed-faucet-db" "service" "port" }}"
+            - name: RELAYS
+              value: "{{ .Values.env.relays }}"
+            - name: EVENT_AGE_LIMIT_SECS
+              value: "{{ .Values.env.eventAgeLimitSecs }}"
+            - name: NODE_ENV
+              value: "{{ .Values.env.nodeEnv }}"
+          envFrom:
+            - secretRef:
+                name: {{ include "smartvaults-rest-server.fullname" . }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
