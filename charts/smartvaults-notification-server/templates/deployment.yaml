@@ -1,35 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "smartvaults-rest-server.fullname" . }}
+  name: {{ include "smartvaults-notification-server.fullname" . }}
   labels:
-    {{- include "smartvaults-rest-server.labels" . | nindent 4 }}
+    {{- include "smartvaults-notification-server.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "smartvaults-rest-server.selectorLabels" . | nindent 6 }}
+      {{- include "smartvaults-notification-server.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "smartvaults-rest-server.selectorLabels" . | nindent 8 }}
+        {{- include "smartvaults-notification-server.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["node", "src/index.js"]
-          ports:
-            - name: http
-              containerPort: 3000
-              protocol: TCP
           env:
-            - name: PORT
-              value: "3000"
             - name: PGHOST
-              value: {{ include "smartvaults-rest-server.dbHost" . }}
+              value: {{ include "smartvaults-notification-server.dbHost" . }}
             - name: PGUSER
               value: "postgres"
             - name: PGDATABASE
@@ -38,15 +32,29 @@ spec:
               value: "{{ index .Values "smartvaults-server-db" "service" "port" }}"
             - name: RELAYS
               value: "{{ .Values.env.relays }}"
-            - name: EVENT_AGE_LIMIT_SECS
-              value: "{{ .Values.env.eventAgeLimitSecs }}"
+            - name: APN_TOKEN_KEY
+              value: "/keys/apn_token_key.p8"
+            - name: APN_TOKEN_KEY_ID
+              value: "{{ .Values.env.apnTokenKeyId }}"
+            - name: APN_TOKEN_TEAM_ID
+              value: "{{ .Values.env.apnTokenTeamId }}"
+            - name: BUNDLE_ID
+              value: "{{ .Values.env.bundleId }}"
             - name: NODE_ENV
               value: "{{ .Values.env.nodeEnv }}"
           envFrom:
             - secretRef:
-                name: {{ include "smartvaults-rest-server.fullname" . }}
+                name: {{ include "smartvaults-notification-server.envSecrets" . }}
+          volumeMounts:
+          - name: {{ include "smartvaults-notification-server.keysVolume" . }}
+            mountPath: "/keys"
+            readOnly: true
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+      - name: {{ include "smartvaults-notification-server.keysVolume" . }}
+        secret:
+          secretName: {{ include "smartvaults-notification-server.fullname" . }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

@@ -1,6 +1,6 @@
 apiVersion: v2
-name: smartvaults-server-db
-description: Deploys the Smartvaults server database
+name: smartvaults-notification-server
+description: Deploys the smartvaults notification server
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -21,4 +21,10 @@ version: 0.1.0
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "0.0.1"
+appVersion: "1.16.0"
+
+dependencies:
+  - name: smartvaults-server-db
+    version: "0.1.0"
+    # repository: "https://sebastianmontero.github.io/helm-charts/"
+    repository: "file://../smartvaults-server-db"

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "properties": {
+    "nameOverride": {
+      "description": "If specified replaces chart name when creating full name used for the names of all components",
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "description": "If specified its value is used for the names of all components",
+      "type": "string"
+    },
+    "replicaCount": {
+      "description": "Number of replicas of the action server",
+      "type": "integer"
+    },
+    "env": {
+      "description": "Environment variables",
+      "properties": {
+        "relays": {
+          "type": "string",
+          "pattern": "^(ws(s)?:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+(,(ws(s)?:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+)*$"
+        },
+        "apnTokenKeyLocalPath": {
+          "type": "string",
+          "pattern": ".+"
+        },
+        "apnTokenKeyId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]{10,10}$"
+        },
+        "apnTokenTeamId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]{10,10}$"
+        },
+        "bundleId": {
+          "type": "string",
+          "pattern": "^[a-z0-9\\.]+$"
+        },
+        "nodeEnv": {
+          "type": "string",
+          "enum": ["dev", "production"]
+        }
+      },
+      "required": [
+        "relays",
+        "apnTokenKeyLocalPath",
+        "apnTokenKeyId",
+        "apnTokenTeamId",
+        "bundleId",
+        "nodeEnv"
+      ],
+      "type": "object"
+    },
+    "image": {
+      "description": "Image Details",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_/]+$"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "pattern": "^(Always|Never|IfNotPresent)$"
+        },
+        "tag": {
+          "type": "string",
+          "pattern": "^[a-z0-9-_\\.]+$"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "type": "object"
+    }
+  },
+  "title": "Values",
+  "required": [
+    "replicaCount",
+    "image",
+    "env"
+  ],
+  "type": "object"
+}

@@ -5,31 +5,27 @@
 replicaCount: 1
 
 image:
-  repository: sebastianmontero/smartvaults-rest-server-dev
+  repository: docker pull sebastianmontero/smartvaults-notification-server-dev
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 5398ddbd582ba753cbec7be55b667f48f74c6039
+  tag: 6256296b8c9d3acab65cd6d68011204a44a22b23
 
 nameOverride: ""
 fullnameOverride: ""
 
-url:
-  domain: 
-    base: ""
-    subdomain: ""
-
 env:
   relays: ""
-  eventAgeLimitSecs: 30
+  apnTokenKeyLocalPath: ""
+  apnTokenKeyId: "2R623TS6SC"
+  apnTokenTeamId: "886J2SDR24"
+  bundleId: "io.smartvaults.app"
   nodeEnv: "production"
 
-ingress:
-  enabled: true
 
 resources:
   requests:
-      cpu: 200m
-      memory: 256Mi
+      cpu: 400m
+      memory: 1Gi
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following

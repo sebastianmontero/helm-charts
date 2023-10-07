@@ -14,10 +14,10 @@ service:
   port: 5432
 
 storage:
-  size: 5Gi
+  size: 10Gi
   class: standard
 
 resources:
     requests:
-        cpu: 100m
-        memory: 128Mi
+        cpu: 200m
+        memory: 256Mi

@@ -1,0 +1,6 @@
+dependencies:
+- name: smartvaults-server-db
+  repository: file://../smartvaults-server-db
+  version: 0.1.0
+digest: sha256:fab778972401d3a5cb16f92d4afc59a5bce97009c69997f0578217eadfb3a6f8
+generated: "2023-10-07T17:13:53.634750352-06:00"
