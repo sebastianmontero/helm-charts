@@ -20,16 +20,16 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["node", "src/index.js"]
+          command: ["node", "dist/index.js"]
           env:
             - name: PGHOST
-              value: {{ include "smartvaults-notification-server.dbHost" . }}
+              value: "{{ .Values.env.pgHost }}"
             - name: PGUSER
               value: "postgres"
             - name: PGDATABASE
               value: "postgres"
             - name: PGPORT
-              value: "{{ index .Values "smartvaults-server-db" "service" "port" }}"
+              value: "5432"
             - name: RELAYS
               value: "{{ .Values.env.relays }}"
             - name: APN_TOKEN_KEY

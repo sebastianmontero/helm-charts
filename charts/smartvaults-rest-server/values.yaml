@@ -8,7 +8,7 @@ image:
   repository: sebastianmontero/smartvaults-rest-server-dev
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 5398ddbd582ba753cbec7be55b667f48f74c6039
+  tag: c5551d5380e1dbccf33981dca55f0f521c2b2fb0
 
 nameOverride: ""
 fullnameOverride: ""
@@ -19,6 +19,8 @@ url:
     subdomain: ""
 
 env:
+  pgHost: ""
+  pgPassword: ""
   relays: ""
   eventAgeLimitSecs: 30
   nodeEnv: "production"
@@ -54,8 +56,3 @@ tolerations: []
 
 affinity: {}
 
-smartvaults-server-db:
-  postgresPassword: ""
-  service:
-    port: 5432
-  

@@ -5,15 +5,17 @@
 replicaCount: 1
 
 image:
-  repository: docker pull sebastianmontero/smartvaults-notification-server-dev
+  repository: sebastianmontero/smartvaults-notification-server-dev
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 6256296b8c9d3acab65cd6d68011204a44a22b23
+  tag: 2c53d370c70fe08a2947757b75ce76ba5e69bc8f
 
 nameOverride: ""
 fullnameOverride: ""
 
 env:
+  pgHost: ""
+  pgPassword: ""
   relays: ""
   apnTokenKeyLocalPath: ""
   apnTokenKeyId: "2R623TS6SC"
@@ -50,8 +52,4 @@ tolerations: []
 
 affinity: {}
 
-smartvaults-server-db:
-  postgresPassword: ""
-  service:
-    port: 5432
   

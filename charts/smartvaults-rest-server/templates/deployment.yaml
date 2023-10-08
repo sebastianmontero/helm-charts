@@ -29,13 +29,13 @@ spec:
             - name: PORT
               value: "3000"
             - name: PGHOST
-              value: {{ include "smartvaults-rest-server.dbHost" . }}
+              value: "{{ .Values.env.pgHost }}"
             - name: PGUSER
               value: "postgres"
             - name: PGDATABASE
               value: "postgres"
             - name: PGPORT
-              value: "{{ index .Values "smartvaults-server-db" "service" "port" }}"
+              value: "5432"
             - name: RELAYS
               value: "{{ .Values.env.relays }}"
             - name: EVENT_AGE_LIMIT_SECS

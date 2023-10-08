@@ -1,9 +1,0 @@
-dependencies:
-- name: smartvaults-rest-server
-  repository: file://../smartvaults-rest-server
-  version: 0.1.0
-- name: smartvaults-notification-server
-  repository: file://../smartvaults-notification-server
-  version: 0.1.0
-digest: sha256:d1507c0b6083660d76f9bdf80925348c60fd6a9c2b332a42422ccb202bd3e4b8
-generated: "2023-10-07T17:15:17.802877586-06:00"

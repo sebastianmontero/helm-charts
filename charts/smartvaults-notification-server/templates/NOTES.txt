@@ -1,8 +1,2 @@
 
 Smartvaults notification server has been deployed.
-
-{{- if .Values.ingress.enabled }}
-Access the services at: {{ include "smartvaults-notification-server.getUrl" . }}
-{{- else }}
-No ingress has been created
-{{- end }}
