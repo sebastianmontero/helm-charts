@@ -27,7 +27,7 @@ serviceAccountName: "nostr-relays-sa"
 
 relays: "[url1,url2]"
 bucketName: ""
-allowedEvents: "[0,3,4,5,9288,9289,9290,9291,9292,9294,9295,24133,32121]"
+allowedEvents: "[0,3,4,5,10002,9288,9289,9290,9291,9292,9294,9295,24133,32121]"
 # whitelistPubkeys: ""
 backupStartDelay: "5m"
 backupInterval: "1d"
