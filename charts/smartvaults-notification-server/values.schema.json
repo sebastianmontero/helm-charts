@@ -39,6 +39,9 @@
         "nodeEnv": {
           "type": "string",
           "enum": ["dev", "production"]
+        },
+        "debug": {
+          "type": "string"
         }
       },
       "required": [
@@ -47,7 +50,8 @@
         "apnTokenKeyId",
         "apnTokenTeamId",
         "bundleId",
-        "nodeEnv"
+        "nodeEnv",
+        "debug"
       ],
       "type": "object"
     },

@@ -42,6 +42,8 @@ spec:
               value: "{{ .Values.env.bundleId }}"
             - name: NODE_ENV
               value: "{{ .Values.env.nodeEnv }}"
+            - name: DEBUG
+              value: "{{ .Values.env.debug }}"
           envFrom:
             - secretRef:
                 name: {{ include "smartvaults-notification-server.envSecrets" . }}
