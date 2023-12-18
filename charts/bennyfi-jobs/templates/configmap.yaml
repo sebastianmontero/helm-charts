@@ -16,10 +16,10 @@ data:
       endpoint: {{ .Values.env.coingecko.endpoint }}
     contracts:
       {{- range .Values.env.contracts -}}
+        {{- printf "- run-interval-mins: %v" .runIntervalMins | nindent 4 }}
         {{- if .contractName }}
-        {{- printf "- contract-name: %s" .contractName | nindent 4 }}
+        {{- printf "contract-name: %s" .contractName | nindent 6 }}
         {{- end }}
-        {{- printf "run-interval-mins: %v" .runIntervalMins | nindent 6 }}
         {{- printf "private-key: %s" .privateKey | nindent 6 }}
         {{- printf "batch-actions:" | nindent 6 }}
           {{- range .batchActions -}}
@@ -36,17 +36,17 @@ data:
         {{- range .Values.env.yieldSourceOracles.oracles -}}
           {{- printf "- name: %s" .name | nindent 6 }}
           {{- if .yield }}
-          {{- printf "yield" | nindent 8 }}
+          {{- printf "yield:" | nindent 8 }}
           {{- printf "provider: %v" .yield.provider | nindent 10 }}
           {{- printf "key: %v" .yield.key | nindent 10 }}
           {{- end }}
           {{- if .token }}
-          {{- printf "token" | nindent 8 }}
+          {{- printf "token:" | nindent 8 }}
           {{- printf "provider: %v" .token.provider | nindent 10 }}
           {{- printf "key: %v" .token.key | nindent 10 }}
           {{- end }}
           {{- if .beny }}
-          {{- printf "beny" | nindent 8 }}
+          {{- printf "beny:" | nindent 8 }}
           {{- printf "provider: %v" .beny.provider | nindent 10 }}
           {{- printf "key: %v" .beny.key | nindent 10 }}
           {{- end }}
