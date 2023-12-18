@@ -12,6 +12,10 @@
     "env": {
       "description": "Environment variables",
       "properties": {
+        "bennyfiContract": {
+          "type": "string",
+          "pattern": "^[a-z1-5\\.]{1,12}$"
+        },
         "eosEndpoints": {
           "type" :"array",
           "items": {
@@ -20,6 +24,20 @@
           },
           "minItems": 1
         },
+        "telosApiEndpoint": {
+          "type": "string",
+          "pattern": "^(http(s)?:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "coingecko": {
+          "type": "object",
+          "properties": {
+            "endpoint": {
+              "type": "string",
+              "pattern": "^(http(s)?:\\/\\/)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+            }
+          },
+          "required": ["endpoint"]
+        },        
         "contracts": {
           "type" :"array",
           "items": {
@@ -65,11 +83,107 @@
             ]
           },
           "minItems": 1
+        },
+        "oracle": {
+          "type": "object",
+          "properties": {
+            "account": {
+              "type": "string",
+              "pattern": "^[a-z1-5\\.]{1,12}$"
+            },
+            "privateKey": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9]+$"
+            }
+          },
+          "required": [
+            "account",
+            "privateKey"
+          ]
+        },
+        "yieldSourceOracles": {
+          "type": "object",
+          "properties": {
+            "config": {
+              "type": "object",
+              "properties": {
+                "runIntervalMins": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "required": ["runIntervalMins"]
+            },
+            "oracles":{
+              "type" :"array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "pattern": "^[a-z1-5\\.]{1,12}$"
+                  },
+                  "yield": {
+                    "type": "object",
+                    "properties": {
+                      "provider": {
+                        "type": "string",
+                        "pattern": "^[-a-z0-9]+$"
+                      },
+                      "key": {
+                        "type": "string",
+                        "pattern": "^[-a-z0-9]+$"
+                      }  
+                    },
+                    "required": ["provider", "key"]
+                  },
+                  "token": {
+                    "type": "object",
+                    "properties": {
+                      "provider": {
+                        "type": "string",
+                        "pattern": "^[-a-z0-9]+$"
+                      },
+                      "key": {
+                        "type": "string",
+                        "pattern": "^[-a-z0-9]+$"
+                      }  
+                    },
+                    "required": ["provider", "key"]
+                  },
+                  "beny": {
+                    "type": "object",
+                    "properties": {
+                      "provider": {
+                        "type": "string",
+                        "pattern": "^[-a-z0-9]+$"
+                      },
+                      "key": {
+                        "type": "string",
+                        "pattern": "^[-a-z0-9]+$"
+                      }  
+                    },
+                    "required": ["provider", "key"]
+                  }
+                },
+                "required": ["name"]
+              }
+            }
+          },
+          "required": [
+            "config",
+            "oracles"
+          ]
         }
       },
       "required": [
+        "bennyfiContract",
+        "telosApiEndpoint",
+        "coingecko",
         "eosEndpoints",
-        "contracts"
+        "contracts",
+        "oracle",
+        "yieldSourceOracles"
       ],
       "type": "object"
     },

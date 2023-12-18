@@ -24,6 +24,9 @@ spec:
         - name: bennyfi-jobs-config
           mountPath: /config/config.yml
           subPath: config.yml
+        envFrom:
+            - secretRef:
+                name: {{ include "bennyfi-jobs.fullname" . }}
         resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:

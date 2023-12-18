@@ -12,10 +12,13 @@ nameOverride: ""
 fullnameOverride: ""
 
 env:
+  bennyfiContract: bennyfi
   eosEndpoints: []
+  telosApiEndpoint: https://api.telos.net
+  coingecko:
+    endpoint: https://api.coingecko.com/api/v3
   contracts:
-    - contractName: bennyfi
-      runIntervalMins: 2
+    - runIntervalMins: 2
       privateKey: ""
       batchActions:
       - action: startpools
@@ -34,9 +37,9 @@ env:
         callOnce: false
       - action: redraw
         callOnce: true
-    - contract-name: tlosrex
+    - contractName: tlosrex
       runIntervalMins: 1
-      private-key: ""
+      privateKey: ""
       batchActions:
         - action: mvfrmsavings
           callOnce: false
@@ -44,6 +47,21 @@ env:
           callOnce: false
         - action: withdrawrex
           callOnce: false
+  oracle:
+    account: benyfioracle
+    privateKey: ""
+  
+  yieldSourceOracles:
+    config:
+      runIntervalMins: 5
+    oracles:
+    - name: tlosrex
+      yield: 
+        provider: telos-api
+        key: rex
+      token:
+        provider: coingecko-api
+        key: telos
 
 resources:
     requests:

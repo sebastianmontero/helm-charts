@@ -6,13 +6,19 @@ metadata:
     {{- include "bennyfi-jobs.labels" . | nindent 4 }}
 data:
   config.yml: |
+    bennyfi-contract: {{ .Values.env.bennyfiContract }}
     eos-endpoints:
       {{- range .Values.env.eosEndpoints -}}
         {{- printf "- %s" . | nindent 4 }}
       {{- end }}
+    telos-api-endpoint: {{ .Values.env.telosApiEndpoint }}
+    coingecko:
+      endpoint: {{ .Values.env.coingecko.endpoint }}
     contracts:
       {{- range .Values.env.contracts -}}
+        {{- if .contractName }}
         {{- printf "- contract-name: %s" .contractName | nindent 4 }}
+        {{- end }}
         {{- printf "run-interval-mins: %v" .runIntervalMins | nindent 6 }}
         {{- printf "private-key: %s" .privateKey | nindent 6 }}
         {{- printf "batch-actions:" | nindent 6 }}
@@ -21,3 +27,28 @@ data:
             {{- printf "call-once: %v" .callOnce | nindent 10 }}
           {{- end }}
       {{- end }}
+    oracle:
+      account: {{ .Values.env.oracle.account }}
+    yield-source-oracles:
+      config:
+        run-interval-mins: {{ .Values.env.yieldSourceOracles.config.runIntervalMins }}
+      oracles:
+        {{- range .Values.env.yieldSourceOracles.oracles -}}
+          {{- printf "- name: %s" .name | nindent 6 }}
+          {{- if .yield }}
+          {{- printf "yield" | nindent 8 }}
+          {{- printf "provider: %v" .yield.provider | nindent 10 }}
+          {{- printf "key: %v" .yield.key | nindent 10 }}
+          {{- end }}
+          {{- if .token }}
+          {{- printf "token" | nindent 8 }}
+          {{- printf "provider: %v" .token.provider | nindent 10 }}
+          {{- printf "key: %v" .token.key | nindent 10 }}
+          {{- end }}
+          {{- if .beny }}
+          {{- printf "beny" | nindent 8 }}
+          {{- printf "provider: %v" .beny.provider | nindent 10 }}
+          {{- printf "key: %v" .beny.key | nindent 10 }}
+          {{- end }}
+          
+        {{- end }}
