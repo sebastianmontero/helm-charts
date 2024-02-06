@@ -169,8 +169,48 @@
       "type": "string",
       "pattern": "^\\[\"([a-zA-Z0-9]+)\"(,\"([a-zA-Z0-9]+)\")*\\]$",
       "description": "A string representing an array of whitelisted (hex) pubkeys. Should be a comma-separated list enclosed in square brackets."
+    },
+    "rateLimit": {
+      "type": "number",
+      "minimum": 1,
+      "description": "The default limit of requests per window of time"
+    },
+    "rateLimitExpiry": {
+      "type": "number",
+      "minimum": 1,
+      "description": "The default window of time in seconds"
+    },
+    "hitLimit": {
+      "type": "number",
+      "minimum": 1,
+      "description": "The default limit of hits per window of time"
+    },
+    "hitExpiry": {
+      "type": "number",
+      "minimum": 1,
+      "description": "The default window of time in seconds"
+    },
+   "limitPerKind": {
+    "type": "string",
+     "pattern": "/^\\{\"\\d+\":\\d+(,\\s*\"\\d+\":\\d+)*\\}$/",
+     "description": "A string representing a map of limits per event kind. Should be a comma-separated list of key-value pairs enclosed in curly brackets, where the key is the event kind and the value is the limit."
+   },
+    "expiryPerKind": {
+      "type": "string",
+      "pattern": "/^\\{\"\\d+\":\\d+(,\\s*\"\\d+\":\\d+)*\\}$/",
+      "description": "A string representing a map of expiries per event kind. Should be a comma-separated list of key-value pairs enclosed in curly brackets, where the key is the event kind and the value is the expiry interval in seconds."
+    },
+    "hitLimitPerKind": {
+      "type": "string",
+      "pattern": "/^\\{\"\\d+\":\\d+(,\\s*\"\\d+\":\\d+)*\\}$/",
+      "description": "A string representing a map of hit limits per event kind. Should be a comma-separated list of key-value pairs enclosed in curly brackets, where the key is the event kind and the value is the limit."
+    },
+    "hitExpiryPerKind": {
+      "type": "string",
+      "pattern": "/^\\{\"\\d+\":\\d+(,\\s*\"\\d+\":\\d+)*\\}$/",
+      "description": "A string representing a map of hit expiries per event kind. Should be a comma-separated list of key-value pairs enclosed in curly brackets, where the key is the event kind and the value is the expiry interval in seconds."
     }
-  },
+     },
   "title": "Values",
   "required": [
     "url",

@@ -3,7 +3,7 @@ image:
   repository: armnd0/strfry-relay
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 953fe94756ae6ab50f065bd687bd8d92a5b7b122a34b45b35b1dec
+  tag: 975f923a7922330161c37e789396ee56eb895e772a489f26e39b51dea419b86b
 
 nameOverride: ""
 fullnameOverride: ""
@@ -34,6 +34,14 @@ backupInterval: "1d"
 syncStartDelay: "5m"
 syncInterval: "10m"
 backUpInitialSleep: "5m"
+rateLimit: 15
+rateLimitExpiry: 60
+hitLimit: 3
+hitExpiry: 900
+limitPerKind: '{"9288":50}'
+expiryPerKind: '{"9288":300}'
+hitLimitPerKind: '{"9288":3}'
+hitExpiryPerKind: '{"9288":1800}'
 
 storage:
   size: 5Gi
