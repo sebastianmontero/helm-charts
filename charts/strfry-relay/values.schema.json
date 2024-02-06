@@ -192,22 +192,22 @@
     },
    "limitPerKind": {
     "type": "string",
-     "pattern": "/^\\{\"\\d+\":\\d+(,\\s*\"\\d+\":\\d+)*\\}$/",
+     "pattern": "^\\{\"\\d+\":\\d+(,\\s*\"\\d+\":\\d+)*\\}$",
      "description": "A string representing a map of limits per event kind. Should be a comma-separated list of key-value pairs enclosed in curly brackets, where the key is the event kind and the value is the limit."
    },
     "expiryPerKind": {
       "type": "string",
-      "pattern": "/^\\{\"\\d+\":\\d+(,\\s*\"\\d+\":\\d+)*\\}$/",
+      "pattern": "^\\{\"\\d+\":\\d+(,\\s*\"\\d+\":\\d+)*\\}$",
       "description": "A string representing a map of expiries per event kind. Should be a comma-separated list of key-value pairs enclosed in curly brackets, where the key is the event kind and the value is the expiry interval in seconds."
     },
     "hitLimitPerKind": {
       "type": "string",
-      "pattern": "/^\\{\"\\d+\":\\d+(,\\s*\"\\d+\":\\d+)*\\}$/",
+      "pattern": "^\\{\"\\d+\":\\d+(,\\s*\"\\d+\":\\d+)*\\}$",
       "description": "A string representing a map of hit limits per event kind. Should be a comma-separated list of key-value pairs enclosed in curly brackets, where the key is the event kind and the value is the limit."
     },
     "hitExpiryPerKind": {
       "type": "string",
-      "pattern": "/^\\{\"\\d+\":\\d+(,\\s*\"\\d+\":\\d+)*\\}$/",
+      "pattern": "^\\{\"\\d+\":\\d+(,\\s*\"\\d+\":\\d+)*\\}$",
       "description": "A string representing a map of hit expiries per event kind. Should be a comma-separated list of key-value pairs enclosed in curly brackets, where the key is the event kind and the value is the expiry interval in seconds."
     }
      },
