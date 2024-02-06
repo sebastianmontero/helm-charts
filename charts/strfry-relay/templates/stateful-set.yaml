@@ -19,7 +19,10 @@ spec:
       containers:
       - name: {{ include "strfry-relay.relay-container-name" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        command: ["/app/strfry", "relay"]
+        command:
+        - "/bin/sh"
+        - "-c"
+        - "redis-server --daemonize yes; until redis-cli ping; do sleep 1; done; /app/strfry relay"
         ports:
         - containerPort: 7777
           name: default
