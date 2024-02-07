@@ -19,10 +19,7 @@ spec:
       containers:
       - name: {{ include "strfry-relay.relay-container-name" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        command:
-        - "/bin/sh"
-        - "-c"
-        - "redis-server --daemonize yes; until redis-cli ping; do sleep 1; done; /app/strfry relay"
+        command: ["/app/strfry", "relay"]
         ports:
         - containerPort: 7777
           name: default
@@ -34,13 +31,13 @@ spec:
         - name: WHITELIST_PUBKEYS
           value: '{{ .Values.whitelistPubkeys }}'
         - name: RATE_LIMIT
-          value: '{{ .Values.rateLimit }}'
+          value: '{{ .Values.rateLimit | toString }}'
         - name: RATE_LIMIT_EXPIRY
-          value: '{{ .Values.rateLimitExpiry }}'
+          value: '{{ .Values.rateLimitExpiry | toString }}'
         - name: HIT_LIMIT
-          value: '{{ .Values.hitLimit }}'
+          value: '{{ .Values.hitLimit | toString }}'
         - name: HIT_EXPIRY
-          value: '{{ .Values.hitExpiry }}'
+          value: '{{ .Values.hitExpiry | toString }}'
         - name: LIMIT_PER_KIND
           value: '{{ .Values.limitPerKind }}'
         - name: EXPIRY_PER_KIND
@@ -49,6 +46,12 @@ spec:
           value: '{{ .Values.hitLimitPerKind }}'
         - name: HIT_EXPIRY_PER_KIND
           value: '{{ .Values.hitExpiryPerKind }}'
+        - name: REDIS_HOST
+          value: '{{ .Values.redis.host }}'
+        - name: REDIS_PORT
+          value: '{{ .Values.redis.port | toString }}'
+        - name: POD_NAME
+          value: {{ include "strfry-relay.fullname" . }}
         volumeMounts:
         - name: {{ include "strfry-relay.fullname" . }}
           mountPath: /var/lib/strfry/strfry-db

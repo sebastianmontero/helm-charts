@@ -3,7 +3,7 @@ image:
   repository: armnd0/strfry-relay
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 5f27a278bf4fba0da9ee5d94a571e6d5eb36b0c56514b677cf784c0863db8495
+  tag: 1fb3f46ad08084725a668362a69cd7c2d312eb9d41794dd81ab6ae5eb62d13cd
 
 nameOverride: ""
 fullnameOverride: ""
@@ -61,3 +61,6 @@ resourcesBackupJob:
     requests:
         cpu: 200m
         memory: 256Mi
+redis:
+  host: "relay-redis-service" # Replace with the actual name of the redis service
+  port: 6379

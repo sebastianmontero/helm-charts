@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "redis-service.fullname" . }}
+  labels:
+    {{- include "redis-service.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "redis-service.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "redis-service.name" . }}
+    spec:
+      containers:
+      - name: redis
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: 6379
+
