@@ -17,6 +17,7 @@ spec:
       containers:
       - name: redis
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        resources: {{- toYaml .Values.resources | nindent 10 }}
         ports:
         - containerPort: 6379
 
