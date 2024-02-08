@@ -47,7 +47,7 @@ spec:
         - name: HIT_EXPIRY_PER_KIND
           value: '{{ .Values.hitExpiryPerKind }}'
         - name: REDIS_HOST
-          value: '{{ .Values.redis.host }}'
+          value:  {{ include "redis-service.getName" . }}
         - name: REDIS_PORT
           value: '{{ .Values.redis.port | toString }}'
         - name: POD_NAME

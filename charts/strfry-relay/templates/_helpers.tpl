@@ -129,3 +129,10 @@ Params:
 {{- define "strfry-relay.getUrl" -}}
 {{- printf "wss://%s" (include "strfry-relay.fullDomain" .) }}
 {{- end }}
+
+{{/*
+Get redis service name
+*/}}
+{{- define "redis-service.getName" -}}
+{{- printf "%s-redis-service" .Release.Name -}}
+{{- end }}

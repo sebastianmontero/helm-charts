@@ -61,6 +61,6 @@ resourcesBackupJob:
     requests:
         cpu: 200m
         memory: 256Mi
+
 redis:
-  host: "redis-redis-service" # Replace with the actual name of the redis service
   port: 6379
