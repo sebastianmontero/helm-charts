@@ -38,10 +38,10 @@ rateLimit: 15
 rateLimitExpiry: 60
 hitLimit: 3
 hitExpiry: 900
-limitPerKind: '{"9288":50}'
-expiryPerKind: '{"9288":300}'
-hitLimitPerKind: '{"9288":3}'
-hitExpiryPerKind: '{"9288":1800}'
+limitPerKind: '{"9288":50, "24133": 1000}'
+expiryPerKind: '{"9288":300, "24133": 300}'
+hitLimitPerKind: '{"9288":3, "24133": 3}'
+hitExpiryPerKind: '{"9288":1800, "24133": 1800}'
 
 storage:
   size: 5Gi
