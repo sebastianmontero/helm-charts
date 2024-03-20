@@ -40,6 +40,10 @@
           "type": "string",
           "enum": ["dev", "production"]
         },
+        "apnEnv": {
+          "type": "string",
+          "enum": ["dev", "production"]
+        },
         "debug": {
           "type": "string"
         }
@@ -51,6 +55,7 @@
         "apnTokenTeamId",
         "bundleId",
         "nodeEnv",
+        "apnEnv",
         "debug"
       ],
       "type": "object"
