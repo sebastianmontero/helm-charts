@@ -64,7 +64,7 @@ data:
         maxFilterLimit = 500
 
         # Maximum number of subscriptions (concurrent REQs) a connection can have open at any time
-        maxSubsPerConnection = 20
+        maxSubsPerConnection = 40
 
         writePolicy {
             # If non-empty, path to an executable script that implements the writePolicy plugin logic
