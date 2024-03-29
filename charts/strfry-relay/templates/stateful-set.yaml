@@ -75,6 +75,10 @@ spec:
           value: "{{ .Values.allowedEventsSync }}"
         - name: WHITELIST_PUBKEYS
           value: '{{ .Values.whitelistPubkeys }}'
+        - name: REDIS_HOST
+          value:  {{ include "redis-service.getName" . }}
+        - name: REDIS_PORT
+          value: '{{ .Values.redis.port | toString }}'
         volumeMounts:
         - name: {{ include "strfry-relay.fullname" . }}
           mountPath: /var/lib/strfry/strfry-db
