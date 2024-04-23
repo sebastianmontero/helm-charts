@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "conversational-rag-server.fullname" . }}
+  labels:
+    {{- include "conversational-rag-server.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "conversational-rag-server.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "conversational-rag-server.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/bin/sh", "-c", "exec uvicorn app.server:app --host 0.0.0.0 --port 8080"]
+          # command: ["exec", "uvicorn", "app.server:app", "--host", "0.0.0.0", "--port", "8080"]
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: LANGCHAIN_TRACING_V2
+              value: "{{ .Values.env.langchainTracingV2 }}"
+            - name: LANGCHAIN_ENDPOINT
+              value: "{{ .Values.env.langchainEndpoint }}"
+            - name: LANGCHAIN_PROJECT
+              value: "{{ .Values.env.langchainProject }}"
+            - name: PINECONE_INDEX
+              value: "{{ .Values.env.pineconeIndex }}"
+          envFrom:
+            - secretRef:
+                name: {{ include "conversational-rag-server.fullname" . }}
+          livenessProbe:
+            httpGet:
+              path: /docs
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /docs
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

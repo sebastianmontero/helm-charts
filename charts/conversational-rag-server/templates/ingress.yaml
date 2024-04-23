@@ -1,0 +1,25 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "conversational-rag-server.fullname" . }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"    
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - {{ include "conversational-rag-server.fullDomain" . }}
+    secretName: {{ include "conversational-rag-server.fullname" . }}
+  rules:
+  - host: {{ include "conversational-rag-server.fullDomain" . }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: {{ include "conversational-rag-server.fullname" . }}
+            port:
+              number: 8080
+{{- end }}

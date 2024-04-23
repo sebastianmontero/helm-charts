@@ -1,0 +1,8 @@
+Conversational RAG server has been deployed.
+
+{{- if .Values.ingress.enabled }}
+Access the services at: {{ include "conversational-rag-server.getUrl" . }}
+View docs at: {{ include "conversational-rag-server.getDocsUrl" . }}
+{{- else }}
+No ingress has been created
+{{- end }}
