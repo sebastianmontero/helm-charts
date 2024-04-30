@@ -32,14 +32,20 @@
           "type": "string",
           "minLength": 2
         },
+        "groqApiKey": {
+          "type": "string",
+          "minLength": 2
+        },
         "langchainApiKey": {
           "type": "string",
           "minLength": 2
         },
         "langchainTracingV2": {
           "type": "string",
-          "enum": ["False", "True"]
-
+          "enum": [
+            "False",
+            "True"
+          ]
         },
         "langchainProject": {
           "type": "string",
@@ -55,6 +61,7 @@
         "pineconeApiKey",
         "pineconeIndex",
         "cohereApiKey",
+        "groqApiKey",
         "langchainApiKey",
         "langchainTracingV2",
         "langchainProject",
@@ -62,7 +69,7 @@
       ],
       "type": "object"
     },
-    "url":{
+    "url": {
       "description": "Url details",
       "properties": {
         "domain": {

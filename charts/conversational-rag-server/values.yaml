@@ -21,6 +21,7 @@ env:
   pineconeApiKey: ""
   pineconeIndex: "sample-movies"
   cohereApiKey: ""
+  groqApiKey: ""
   langchainApiKey: ""
   langchainTracingV2: "False"
   langchainProject: "lecl-test"
