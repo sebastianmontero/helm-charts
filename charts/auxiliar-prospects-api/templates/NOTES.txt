@@ -1,0 +1,3 @@
+Auxiliar Prospects API has been installed. 
+
+The endpoint is: {{ include "auxiliar-prospects-api.url" . }}

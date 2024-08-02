@@ -1,0 +1,26 @@
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+nameOverride: ""
+fullnameOverride: ""
+
+url:
+  domain: 
+    base: ""
+    subdomain: ""
+
+ingress:
+  enabled: true
+
+env:
+  linkedinOauth2AccessToken: ""
+  nubelaOauth2AccessToken: ""
+
+resources:
+    requests:
+        cpu: 100m
+        memory: 128Mi

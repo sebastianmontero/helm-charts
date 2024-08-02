@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "auxiliar-prospects-api.fullname" . }}
+  labels:
+    {{- include "auxiliar-prospects-api.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "auxiliar-prospects-api.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "auxiliar-prospects-api.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["node", "index.js"]
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: {{ include "auxiliar-prospects-api.fullname" . }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
