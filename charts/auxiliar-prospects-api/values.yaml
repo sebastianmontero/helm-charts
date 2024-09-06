@@ -19,6 +19,10 @@ ingress:
 env:
   linkedinOauth2AccessToken: ""
   nubelaOauth2AccessToken: ""
+  supabaseUrl: ""
+  supabaseKey: ""
+  zohoClientId: ""
+  zohoClientSecret: ""
 
 resources:
     requests:

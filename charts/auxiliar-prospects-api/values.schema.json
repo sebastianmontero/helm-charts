@@ -58,11 +58,31 @@
         "nubelaOauth2AccessToken": {
           "type": "string",
           "pattern": ".+"
+        },
+        "supabaseUrl": {
+          "type": "string",
+          "pattern": ".+"
+        },
+        "supabaseKey": {
+          "type": "string",
+          "pattern": ".+"
+        },
+        "zohoClientId": {
+          "type": "string",
+          "pattern": ".+"
+        },
+        "zohoClientSecret": {
+          "type": "string",
+          "pattern": ".+"
         }
       },
       "required": [
         "linkedinOauth2AccessToken",
-        "nubelaOauth2AccessToken"
+        "nubelaOauth2AccessToken",
+        "supabaseUrl",
+        "supabaseKey",
+        "zohoClientId",
+        "zohoClientSecret"
       ],
       "type": "object"
     },
