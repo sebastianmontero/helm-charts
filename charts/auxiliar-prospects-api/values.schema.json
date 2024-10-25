@@ -82,7 +82,14 @@
         "supabaseUrl",
         "supabaseKey",
         "zohoClientId",
-        "zohoClientSecret"
+        "zohoClientSecret",
+        "stripeWebhookSecret",
+        "stripeSecretKey",
+        "emailUser",
+        "emailPass",
+        "imagicaSupabaseServiceKey",
+        "imagicaSupabaseUrl",
+        "appURL"
       ],
       "type": "object"
     },

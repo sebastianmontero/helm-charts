@@ -23,6 +23,13 @@ env:
   supabaseKey: ""
   zohoClientId: ""
   zohoClientSecret: ""
+  stripeWebhookSecret: ""
+  stripeSecretKey: ""
+  emailUser: ""
+  emailPass: ""
+  imagicaSupabaseServiceKey: ""
+  imagicaSupabaseUrl: ""
+  appURL: ""
 
 resources:
     requests:
