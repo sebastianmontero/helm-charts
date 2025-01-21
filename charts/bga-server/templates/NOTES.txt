@@ -1,0 +1,8 @@
+BGA server has been deployed.
+
+{{- if .Values.ingress.enabled }}
+Access the services at: {{ include "bga-server.getUrl" . }}
+View docs at: {{ include "bga-server.getDocsUrl" . }}
+{{- else }}
+No ingress has been created
+{{- end }}

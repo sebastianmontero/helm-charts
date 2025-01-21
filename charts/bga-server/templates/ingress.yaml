@@ -1,0 +1,25 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "bga-server.fullname" . }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"    
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - {{ include "bga-server.fullDomain" . }}
+    secretName: {{ include "bga-server.fullname" . }}
+  rules:
+  - host: {{ include "bga-server.fullDomain" . }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: {{ include "bga-server.fullname" . }}
+            port:
+              number: 8080
+{{- end }}
