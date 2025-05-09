@@ -1,0 +1,164 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "image": {
+      "type": "object",
+      "properties": {
+        "repository": {
+          "type": "string"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "enum": ["Always", "IfNotPresent", "Never"]
+        },
+        "tag": {
+          "type": "string"
+        }
+      },
+      "required": ["repository", "pullPolicy"]
+    },
+    "nameOverride": {
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "type": "string"
+    },
+    "env": {
+      "type": "object",
+      "properties": {
+        "exchangesById": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "enabled": {
+                "type": "boolean"
+              },
+              "feePercent": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            "required": ["id", "enabled", "feePercent"]
+          }
+        },
+        "tradingPairs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z]+/[A-Z]+$"
+          }
+        },
+        "arbitrage": {
+          "type": "object",
+          "properties": {
+            "minProfitPercentThreshold": {
+              "type": "number",
+              "minimum": 0
+            },
+            "alertCooldownMinutes": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": ["minProfitPercentThreshold", "alertCooldownMinutes"]
+        },
+        "pollingIntervalSeconds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "alerters": {
+          "type": "object",
+          "properties": {
+            "console": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "required": ["enabled"]
+            },
+            "log": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "required": ["enabled"]
+            },
+            "webhook": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "url": {
+                  "type": ["string","null"],
+                  "format": "uri"
+                }
+              },
+              "required": ["enabled"]
+            },
+            "telegram": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "botToken": {
+                  "type": ["string","null"]
+                },
+                "chatId": {
+                  "type": ["integer","null"]
+                }
+              },
+              "required": ["enabled"]
+            }
+          },
+          "required": ["console", "log", "webhook", "telegram"]
+        },
+        "logging": {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "string",
+              "enum": ["debug", "info", "warn", "error"]
+            },
+            "logToFile": {
+              "type": "boolean"
+            },
+            "logFilename": {
+              "type": "string"
+            }
+          },
+          "required": ["level", "logToFile", "logFilename"]
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "properties": {
+        "requests": {
+          "type": "object",
+          "properties": {
+            "cpu": {
+              "type": "string"
+            },
+            "memory": {
+              "type": "string"
+            }
+          },
+          "required": ["cpu", "memory"]
+        }
+      }
+    }
+  },
+  "required": ["image", "env", "resources"]
+}

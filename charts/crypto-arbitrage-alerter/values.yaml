@@ -1,0 +1,66 @@
+# Default values for crypto-arbitrage-alerter.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: sebastianmontero/crypto-arbitrage-alerter-prod
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: bc2960d867540e0f8e9993a291e169a08fd3a419
+
+nameOverride: ""
+fullnameOverride: ""
+
+env:
+  exchangesById:
+    kraken:
+      id: kraken
+      enabled: true
+      feePercent: 0.26
+    binance:
+      id: binance
+      enabled: true
+      feePercent: 0.1
+    kucoin:
+      id: kucoin
+      enabled: true
+      feePercent: 0.1
+
+  tradingPairs:
+    - BTC/USDT
+    - ETH/BTC
+    - ETH/USDT
+    - SOL/USDT
+    - XMR/USDT
+
+  arbitrage:
+    minProfitPercentThreshold: 0.5
+    alertCooldownMinutes: 15
+
+  pollingIntervalSeconds: 15
+
+  alerters:
+    console:
+      enabled: true
+    log:
+      enabled: false
+    webhook:
+      enabled: false
+      url: null
+    telegram:
+      enabled: true 
+      chatId: null
+
+  logging:
+    level: info
+    logToFile: false
+    logFilename: app.log
+
+secrets:
+  telegram:
+    botToken: null
+
+resources:
+    requests:
+        cpu: 100m
+        memory: 128Mi

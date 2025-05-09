@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "crypto-arbitrage-alerter.fullname" . }}
+  labels:
+    {{- include "crypto-arbitrage-alerter.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "crypto-arbitrage-alerter.selectorLabels" . | nindent 6 }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        {{- include "crypto-arbitrage-alerter.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["node", "dist/index.js"]
+        volumeMounts:
+          - name: crypto-arbitrage-alerter-config
+            mountPath: /crypto-arbitrage-alerter/config/default.json
+            subPath: default.json
+          - name: crypto-arbitrage-alerter-custom-env-vars-config
+            mountPath: /crypto-arbitrage-alerter/config/custom-environment-variables.json
+            subPath: custom-environment-variables.json
+        envFrom:
+            - secretRef:
+                name: {{ include "crypto-arbitrage-alerter.fullname" . }}
+        resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: crypto-arbitrage-alerter-config
+          configMap:
+            name: {{ include "crypto-arbitrage-alerter.fullname" . }}
+        - name: crypto-arbitrage-alerter-custom-env-vars-config
+          configMap:
+            name: {{ include "crypto-arbitrage-alerter.custom-env-vars-configmap" . }}

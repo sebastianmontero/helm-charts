@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "crypto-arbitrage-alerter.custom-env-vars-configmap" . }}
+  labels:
+    {{- include "crypto-arbitrage-alerter.labels" . | nindent 4 }}
+data:
+  custom-environment-variables.json: |
+    {
+      "exchangesById": {
+        "kraken": {
+          "apiKey": "KRAKEN_API_KEY",
+          "secret": "KRAKEN_SECRET"
+        },
+        "binance": {
+          "apiKey": "BINANCE_API_KEY",
+          "secret": "BINANCE_SECRET"
+        },
+        "kucoin": {
+          "apiKey": "KUCOIN_API_KEY",
+          "secret": "KUCOIN_SECRET",
+          "password": "KUCOIN_PASSWORD"
+        }
+      },
+      "alerters": {
+        "webhook": {
+          "url": "WEBHOOK_URL"
+        },
+        "telegram": {
+          "botToken": "TELEGRAM_BOT_TOKEN",
+          "chatId": "TELEGRAM_CHAT_ID"
+        }
+      },
+      "logging": {
+        "level": "LOG_LEVEL"
+      }
+    }
