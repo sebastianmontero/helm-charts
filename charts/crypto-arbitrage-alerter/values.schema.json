@@ -10,13 +10,20 @@
         },
         "pullPolicy": {
           "type": "string",
-          "enum": ["Always", "IfNotPresent", "Never"]
+          "enum": [
+            "Always",
+            "IfNotPresent",
+            "Never"
+          ]
         },
         "tag": {
           "type": "string"
         }
       },
-      "required": ["repository", "pullPolicy"]
+      "required": [
+        "repository",
+        "pullPolicy"
+      ]
     },
     "nameOverride": {
       "type": "string"
@@ -44,14 +51,23 @@
                 "maximum": 100
               }
             },
-            "required": ["id", "enabled", "feePercent"]
+            "required": [
+              "id",
+              "enabled",
+              "feePercent"
+            ]
           }
         },
         "tradingPairs": {
           "type": "array",
           "items": {
-            "type": "string",
-            "pattern": "^[A-Z]+/[A-Z]+$"
+            "type": "object",
+            "properties": {
+              "symbol": {
+                "type": "string",
+                "pattern": "^[A-Z]+/[A-Z]+$"
+              }
+            }
           }
         },
         "arbitrage": {
@@ -66,7 +82,10 @@
               "minimum": 0
             }
           },
-          "required": ["minProfitPercentThreshold", "alertCooldownMinutes"]
+          "required": [
+            "minProfitPercentThreshold",
+            "alertCooldownMinutes"
+          ]
         },
         "pollingIntervalSeconds": {
           "type": "integer",
@@ -82,7 +101,9 @@
                   "type": "boolean"
                 }
               },
-              "required": ["enabled"]
+              "required": [
+                "enabled"
+              ]
             },
             "log": {
               "type": "object",
@@ -91,7 +112,9 @@
                   "type": "boolean"
                 }
               },
-              "required": ["enabled"]
+              "required": [
+                "enabled"
+              ]
             },
             "webhook": {
               "type": "object",
@@ -100,11 +123,16 @@
                   "type": "boolean"
                 },
                 "url": {
-                  "type": ["string","null"],
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "format": "uri"
                 }
               },
-              "required": ["enabled"]
+              "required": [
+                "enabled"
+              ]
             },
             "telegram": {
               "type": "object",
@@ -112,24 +140,36 @@
                 "enabled": {
                   "type": "boolean"
                 },
-                "botToken": {
-                  "type": ["string","null"]
-                },
                 "chatId": {
-                  "type": ["integer","null"]
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
                 }
               },
-              "required": ["enabled"]
+              "required": [
+                "enabled"
+              ]
             }
           },
-          "required": ["console", "log", "webhook", "telegram"]
+          "required": [
+            "console",
+            "log",
+            "webhook",
+            "telegram"
+          ]
         },
         "logging": {
           "type": "object",
           "properties": {
             "level": {
               "type": "string",
-              "enum": ["debug", "info", "warn", "error"]
+              "enum": [
+                "debug",
+                "info",
+                "warn",
+                "error"
+              ]
             },
             "logToFile": {
               "type": "boolean"
@@ -138,7 +178,24 @@
               "type": "string"
             }
           },
-          "required": ["level", "logToFile", "logFilename"]
+          "required": [
+            "level",
+            "logToFile",
+            "logFilename"
+          ]
+        }
+      }
+    },
+    "secrets": {
+      "telegram": {
+        "type": "object",
+        "properties": {
+          "botToken": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
         }
       }
     },
@@ -155,10 +212,17 @@
               "type": "string"
             }
           },
-          "required": ["cpu", "memory"]
+          "required": [
+            "cpu",
+            "memory"
+          ]
         }
       }
     }
   },
-  "required": ["image", "env", "resources"]
+  "required": [
+    "image",
+    "env",
+    "resources"
+  ]
 }

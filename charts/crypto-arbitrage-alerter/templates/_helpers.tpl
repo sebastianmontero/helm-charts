@@ -31,6 +31,13 @@ Create chart name and version as used by the chart label.
 {{- end }}
 
 {{/*
+Create alpha service name.
+*/}}
+{{- define "bisq-daemon.serviceName" -}}
+{{- printf "%s-bisq-daemon" .Release.Name }}
+{{- end }}
+
+{{/*
 Common labels
 */}}
 {{- define "crypto-arbitrage-alerter.labels" -}}

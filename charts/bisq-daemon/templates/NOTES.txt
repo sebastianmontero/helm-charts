@@ -1,0 +1,8 @@
+Bisq daemon has been deployed.
+
+{{- if .Values.ingress.enabled }}
+Access the services at: {{ include "bisq-daemon.getUrl" . }}
+View docs at: {{ include "bisq-daemon.getDocsUrl" . }}
+{{- else }}
+No ingress has been created
+{{- end }}

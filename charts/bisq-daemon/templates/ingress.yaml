@@ -1,0 +1,25 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "bisq-daemon.fullname" . }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"    
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - {{ include "bisq-daemon.fullDomain" . }}
+    secretName: {{ include "bisq-daemon.fullname" . }}
+  rules:
+  - host: {{ include "bisq-daemon.fullDomain" . }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: {{ include "bisq-daemon.fullname" . }}
+            port:
+              number: 9998
+{{- end }}

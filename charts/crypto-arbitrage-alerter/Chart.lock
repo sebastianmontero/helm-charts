@@ -1,0 +1,6 @@
+dependencies:
+- name: bisq-daemon
+  repository: file://../bisq-daemon
+  version: 0.1.0
+digest: sha256:c72383fb90ce59747333c0bd4437b554b9254724be85065b2698ed45bb36eed0
+generated: "2025-05-28T21:44:04.190728132-06:00"

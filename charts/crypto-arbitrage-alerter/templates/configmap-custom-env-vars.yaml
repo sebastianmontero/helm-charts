@@ -7,6 +7,7 @@ metadata:
 data:
   custom-environment-variables.json: |
     {
+      "probeAmountUSD": "PROBE_AMOUNT_USD",
       "exchangesById": {
         "kraken": {
           "apiKey": "KRAKEN_API_KEY",
@@ -20,7 +21,21 @@ data:
           "apiKey": "KUCOIN_API_KEY",
           "secret": "KUCOIN_SECRET",
           "password": "KUCOIN_PASSWORD"
+        },
+        "bisq": {
+          "bisqPassword": "BISQ_API_PASSWORD", 
+          "bisqConfig": {
+            "rpcHost": "BISQ_RPC_HOST",
+            "estimatedTradingFeePercent": "BISQ_TRADING_FEE_PERCENT", 
+            "estimatedBtcNetworkFeePerOffer": "BISQ_BTC_NETWORK_FEE",
+            "priceApiCallIntervalMs": "BISQ_PRICE_API_INTERVAL_MS"
+          }
         }
+      },
+      "majesticBank": {
+        "probeAmountUSD": "MAJESTIC_PROBE_USD",
+        "apiBaseUrl": "MAJESTIC_API_URL",
+        "cacheTTLSeconds": "MAJESTIC_CACHE_TTL_SECONDS"
       },
       "alerters": {
         "webhook": {

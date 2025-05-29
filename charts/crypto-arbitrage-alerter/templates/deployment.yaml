@@ -26,6 +26,9 @@ spec:
           - name: crypto-arbitrage-alerter-custom-env-vars-config
             mountPath: /crypto-arbitrage-alerter/config/custom-environment-variables.json
             subPath: custom-environment-variables.json
+        env:
+          - name: BISQ_RPC_HOST
+            value: "{{ include "bisq-daemon.serviceName" . }}:9998"
         envFrom:
             - secretRef:
                 name: {{ include "crypto-arbitrage-alerter.fullname" . }}

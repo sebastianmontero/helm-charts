@@ -12,6 +12,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 env:
+  probeAmountUSD: 5000
   exchangesById:
     kraken:
       id: kraken
@@ -19,25 +20,39 @@ env:
       feePercent: 0.26
     binance:
       id: binance
-      enabled: true
+      enabled: false
       feePercent: 0.1
     kucoin:
       id: kucoin
-      enabled: true
+      enabled: false
       feePercent: 0.1
+    majesticbank:
+      id: majesticbank
+      enabled: false
+      feePercent: 0
+    bisq:
+      id: bisq
+      enabled: true
+      feePercent: 0  # IMPORTANT: Engine will apply 0% fee to prices from BisqAdapter
+      bisqConfig:  # Adapter-specific settings for Bisq fee estimation
+        estimatedTradingFeePercent: 0.007  # Example: 0.2% (user's best guess for their Bisq trading fee)
+        estimatedBtcNetworkFeePerOffer: 0.0001  # Takers perform 3 on chain transactions Example: Avg 5000 sats in BTC
+        priceApiCallIntervalMs: 1200
 
   tradingPairs:
-    - BTC/USDT
-    - ETH/BTC
-    - ETH/USDT
-    - SOL/USDT
-    - XMR/USDT
+    # - symbol: BTC/USD
+    # - symbol: XMR/USD
+    - symbol: XMR/BTC
 
   arbitrage:
     minProfitPercentThreshold: 0.5
     alertCooldownMinutes: 15
 
   pollingIntervalSeconds: 15
+
+  majesticBank:
+    apiBaseUrl: https://majesticbank.sc/api/v1
+    cacheTTLSeconds: 300
 
   alerters:
     console:
@@ -48,7 +63,8 @@ env:
       enabled: false
       url: null
     telegram:
-      enabled: true 
+      enabled: true
+      botToken: null
       chatId: null
 
   logging:
