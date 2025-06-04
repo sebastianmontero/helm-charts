@@ -168,7 +168,8 @@
                 "debug",
                 "info",
                 "warn",
-                "error"
+                "error",
+                "trace"
               ]
             },
             "logToFile": {

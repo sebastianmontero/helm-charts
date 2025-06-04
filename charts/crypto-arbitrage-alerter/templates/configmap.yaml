@@ -5,5 +5,5 @@ metadata:
   labels:
     {{- include "crypto-arbitrage-alerter.labels" . | nindent 4 }}
 data:
-  default.json: |
+  default.hjson: |
      {{- .Values.env | toPrettyJson | nindent 4 }}

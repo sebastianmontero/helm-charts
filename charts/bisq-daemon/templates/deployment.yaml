@@ -28,19 +28,37 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["java", "-jar", "daemon.jar", "--apiPassword=p123"]
+          command: ["java", "-jar", "bisq-daemon/daemon.jar", "--apiPassword=p123"]
           ports:
             - name: grpc
               containerPort: 9998
               protocol: TCP
-          # livenessProbe:
-          #   httpGet:
-          #     path: /docs
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /docs
-          #     port: http
+          livenessProbe:
+            exec:
+              command:
+              - /bin/sh
+              - -c
+              # Ensure 'p123' matches the apiPassword. Consider using a Helm value.
+              # The service/method pb.GetVersion/GetVersion is based on Bisq documentation.
+              - "java -jar bisq-cli/cli.jar --password=p123 getversion"
+            initialDelaySeconds: 60 # Time to wait before the first probe
+            periodSeconds: 30       # How often to perform the probe
+            timeoutSeconds: 10        # When the probe times out
+            failureThreshold: 3       # How many failures before marking unhealthy/restarting
+            successThreshold: 1       # Minimum consecutive successes to be considered healthy
+          readinessProbe:
+            exec:
+              command:
+              - /bin/sh
+              - -c
+              # Ensure 'p123' matches the apiPassword. Consider using a Helm value.
+              # The service/method pb.Wallets/GetTxFeeRate is based on Bisq documentation.
+              - "java -jar bisq-cli/cli.jar --password=p123 gettxfeerate"
+            initialDelaySeconds: 30 # Time to wait before the first probe
+            periodSeconds: 20       # How often to perform the probe
+            timeoutSeconds: 10        # When the probe times out
+            failureThreshold: 3       # How many failures before marking unready
+            successThreshold: 1       # Minimum consecutive successes to be considered ready
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

@@ -18,17 +18,17 @@ env:
       id: kraken
       enabled: true
       feePercent: 0.26
-    binance:
-      id: binance
+    binanceus:
+      id: binanceus
       enabled: false
       feePercent: 0.1
     kucoin:
       id: kucoin
-      enabled: false
+      enabled: true
       feePercent: 0.1
     majesticbank:
       id: majesticbank
-      enabled: false
+      enabled: true
       feePercent: 0
     bisq:
       id: bisq
@@ -68,7 +68,7 @@ env:
       chatId: null
 
   logging:
-    level: info
+    level: trace
     logToFile: false
     logFilename: app.log
 

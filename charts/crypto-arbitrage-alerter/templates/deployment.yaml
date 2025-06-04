@@ -21,14 +21,16 @@ spec:
         command: ["node", "dist/index.js"]
         volumeMounts:
           - name: crypto-arbitrage-alerter-config
-            mountPath: /crypto-arbitrage-alerter/config/default.json
-            subPath: default.json
+            mountPath: /crypto-arbitrage-alerter/config/default.hjson
+            subPath: default.hjson
           - name: crypto-arbitrage-alerter-custom-env-vars-config
             mountPath: /crypto-arbitrage-alerter/config/custom-environment-variables.json
             subPath: custom-environment-variables.json
         env:
           - name: BISQ_RPC_HOST
             value: "{{ include "bisq-daemon.serviceName" . }}:9998"
+          # - name: TELEGRAM_CHAT_ID
+          #   value: "{{ .Values.env.alerters.telegram.chatId }}"
         envFrom:
             - secretRef:
                 name: {{ include "crypto-arbitrage-alerter.fullname" . }}
